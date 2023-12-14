@@ -1,1 +1,20 @@
-{}
+{
+  "secma-admin": {
+    "app": {
+      "title": {
+        "__id__": "secma-admin.app.title",
+        "defaultMessage": "Security machine",
+        "en": "Security Machine",
+        "ro": "Security Machine"
+      }
+    },
+    "error": {
+      "route": {
+        "title": {
+          "__id__": "secma-admin.error.route.title",
+          "defaultMessage": "Unexpected Error"
+        }
+      }
+    }
+  }
+}

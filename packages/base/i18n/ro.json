@@ -1,2 +1,11 @@
 {
+  "secma-base.duplicate-app": "secma-base.duplicate-app",
+  "secma-base.err-comm": "Could not communicate with the server",
+  "secma-base.err-unknown": "Unknown error",
+  "secma-base.err-validation": "Validation error",
+  "secma-base.invalid-credentials": "secma-base.invalid-credentials",
+  "secma-base.no-app": "No application with a `{appSlug}` slug was found",
+  "secma-base.no-permission": "secma-base.no-permission",
+  "secma-base.no-role": "No role with a `{roleId}` ID was found withing this tenant",
+  "secma-base.no-user": "No user with a `{userId}` ID was found withing this tenant"
 }

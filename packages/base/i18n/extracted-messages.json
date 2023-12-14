@@ -1,1 +1,43 @@
-{}
+{
+  "secma-base": {
+    "duplicate-app": {
+      "__id__": "secma-base.duplicate-app"
+    },
+    "err-comm": {
+      "__id__": "secma-base.err-comm",
+      "defaultMessage": "Could not communicate with the server",
+      "en": "Could not communicate with the server",
+      "ro": "Could not communicate with the server"
+    },
+    "err-unknown": {
+      "__id__": "secma-base.err-unknown",
+      "defaultMessage": "Unknown error",
+      "en": "Unknown error",
+      "ro": "Unknown error"
+    },
+    "err-validation": {
+      "__id__": "secma-base.err-validation",
+      "defaultMessage": "Validation error",
+      "en": "Validation error",
+      "ro": "Validation error"
+    },
+    "invalid-credentials": {
+      "__id__": "secma-base.invalid-credentials"
+    },
+    "no-app": {
+      "__id__": "secma-base.no-app",
+      "defaultMessage": "No application with a `{appSlug}` slug was found"
+    },
+    "no-permission": {
+      "__id__": "secma-base.no-permission"
+    },
+    "no-role": {
+      "__id__": "secma-base.no-role",
+      "defaultMessage": "No role with a `{roleId}` ID was found withing this tenant"
+    },
+    "no-user": {
+      "__id__": "secma-base.no-user",
+      "defaultMessage": "No user with a `{userId}` ID was found withing this tenant"
+    }
+  }
+}
