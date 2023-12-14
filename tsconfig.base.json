@@ -15,7 +15,10 @@
         "skipDefaultLibCheck": true,
         "baseUrl": ".",
         "paths": {
-
+            "@secma/admin": ["packages/admin/src/index.ts"],
+            "@secma/base": ["packages/base/src/index.ts"],
+            "@secma/mui": ["packages/mui/src/index.ts"],
+            "@secma/react": ["packages/react/src/index.ts"]
         }
     },
     "exclude": ["node_modules", "tmp"]
