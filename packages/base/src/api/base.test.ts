@@ -23,6 +23,8 @@ describe("AccessPoint", () => {
     type TPath = { id: number, slug: string };
     type TResult = { id: number, name: string, slug: string };
     class ToTest extends AccessPoint<Payload, TPath, TResult> {
+        public constructor() { super(); }
+
         get isMutation() { return true; }
         get method() { return "POST" as AccessPointMethod; }
         get pathPattern() { return "/api/{id}/{slug}"; }
@@ -40,6 +42,7 @@ describe("AccessPoint", () => {
         });
         it("should return the path if no argument", () => {
             class ToTest2 extends AccessPoint<Payload, TPath, TResult> {
+                public constructor() { super(); }
                 get isMutation() { return true; }
                 get method() { return "POST" as AccessPointMethod; }
                 get pathPattern() { return "/api/1/2/3"; }

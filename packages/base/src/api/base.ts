@@ -1,4 +1,5 @@
 import { IntlShape, useIntl } from "react-intl";
+import { DateTime } from "luxon";
 
 import { AccessPointError } from "../models/errors";
 
@@ -13,10 +14,16 @@ export type AccessPointMethod = "GET" | "POST" | "PUT" | "DELETE";
  * Base class for all API calls.
  */
 export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
+
     /**
      * The controller that allows the cancellation of the call.
      */
     protected abortController?: AbortController = undefined;
+
+    /**
+     * The constructor.
+     */
+    protected constructor() { }
 
     /**
      * Tell if this is a mutation or a query.
@@ -42,6 +49,18 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
      */
     processResult(result: any): TResult {
         return result as TResult;
+    }
+
+    /**
+     * An utility function for the common case of a query that
+     * has date of creation and modification.
+     */
+    processDates(result: any): TResult {
+        return {
+            ...result,
+            created: DateTime.fromISO(result.created),
+            modified: DateTime.fromISO(result.modified),
+        };
     }
 
     /**
@@ -72,7 +91,7 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
      */
     async call(
         intl: IntlShape,
-        payload: TPayload,
+        payload?: TPayload,
         pathArgs?: TPathArgs,
         headers?: Record<string, string>
     ): Promise<TResult | AccessPointError> {
@@ -95,7 +114,9 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
         try {
             response = await fetch(this.url(pathArgs), {
                 method: this.method,
-                body: JSON.stringify(payload),
+                body: payload === undefined
+                    ? payload as any
+                    : JSON.stringify(payload),
                 headers: {
                     'Content-Type': 'application/json',
                     ...headers
