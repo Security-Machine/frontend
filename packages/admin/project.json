@@ -35,6 +35,49 @@
             "options": {
                 "jestConfig": "packages/admin/jest.config.ts"
             }
+        },
+        "storybook": {
+            "executor": "@nx/storybook:storybook",
+            "options": {
+                "port": 4601,
+                "configDir": "packages/admin/.storybook"
+            },
+            "configurations": {
+                "ci": {
+                    "quiet": true
+                }
+            }
+        },
+        "build-storybook": {
+            "executor": "@nx/storybook:build",
+            "outputs": ["{options.outputDir}"],
+            "options": {
+                "outputDir": "dist/storybook/admin",
+                "configDir": "packages/admin/.storybook"
+            },
+            "configurations": {
+                "ci": {
+                    "quiet": true
+                }
+            }
+        },
+        "test-storybook": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "test-storybook -c packages/admin/.storybook --url=http://localhost:4601"
+            }
+        },
+        "static-storybook": {
+            "executor": "@nx/web:file-server",
+            "options": {
+                "buildTarget": "admin:build-storybook",
+                "staticFilePath": "dist/storybook/admin"
+            },
+            "configurations": {
+                "ci": {
+                    "buildTarget": "admin:build-storybook:ci"
+                }
+            }
         }
     }
 }

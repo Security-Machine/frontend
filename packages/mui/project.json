@@ -35,6 +35,49 @@
             "options": {
                 "jestConfig": "packages/mui/jest.config.ts"
             }
+        },
+        "storybook": {
+            "executor": "@nx/storybook:storybook",
+            "options": {
+                "port": 4602,
+                "configDir": "packages/mui/.storybook"
+            },
+            "configurations": {
+                "ci": {
+                    "quiet": true
+                }
+            }
+        },
+        "build-storybook": {
+            "executor": "@nx/storybook:build",
+            "outputs": ["{options.outputDir}"],
+            "options": {
+                "outputDir": "dist/storybook/mui",
+                "configDir": "packages/mui/.storybook"
+            },
+            "configurations": {
+                "ci": {
+                    "quiet": true
+                }
+            }
+        },
+        "test-storybook": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "test-storybook -c packages/mui/.storybook --url=http://localhost:4602"
+            }
+        },
+        "static-storybook": {
+            "executor": "@nx/web:file-server",
+            "options": {
+                "buildTarget": "mui:build-storybook",
+                "staticFilePath": "dist/storybook/mui"
+            },
+            "configurations": {
+                "ci": {
+                    "buildTarget": "mui:build-storybook:ci"
+                }
+            }
         }
     }
 }
