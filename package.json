@@ -8,7 +8,7 @@
     "dependencies": {
         "@reduxjs/toolkit": "^2.0.1",
         "@swc/helpers": "~0.5.3",
-        "@vebgen/g11n": "^0.1.0",
+        "@vebgen/g11n": "^0.1.2",
         "core-js": "^3.34.0",
         "lodash": "^4.17.21",
         "luxon": "^3.4.4",
@@ -74,7 +74,7 @@
         "@types/react-router-dom": "5.3.3",
         "@typescript-eslint/eslint-plugin": "6.13.2",
         "@typescript-eslint/parser": "6.13.2",
-        "@vebgen/g11n-cli": "^0.1.0",
+        "@vebgen/g11n-cli": "^0.1.2",
         "babel-jest": "^29.7.0",
         "cypress": "^13.6.1",
         "eslint": "8.55.0",
