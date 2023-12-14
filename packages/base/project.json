@@ -4,9 +4,26 @@
     "sourceRoot": "packages/base/src",
     "projectType": "library",
     "targets": {
+        "translate": {
+            "executor": "nx:run-commands",
+            "options": {
+                "commands": [
+                    "g11n-cli update {projectRoot}/src {projectRoot}/i18n"
+                ],
+                "parallel": false
+            },
+            "inputs": [
+                "^tsFiles"
+            ],
+            "outputs": [
+                "{projectRoot}/i18n"
+            ]
+        },
         "build": {
             "executor": "@nx/rollup:rollup",
-            "outputs": ["{options.outputPath}"],
+            "outputs": [
+                "{options.outputPath}"
+            ],
             "options": {
                 "outputPath": "dist/packages/base",
                 "main": "packages/base/src/index.ts",
@@ -14,20 +31,33 @@
                 "assets": [],
                 "project": "packages/base/package.json",
                 "compiler": "swc",
-                "format": ["cjs", "esm"]
-            }
+                "format": [
+                    "cjs",
+                    "esm"
+                ]
+            },
+            "dependsOn": [
+                "translate"
+            ]
         },
         "publish": {
             "command": "node tools/scripts/publish.mjs base {args.ver} {args.tag}",
-            "dependsOn": ["build"]
+            "dependsOn": [
+                "build",
+                "lint"
+            ]
         },
         "lint": {
             "executor": "@nx/eslint:lint",
-            "outputs": ["{options.outputFile}"]
+            "outputs": [
+                "{options.outputFile}"
+            ]
         },
         "test": {
             "executor": "@nx/jest:jest",
-            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "outputs": [
+                "{workspaceRoot}/coverage/{projectRoot}"
+            ],
             "options": {
                 "jestConfig": "packages/base/jest.config.ts"
             }

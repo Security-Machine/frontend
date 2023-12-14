@@ -1,1 +1,1 @@
-export * from './lib/base';
+export const xx = true;

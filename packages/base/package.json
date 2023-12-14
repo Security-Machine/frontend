@@ -1,7 +1,9 @@
 {
     "name": "@secma/base",
     "version": "0.0.1",
-    "dependencies": {},
+    "dependencies": {
+        "luxon": "^3.4.4"
+    },
     "type": "commonjs",
     "main": "./index.cjs",
     "module": "./index.js"

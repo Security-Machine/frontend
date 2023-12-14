@@ -5,6 +5,29 @@
     "projectType": "library",
     "tags": [],
     "targets": {
+        "translate": {
+            "executor": "nx:run-commands",
+            "options": {
+                "commands": [
+                    "g11n-cli update {projectRoot}/src {projectRoot}/i18n packages/base/i18n/extracted-messages.json"
+                ],
+                "parallel": false
+            },
+            "inputs": [
+                "^tsFiles"
+            ],
+            "outputs": [
+                "{projectRoot}/i18n"
+            ],
+            "dependsOn": [
+                {
+                    "target": "translate",
+                    "projects": [
+                        "base"
+                    ]
+                }
+            ]
+        },
         "lint": {
             "executor": "@nx/eslint:lint",
             "outputs": ["{options.outputFile}"]
@@ -27,7 +50,11 @@
                         "output": "."
                     }
                 ]
-            }
+            },
+            "dependsOn": [
+                "translate",
+                "lint"
+            ]
         },
         "test": {
             "executor": "@nx/jest:jest",
