@@ -60,6 +60,10 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
     /**
      * An utility function for the common case of a query that
      * has date of creation and modification.
+     *
+     * @param result The json-parsed result of the call.
+     *
+     * @returns The result with the dates converted to `DateTime`.
      */
     processDates(result: any): TResult {
         return {
@@ -67,6 +71,18 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
             created: DateTime.fromISO(result.created),
             updated: DateTime.fromISO(result.updated),
         };
+    }
+
+    /**
+     * Create the body of the request.
+     *
+     * @param payload The payload to send.
+     */
+    createBody(payload?: Readonly<TPayload>): string | undefined {
+        if (payload === undefined) {
+            return undefined;
+        }
+        return JSON.stringify(payload);
     }
 
     /**
@@ -131,14 +147,16 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
         // Create the abort controller.
         this.abortController = new AbortController();
 
+        // Compute the body of the request. The call may throw an
+        // exception if the payload is invalid.
+        const body = this.createBody(payload);
+
         // Make the request.
         let response: Response;
         try {
             response = await fetch(this.url(pathArgs), {
                 method: this.method,
-                body: payload === undefined
-                    ? payload as any
-                    : JSON.stringify(payload),
+                body,
                 headers: {
                     'Content-Type': 'application/json',
                     ...headers

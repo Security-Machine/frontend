@@ -1,5 +1,5 @@
 export type {
-    TokenReply, TokenContent, OnTokenError, RetrieveTokenResult
+    TokenReply, TokenData, OnTokenError, RetrieveTokenResult
 } from "./models";
 
 export type { SecMaUser } from "./user";

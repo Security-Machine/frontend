@@ -1,8 +1,8 @@
 import { enableFetchMocks } from "jest-fetch-mock";
-import { StatsAP, VersionAP } from "./others";
-import { SecMaUser } from "../user";
 import { IntlShape } from "react-intl";
 
+import { SecMaUser } from "../user";
+import { StatsAP, VersionAP } from "./others";
 import { checkNoUser, checkNoPermission } from "./apps.test";
 
 

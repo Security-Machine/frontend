@@ -1,4 +1,4 @@
-import { SecMaUser, TokenContent } from "@secma/base";
+import { SecMaUser, TokenData } from "@secma/base";
 
 /**
  * Information about the current user stored in context.
@@ -21,7 +21,7 @@ export const initialUserState: SecMaState = {
  */
 export interface SignInAction {
     type: "sign-in";
-    payload: TokenContent & { token: string; }
+    payload: TokenData
 };
 
 

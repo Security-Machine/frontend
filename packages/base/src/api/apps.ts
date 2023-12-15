@@ -37,7 +37,6 @@ export class AppListAP extends AccessPoint<never, never, string[]> {
     protected static _instance: AppListAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    protected constructor() { super(); }
     get isMutation() { return false; }
     get method() { return "GET" as AccessPointMethod; }
     get pathPattern() { return "/api/apps/"; }

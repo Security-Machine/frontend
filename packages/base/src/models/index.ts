@@ -1,3 +1,3 @@
 export type{
-    TokenReply, TokenContent, OnTokenError, RetrieveTokenResult
+    TokenReply, TokenData, OnTokenError, RetrieveTokenResult
 } from "./token";

@@ -174,7 +174,7 @@ describe("read", () => {
         await checkNoPermission(toTest);
     });
 
-    it("should call the XXX API and return the result", async () => {
+    it("should call the API and return the result", async () => {
         testUser.permissions = permissions;
         testUser.user_name = "test";
         fetchMock.mockResponseOnce(appDataPayload);

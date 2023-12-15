@@ -19,7 +19,12 @@ export interface TokenReply {
 /**
  * The content of the token.
  */
-export interface TokenContent {
+export interface TokenData {
+
+    /**
+     * The encoded token.
+     */
+    token: string;
 
     /**
      * The subject (name of the user in this case).
@@ -54,5 +59,4 @@ export type OnTokenError = (error: "sign-in-error" | "invalid-response") => void
  * If the token could not be retrieved, `undefined` is returned; the
  * error handler was already called.
  */
-export type RetrieveTokenResult = Promise<[string, TokenContent] | undefined>;
-
+export type RetrieveTokenResult = Promise<[string, TokenData] | undefined>;
