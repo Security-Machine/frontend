@@ -2,6 +2,7 @@ import { IntlShape, useIntl } from "react-intl";
 import { DateTime } from "luxon";
 
 import { AccessPointError } from "../models/errors";
+import { SecMaUser } from "../user";
 
 
 /**
@@ -43,6 +44,11 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
     abstract get pathPattern(): string;
 
     /**
+     * Checks if the user is allowed to call this access point.
+     */
+    abstract isAllowed(user: Readonly<SecMaUser>): boolean;
+
+    /**
      * Post-process the result of the call.
      *
      * @param result The json-parsed result of the call.
@@ -59,7 +65,7 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
         return {
             ...result,
             created: DateTime.fromISO(result.created),
-            modified: DateTime.fromISO(result.modified),
+            updated: DateTime.fromISO(result.updated),
         };
     }
 
@@ -72,7 +78,7 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
      *
      * @returns The URL of the access point.
      */
-    url(args?: TPathArgs): string {
+    url(args?: Readonly<TPathArgs>): string {
         if (!args) {
             args = {} as any;
         }
@@ -90,10 +96,11 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
      * Call the access point and return a promise with the result.
      */
     async call(
-        intl: IntlShape,
-        payload?: TPayload,
-        pathArgs?: TPathArgs,
-        headers?: Record<string, string>
+        user: Readonly<SecMaUser>,
+        intl: Readonly<IntlShape>,
+        payload?: Readonly<TPayload>,
+        pathArgs?: Readonly<TPathArgs>,
+        headers?: Readonly<Record<string, string>>
     ): Promise<TResult | AccessPointError> {
         console.log("[AccessPoint.call] payload", payload);
         console.log("[AccessPoint.call] pathArgs", pathArgs);
@@ -104,6 +111,21 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
             this.abortController.abort();
             this.abortController = undefined;
             console.log("[AccessPoint.call] Previous call aborted");
+        }
+
+        // See if the user is allowed to call this access point.
+        if (!this.isAllowed(user)) {
+            console.log("[AccessPoint.call] Not allowed");
+            return {
+                status: 0,
+                code: 'err-permission',
+                message: intl.formatMessage({
+                    id: "secma-base.err-permission",
+                    defaultMessage:
+                        "You don't have the required permissions to " +
+                        "access this resource"
+                })
+            }
         }
 
         // Create the abort controller.

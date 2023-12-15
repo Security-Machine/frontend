@@ -2,9 +2,13 @@ import { describe } from "node:test";
 import { AccessPoint, AccessPointMethod } from "./base";
 import { enableFetchMocks } from 'jest-fetch-mock'
 import { IntlShape } from "react-intl";
+import { SecMaUser } from "../user";
 
 
 enableFetchMocks();
+
+// User data for tests.
+const testUser: SecMaUser = {} as any as SecMaUser;
 
 // Instead of using the real translator.
 const translator = {
@@ -24,7 +28,7 @@ describe("AccessPoint", () => {
     type TResult = { id: number, name: string, slug: string };
     class ToTest extends AccessPoint<Payload, TPath, TResult> {
         public constructor() { super(); }
-
+        isAllowed(user: SecMaUser) { return true; }
         get isMutation() { return true; }
         get method() { return "POST" as AccessPointMethod; }
         get pathPattern() { return "/api/{id}/{slug}"; }
@@ -43,6 +47,7 @@ describe("AccessPoint", () => {
         it("should return the path if no argument", () => {
             class ToTest2 extends AccessPoint<Payload, TPath, TResult> {
                 public constructor() { super(); }
+                isAllowed(user: SecMaUser) { return true; }
                 get isMutation() { return true; }
                 get method() { return "POST" as AccessPointMethod; }
                 get pathPattern() { return "/api/1/2/3"; }
@@ -66,7 +71,7 @@ describe("AccessPoint", () => {
             fetchMock.mockResponseOnce(JSON.stringify({ data: '12345' }));
 
             const toTest = new ToTest2();
-            const result = await toTest.call(translator, {
+            const result = await toTest.call(testUser, translator, {
                 name: "test"
             }, {
                 id: 1, slug: "test"
@@ -76,12 +81,23 @@ describe("AccessPoint", () => {
                 data: '12345'
             });
             expect(fetchMock.mock.calls.length).toEqual(1);
+
+            expect(fetchMock.mock.calls[0][0]).toEqual("/api/1/test");
+            const arg: any = fetchMock.mock.calls[0][1];
+            expect(arg).toBeDefined();
+            expect(arg.method).toEqual("POST");
+            expect(arg.headers).toBeDefined();
+            expect(arg.headers["Content-Type"]).toEqual("application/json");
+            expect(arg.body).toEqual("{\"name\":\"test\"}");
+            expect(arg.signal).toBeDefined();
+            expect(arg.signal.aborted).toBeFalsy();
+
             expect(translator.formatMessage).not.toHaveBeenCalled();
         });
         it("should return an error on fetch error", async () => {
             fetchMock.mockReject(new Error('fake error message'));
             const toTest = new ToTest();
-            const result = await toTest.call(translator, {
+            const result = await toTest.call(testUser, translator, {
                 name: "test"
             }, {
                 id: 1, slug: "test"
@@ -95,7 +111,7 @@ describe("AccessPoint", () => {
         it("should return an error if aborted", async () => {
             fetchMock.mockAbort();
             const toTest = new ToTest();
-            const result = await toTest.call(translator, {
+            const result = await toTest.call(testUser, translator, {
                 name: "test"
             }, {
                 id: 1, slug: "test"
@@ -109,7 +125,7 @@ describe("AccessPoint", () => {
         it("should show error if response is not json", async () => {
             fetchMock.mockResponseOnce("not json");
             const toTest = new ToTest();
-            const result = await toTest.call(translator, {
+            const result = await toTest.call(testUser, translator, {
                 name: "test"
             }, {
                 id: 1, slug: "test"
@@ -134,7 +150,7 @@ describe("AccessPoint", () => {
                 { status: 422 }
             );
             const toTest = new ToTest();
-            const result = await toTest.call(translator, {
+            const result = await toTest.call(testUser, translator, {
                 name: "test"
             }, {
                 id: 1, slug: "test"
@@ -163,7 +179,7 @@ describe("AccessPoint", () => {
                 { status: 500 }
             );
             const toTest = new ToTest();
-            const result = await toTest.call(translator, {
+            const result = await toTest.call(testUser, translator, {
                 name: "test"
             }, {
                 id: 1, slug: "test"
@@ -181,6 +197,31 @@ describe("AccessPoint", () => {
                     "lorem": "ipsum"
                 },
                 "status": 500,
+            });
+        });
+        it("should reject the call if the user is not allowed", async () => {
+            class ToTest2 extends ToTest {
+                override isAllowed(user: Readonly<SecMaUser>) {
+                    return false;
+                }
+            }
+            const toTest = new ToTest2();
+            const result = await toTest.call(testUser, translator, {
+                name: "test"
+            }, {
+                id: 1, slug: "test"
+            });
+            expect(fetchMock.mock.calls.length).toEqual(0);
+            expect(translator.formatMessage).toHaveBeenCalledWith({
+                "defaultMessage":
+                    "You don't have the required permissions to access " +
+                    "this resource",
+                "id": "secma-base.err-permission",
+            });
+            expect(result).toEqual({
+                "code": "err-permission",
+                "message": "a message",
+                "status": 0,
             });
         });
     });

@@ -9,6 +9,10 @@
       "en": "Could not communicate with the server",
       "ro": "Could not communicate with the server"
     },
+    "err-permission": {
+      "__id__": "secma-base.err-permission",
+      "defaultMessage": "You don't have the required permissions to access this resource"
+    },
     "err-unknown": {
       "__id__": "secma-base.err-unknown",
       "defaultMessage": "Unknown error",
@@ -26,18 +30,24 @@
     },
     "no-app": {
       "__id__": "secma-base.no-app",
-      "defaultMessage": "No application with a `{appSlug}` slug was found"
+      "defaultMessage": "No application with a `{appSlug}` slug was found",
+      "en": "No application with a `{appSlug}` slug was found",
+      "ro": "No application with a `{appSlug}` slug was found"
     },
     "no-permission": {
       "__id__": "secma-base.no-permission"
     },
     "no-role": {
       "__id__": "secma-base.no-role",
-      "defaultMessage": "No role with a `{roleId}` ID was found withing this tenant"
+      "defaultMessage": "No role with a `{roleId}` ID was found withing this tenant",
+      "en": "No role with a `{roleId}` ID was found withing this tenant",
+      "ro": "No role with a `{roleId}` ID was found withing this tenant"
     },
     "no-user": {
       "__id__": "secma-base.no-user",
-      "defaultMessage": "No user with a `{userId}` ID was found withing this tenant"
+      "defaultMessage": "No user with a `{userId}` ID was found withing this tenant",
+      "en": "No user with a `{userId}` ID was found withing this tenant",
+      "ro": "No user with a `{userId}` ID was found withing this tenant"
     }
   }
 }

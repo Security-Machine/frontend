@@ -1,31 +1,9 @@
-import { TokenContent } from "@secma/base";
+import { SecMaUser, TokenContent } from "@secma/base";
 
 /**
  * Information about the current user stored in context.
  */
-export interface SecMaState {
-
-    /**
-     * The name of the user.
-     */
-    user_name?: string;
-
-    /**
-     * The expiration time of the current token.
-     */
-    expires: number;
-
-    /**
-     * The permissions that this user has.
-     */
-    permissions: string[];
-
-    /**
-     * The token that was used to retrieve the user information.
-     */
-    token?: string;
-
-};
+export interface SecMaState extends SecMaUser {};
 
 
 // Initial state of the controller.
