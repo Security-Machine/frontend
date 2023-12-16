@@ -1,3 +1,4 @@
+import { AccessPointError } from "./errors";
 
 
 /**
@@ -46,9 +47,9 @@ export interface TokenData {
 /**
  * The function that is called when the token cannot be retrieved.
  *
- * @param error The error code indicating what went wrong.
+ * @param error The error indicating what went wrong.
  */
-export type OnTokenError = (error: "sign-in-error" | "invalid-response") => void;
+export type OnTokenError = (error: AccessPointError) => void;
 
 
 /**
@@ -59,4 +60,20 @@ export type OnTokenError = (error: "sign-in-error" | "invalid-response") => void
  * If the token could not be retrieved, `undefined` is returned; the
  * error handler was already called.
  */
-export type RetrieveTokenResult = Promise<[string, TokenData] | undefined>;
+export type RetrieveTokenResult = Promise<TokenData | AccessPointError>;
+
+
+/**
+ * The function that is called when the an user was signed in.
+ *
+ * @param error The error indicating what went wrong.
+ */
+export type OnSignIn = (data: TokenData) => void;
+
+
+/**
+ * The function that is called when the an user was signed in.
+ *
+ * @param data The result from the server.
+ */
+export type OnSignOut = (data: TokenData) => void;

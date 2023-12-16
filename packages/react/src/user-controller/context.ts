@@ -17,7 +17,6 @@ export interface SecMaContext extends SecMaState {
      */
     signIn: (email: string, password: string) => RetrieveTokenResult;
 
-
     /**
      * Signs the user out.
      */

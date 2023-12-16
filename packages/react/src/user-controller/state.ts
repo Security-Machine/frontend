@@ -8,9 +8,26 @@ export interface SecMaState extends SecMaUser {};
 
 // Initial state of the controller.
 export const initialUserState: SecMaState = {
+    /**
+     * The name of the user that is logged in or undefined if no user is
+     * logged in.
+     */
     user_name: undefined,
+
+    /**
+     * The time when the token expires.
+     */
     expires: 0,
+
+    /**
+     * The permissions the user has.
+     */
     permissions: [],
+
+    /**
+     * The token that was used to sign the user in.
+     */
+    token: undefined,
 };
 
 
@@ -39,6 +56,9 @@ export interface ClearAction {
 export type SecMaUserAction = SignInAction | ClearAction;
 
 
+/**
+ * The reducer for the {@link SecMaController} component.
+ */
 export function secMaReducer(
     state: SecMaState, action: SecMaUserAction
 ): SecMaState {
@@ -53,5 +73,7 @@ export function secMaReducer(
             }
         case "clear":
             return initialUserState;
+        default:
+            return state;
     }
 }
