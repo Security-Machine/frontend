@@ -136,6 +136,7 @@ export const SignInForm: FC<SignInFormProps> = ({
         return result;
     }, [intl]);
 
+
     // The callback used to submit the form.
     const submit = useCallback((values: SignInFormState) => {
         console.log('[SignInForm] Sign in %O', values);
@@ -143,10 +144,14 @@ export const SignInForm: FC<SignInFormProps> = ({
         // TODO: Handle remember me by using a refresh token.
     }, [signIn]);
 
+
     // Inform the parent if the user was signed in.
     useEffect(() => {
         if (onSignIn && user_name) {
-            console.log('[SignInForm] onSignIn Callback triggered');
+            console.log(
+                '[SignInForm] onSignIn callback triggered for %s',
+                user_name
+            );
             onSignIn();
         }
     }, [onSignIn, user_name]);

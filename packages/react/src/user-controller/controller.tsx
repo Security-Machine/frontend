@@ -84,6 +84,7 @@ export const SecMaController: FC<SecMaControllerProps> = ({
             undefined, // headers
             timeout,
         );
+        console.log("[SecMaController] api result %O", result);
 
         if ("code" in result) {
             // This is an error.

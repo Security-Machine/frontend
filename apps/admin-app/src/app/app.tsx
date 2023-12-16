@@ -4,6 +4,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 
 import { muiTheme } from "./mui-theme";
 import { appRouter } from "./router";
+import { SecMaController } from "@secma/react";
 
 
 /**
@@ -13,7 +14,7 @@ export function App() {
     return (
         <ThemeProvider theme={muiTheme}>
             <CssBaseline />
-            <RouterProvider router={appRouter} />
+                <RouterProvider router={appRouter} />
         </ThemeProvider>
     );
 }

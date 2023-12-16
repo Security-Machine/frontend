@@ -12,7 +12,9 @@
       "route": {
         "title": {
           "__id__": "secma-admin.error.route.title",
-          "defaultMessage": "Unexpected Error"
+          "defaultMessage": "Unexpected Error",
+          "en": "Unexpected Error",
+          "ro": "Unexpected Error"
         }
       }
     }

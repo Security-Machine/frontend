@@ -1,1 +1,34 @@
-{}
+{
+  "secma-mui": {
+    "signIn": {
+      "button": {
+        "__id__": "secma-mui.signIn.button",
+        "defaultMessage": "Sign in"
+      },
+      "forgotPassword": {
+        "__id__": "secma-mui.signIn.forgotPassword",
+        "defaultMessage": "Forgot password?"
+      },
+      "password": {
+        "__id__": "secma-mui.signIn.password",
+        "defaultMessage": "Password"
+      },
+      "rememberMe": {
+        "__id__": "secma-mui.signIn.rememberMe",
+        "defaultMessage": "Remember me"
+      },
+      "signUp": {
+        "__id__": "secma-mui.signIn.signUp",
+        "defaultMessage": "Don't have an account? Sign Up"
+      },
+      "title": {
+        "__id__": "secma-mui.signIn.title",
+        "defaultMessage": "Sign in"
+      },
+      "username": {
+        "__id__": "secma-mui.signIn.username",
+        "defaultMessage": "Username or email"
+      }
+    }
+  }
+}

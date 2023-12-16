@@ -1,1 +1,1 @@
-export const xx = true;
+export { SignInMuiForm } from './email-password';

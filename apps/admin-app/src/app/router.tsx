@@ -1,5 +1,5 @@
-import { Router, createBrowserRouter, } from "react-router-dom";
-import { AppLayout, Error404Page } from "@secma/admin";
+import { Outlet, createBrowserRouter, } from "react-router-dom";
+import { adminRoutes } from "@secma/admin";
 
 
 /**
@@ -7,9 +7,8 @@ import { AppLayout, Error404Page } from "@secma/admin";
  */
 export const appRouter: any = createBrowserRouter([
     {
-        path: "/",
-        element: <AppLayout />,
-        errorElement: <Error404Page />,
-        children: []
+        path: "/admin",
+        element: <Outlet />,
+        children: adminRoutes
     },
 ]);
