@@ -1,2 +1,22 @@
 {
+  "secma-base.duplicate-app": "secma-base.duplicate-app",
+  "secma-base.err-comm": "Could not communicate with the server",
+  "secma-base.err-permission": "You don't have the required permissions to access this resource",
+  "secma-base.err-unknown": "Unknown error",
+  "secma-base.err-validation": "Validation error",
+  "secma-base.invalid-credentials": "secma-base.invalid-credentials",
+  "secma-base.no-app": "No application with a `{appSlug}` slug was found",
+  "secma-base.no-permission": "secma-base.no-permission",
+  "secma-base.no-role": "No role with a `{roleId}` ID was found withing this tenant",
+  "secma-base.no-user": "No user with a `{userId}` ID was found withing this tenant",
+  "secma-react.email.errRequired": "The email is required.",
+  "secma-react.email.errTooLong": "The email is too long (255 characters is the limit).",
+  "secma-react.email.errTooShort": "The email is too short.",
+  "secma-react.password.errNoDigit": "The password must contain at least one digit.",
+  "secma-react.password.errNoLower": "The password must contain at least one lowercase letter.",
+  "secma-react.password.errNoSpecial": "The password must contain at least one special character.",
+  "secma-react.password.errNoUpper": "The password must contain at least one uppercase letter.",
+  "secma-react.password.errRequired": "The password is required.",
+  "secma-react.password.errTooLong": "The password is too long (255 characters is the limit).",
+  "secma-react.password.errTooShort": "The password is too short."
 }

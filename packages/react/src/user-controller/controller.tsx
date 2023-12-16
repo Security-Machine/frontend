@@ -82,6 +82,7 @@ export const SecMaController: FC<SecMaControllerProps> = ({
                 tenant: tenantSlug,
             }, // pathArgs
             undefined, // headers
+            timeout,
         );
 
         if ("code" in result) {

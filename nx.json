@@ -69,7 +69,8 @@
             "!{projectRoot}/**/*.cy.[jt]s?(x)",
             "!{projectRoot}/cypress.config.[jt]s"
         ],
-        "sharedGlobals": ["{workspaceRoot}/babel.config.json"]
+        "sharedGlobals": ["{workspaceRoot}/babel.config.json"],
+        "tsFiles": ["{projectRoot}/**/*.ts?(x)"]
     },
     "workspaceLayout": {
         "appsDir": "apps",

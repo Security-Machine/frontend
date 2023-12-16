@@ -1,8 +1,8 @@
 import type { StoryFn, Meta } from '@storybook/react';
-import { SimpleController as G11nController } from '@vebgen/g11n';
-import enMessages from '../../i18n/en.json';
 import { Link, RouterProvider, createMemoryRouter } from 'react-router-dom';
+import { SimpleController as G11nController } from '@vebgen/g11n';
 
+import enMessages from '../../i18n/en.json';
 import type { AppLayoutProps } from './layout';
 import { AppLayout } from './layout';
 

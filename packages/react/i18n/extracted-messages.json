@@ -1,1 +1,48 @@
-{}
+{
+  "secma-react": {
+    "email": {
+      "errRequired": {
+        "__id__": "secma-react.email.errRequired",
+        "defaultMessage": "The email is required."
+      },
+      "errTooLong": {
+        "__id__": "secma-react.email.errTooLong",
+        "defaultMessage": "The email is too long (255 characters is the limit)."
+      },
+      "errTooShort": {
+        "__id__": "secma-react.email.errTooShort",
+        "defaultMessage": "The email is too short."
+      }
+    },
+    "password": {
+      "errNoDigit": {
+        "__id__": "secma-react.password.errNoDigit",
+        "defaultMessage": "The password must contain at least one digit."
+      },
+      "errNoLower": {
+        "__id__": "secma-react.password.errNoLower",
+        "defaultMessage": "The password must contain at least one lowercase letter."
+      },
+      "errNoSpecial": {
+        "__id__": "secma-react.password.errNoSpecial",
+        "defaultMessage": "The password must contain at least one special character."
+      },
+      "errNoUpper": {
+        "__id__": "secma-react.password.errNoUpper",
+        "defaultMessage": "The password must contain at least one uppercase letter."
+      },
+      "errRequired": {
+        "__id__": "secma-react.password.errRequired",
+        "defaultMessage": "The password is required."
+      },
+      "errTooLong": {
+        "__id__": "secma-react.password.errTooLong",
+        "defaultMessage": "The password is too long (255 characters is the limit)."
+      },
+      "errTooShort": {
+        "__id__": "secma-react.password.errTooShort",
+        "defaultMessage": "The password is too short."
+      }
+    }
+  }
+}

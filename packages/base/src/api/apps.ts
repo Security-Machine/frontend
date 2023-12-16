@@ -39,7 +39,7 @@ export class AppListAP extends AccessPoint<never, never, string[]> {
 
     get isMutation() { return false; }
     get method() { return "GET" as AccessPointMethod; }
-    get pathPattern() { return "/api/apps/"; }
+    get pathPattern() { return "/mng/apps/"; }
     override isAllowed(user: Readonly<SecMaUser>) {
         return (
             !!user.user_name &&

@@ -8,13 +8,17 @@ import { useAPI } from "./base";
  *
  * @param autoTrigger Whether to trigger the API call automatically.
  */
-export const useStats = (autoTrigger: Readonly<boolean> = true) => {
+export const useStats = (
+    autoTrigger: Readonly<boolean> = true,
+    timeout?: number,
+) => {
     return useAPI(
         StatsAP.i, // accessPoint
         undefined, // apiPayload
         undefined, // pathArgs
         undefined, // headers
         autoTrigger,
+        timeout,
     );
 };
 
@@ -24,12 +28,16 @@ export const useStats = (autoTrigger: Readonly<boolean> = true) => {
  *
  * @param autoTrigger Whether to trigger the API call automatically.
  */
-export const useVersion = (autoTrigger: Readonly<boolean> = true) => {
+export const useVersion = (
+    autoTrigger: Readonly<boolean> = true,
+    timeout?: number
+) => {
     return useAPI(
         VersionAP.i, // accessPoint
         undefined, // apiPayload
         undefined, // pathArgs
         undefined, // headers
         autoTrigger,
+        timeout,
     );
 };

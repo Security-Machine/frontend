@@ -137,6 +137,7 @@ export function reducer<TResult>(
                 result: action.payload,
                 loading: false,
                 called: true,
+                error: undefined,
             };
         case "error":
             return {
@@ -168,6 +169,7 @@ export function useAPI<
     pathArgs?: Readonly<TPathArgs>,
     headers?: Readonly<Record<string, string>>,
     autoTrigger?: Readonly<boolean>,
+    timeout?: Readonly<number>,
 ): SecMaApiResult<TPayload, TPathArgs, TResult> {
     console.log("[useAPI] apiPayload %O", apiPayload);
     console.log("[useAPI] pathArgs %O", pathArgs);
@@ -199,7 +201,8 @@ export function useAPI<
             intl,
             apiPayloadOverride || apiPayload,
             pathArgsOverride || pathArgs,
-            headersOverride || headers
+            headersOverride || headers,
+            timeout || 8000,
         );
 
         // Dispatch the result.
@@ -210,7 +213,7 @@ export function useAPI<
         }
 
         return result;
-    }, [accessPoint, userState, intl, apiPayload, pathArgs, headers]);
+    }, [accessPoint, userState, intl, apiPayload, pathArgs, headers, timeout]);
 
     // Reset the state of the hook.
     const reset = useCallback(() => { dispatch({ type: "reset", }); }, []);

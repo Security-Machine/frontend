@@ -110,13 +110,21 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
 
     /**
      * Call the access point and return a promise with the result.
+     *
+     * @param user The user that is making the call.
+     * @param intl The internationalization object.
+     * @param payload The payload to send.
+     * @param pathArgs The arguments to use to compute the URL.
+     * @param headers The headers to send.
+     * @param timeout The timeout in milliseconds (8 seconds by default).
      */
     async call(
         user: Readonly<SecMaUser>,
         intl: Readonly<IntlShape>,
         payload?: Readonly<TPayload>,
         pathArgs?: Readonly<TPathArgs>,
-        headers?: Readonly<Record<string, string>>
+        headers?: Readonly<Record<string, string>>,
+        timeout?: number
     ): Promise<TResult | AccessPointError> {
         console.log("[AccessPoint.call] payload", payload);
         console.log("[AccessPoint.call] pathArgs", pathArgs);
@@ -146,6 +154,13 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
 
         // Create the abort controller.
         this.abortController = new AbortController();
+        setTimeout(() => {
+            if (this.abortController) {
+                this.abortController.abort();
+                this.abortController = undefined;
+                console.log("[AccessPoint.call] Timeout");
+            }
+        }, timeout || 8000);
 
         // Compute the body of the request. The call may throw an
         // exception if the payload is invalid.

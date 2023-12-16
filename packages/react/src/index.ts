@@ -13,3 +13,7 @@ export {
     useSecMaContext, useSecMaAuthorized,
     SecMaController, secMaReducer
 } from './user-controller';
+
+
+export type { SignInFormProps, SignInFormState } from './email-password';
+export { SignInForm } from './email-password';

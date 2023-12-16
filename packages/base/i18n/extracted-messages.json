@@ -11,7 +11,9 @@
     },
     "err-permission": {
       "__id__": "secma-base.err-permission",
-      "defaultMessage": "You don't have the required permissions to access this resource"
+      "defaultMessage": "You don't have the required permissions to access this resource",
+      "en": "You don't have the required permissions to access this resource",
+      "ro": "You don't have the required permissions to access this resource"
     },
     "err-unknown": {
       "__id__": "secma-base.err-unknown",
