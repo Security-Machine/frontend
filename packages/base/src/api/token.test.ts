@@ -5,7 +5,7 @@ import jwt_encode from "jwt-encode";
 import { SecMaUser } from "../user";
 
 import { checkNoUser, checkNoPermission } from "./apps.test";
-import { TokenAP } from "./token";
+import { LogInTokenAP } from "./token";
 
 // User data for tests.
 const testUser: SecMaUser = {
@@ -21,7 +21,7 @@ const translator = {
     formatMessage: jest.fn(() => "a message" as any as string),
 } as unknown as IntlShape;
 
-class LocalTokenAP extends TokenAP {
+class LocalTokenAP extends LogInTokenAP {
     public constructor() { super(); }
 }
 let toTest: LocalTokenAP;

@@ -4,7 +4,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 
 import { muiTheme } from "./mui-theme";
 import { appRouter } from "./router";
-import { SecMaController } from "@secma/react";
+import { SecMaAppController, SecMaController } from "@secma/react";
 
 
 /**
@@ -14,7 +14,9 @@ export function App() {
     return (
         <ThemeProvider theme={muiTheme}>
             <CssBaseline />
+            <SecMaAppController loginPath="/admin/email-password/sign-in">
                 <RouterProvider router={appRouter} />
+            </SecMaAppController>
         </ThemeProvider>
     );
 }

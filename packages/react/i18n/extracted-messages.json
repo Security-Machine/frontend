@@ -20,6 +20,16 @@
         "ro": "The email is too short."
       }
     },
+    "lost": {
+      "errEmailPattern": {
+        "__id__": "secma-react.lost.errEmailPattern",
+        "defaultMessage": "Please provide a valid email."
+      },
+      "errRequired": {
+        "__id__": "secma-react.lost.errRequired",
+        "defaultMessage": "The email is required."
+      }
+    },
     "password": {
       "errNoDigit": {
         "__id__": "secma-react.password.errNoDigit",

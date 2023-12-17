@@ -23,6 +23,7 @@ const storybookConfig: Meta<StoryProps> = {
     component: SignInForm,
     args: {
         onSignIn: () => { },
+        isExisting: true,
     },
     parameters: {
         fetchMock: {
@@ -138,3 +139,12 @@ const Template: StoryFn<StoryProps> = (args) => {
  * The default story.
  */
 export const Default: StoryFn<StoryProps> = Template.bind({});
+Default.args = {};
+
+/**
+ * The story for signing up.
+ */
+export const SignUp: StoryFn<StoryProps> = Template.bind({});
+SignUp.args = {
+    isExisting: false,
+};

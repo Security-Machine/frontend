@@ -10,12 +10,18 @@ import { SecMaState } from "./state";
 export interface SecMaContext extends SecMaState {
 
     /**
-     * Signs the user in.
+     * Signs the user in (existing user).
      *
      * @param email The email of the user.
      * @param password The password of the user.
+     * @param isExisting Whether the user is an existing user (sign in) or
+     *  a new user (sign up).
      */
-    signIn: (email: string, password: string) => RetrieveTokenResult;
+    signIn: (
+        email: string,
+        password: string,
+        isExisting: boolean,
+    ) => RetrieveTokenResult;
 
     /**
      * Signs the user out.

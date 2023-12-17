@@ -1,5 +1,8 @@
 import { FC, ReactNode, useCallback, useReducer } from "react";
-import { OnSignIn, OnSignOut, OnTokenError, TokenAP, TokenData } from "@secma/base";
+import {
+    OnSignIn, OnSignOut, OnTokenError, LogInTokenAP, SignUpTokenAP,
+    TokenData
+} from "@secma/base";
 import { useIntl } from "react-intl";
 
 import { SecMaContext, SecMaContextProvider } from "./context";
@@ -68,9 +71,12 @@ export const SecMaController: FC<SecMaControllerProps> = ({
     const [state, dispatch] = useReducer(secMaReducer, initialUserState);
 
     // The sign in function.
-    const signIn = useCallback(async (email: string, password: string) => {
+    const signIn = useCallback(async (
+        email: string, password: string, isExisting: boolean,
+    ) => {
         // Call the API, retrieve the token.
-        const result = await TokenAP.i.call(
+        const Cls = isExisting ? LogInTokenAP : SignUpTokenAP;
+        const result = await Cls.i.call(
             undefined as any, // user (not used in this case)
             intl,
             {

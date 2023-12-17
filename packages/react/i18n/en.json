@@ -12,6 +12,8 @@
   "secma-react.email.errRequired": "The email is required.",
   "secma-react.email.errTooLong": "The email is too long (255 characters is the limit).",
   "secma-react.email.errTooShort": "The email is too short.",
+  "secma-react.lost.errEmailPattern": "Please provide a valid email.",
+  "secma-react.lost.errRequired": "The email is required.",
   "secma-react.password.errNoDigit": "The password must contain at least one digit.",
   "secma-react.password.errNoLower": "The password must contain at least one lowercase letter.",
   "secma-react.password.errNoSpecial": "The password must contain at least one special character.",

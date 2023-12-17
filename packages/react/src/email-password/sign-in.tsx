@@ -2,6 +2,8 @@ import { FC, ReactNode, useCallback, useEffect } from 'react';
 import { Form } from 'react-final-form';
 import { useIntl } from 'react-intl';
 import { useSecMaContext } from '../user-controller';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { NavigationData, navigationDataToUrl } from '../utility';
 
 
 /**
@@ -13,6 +15,13 @@ export interface SignInFormProps {
      * The callback triggered when an user was signed in.
      */
     onSignIn?: () => void;
+
+    /**
+     * Indicate if this is a sign in form (existing user) or a sign up form
+     * (new user).
+     * @default true
+     */
+    isExisting?: boolean;
 
     /**
      * The children rendered inside the form.
@@ -55,9 +64,17 @@ const initialValues: SignInFormState = {
  */
 export const SignInForm: FC<SignInFormProps> = ({
     onSignIn,
+    isExisting = true,
     children,
 }) => {
+    const strMode = isExisting ? 'SignInForm' : 'SignUpForm';
     console.log('[SignInForm] renders');
+
+    // The location state.
+    const { state: navState } = useLocation();
+
+    // Navigation provider.
+    const navigate = useNavigate();
 
     // Translation provider.
     const intl = useIntl();
@@ -95,66 +112,78 @@ export const SignInForm: FC<SignInFormProps> = ({
                 id: 'secma-react.password.errRequired',
                 defaultMessage: 'The password is required.',
             });
-        } else if (values.password.length < 8) {
-            result.password = intl.formatMessage({
-                id: 'secma-react.password.errTooShort',
-                defaultMessage: 'The password is too short.',
-            });
-        } else if (values.password.length > 255) {
-            result.password = intl.formatMessage({
-                id: 'secma-react.password.errTooLong',
-                defaultMessage: 'The password is too long (255 characters ' +
-                    'is the limit).',
-            });
-        } else if (!/[a-z]/.test(values.password)) {
-            result.password = intl.formatMessage({
-                id: 'secma-react.password.errNoLower',
-                defaultMessage: 'The password must contain at least one ' +
-                    'lowercase letter.',
-            });
-        } else if (!/[A-Z]/.test(values.password)) {
-            result.password = intl.formatMessage({
-                id: 'secma-react.password.errNoUpper',
-                defaultMessage: 'The password must contain at least one ' +
-                    'uppercase letter.',
-            });
-        } else if (!/[0-9]/.test(values.password)) {
-            result.password = intl.formatMessage({
-                id: 'secma-react.password.errNoDigit',
-                defaultMessage: 'The password must contain at least one ' +
-                    'digit.',
-            });
-        } else if (!/[^a-zA-Z0-9]/.test(values.password)) {
-            result.password = intl.formatMessage({
-                id: 'secma-react.password.errNoSpecial',
-                defaultMessage: 'The password must contain at least one ' +
-                    'special character.',
-            });
+        } else if (!isExisting) {
+            if (values.password.length < 8) {
+                result.password = intl.formatMessage({
+                    id: 'secma-react.password.errTooShort',
+                    defaultMessage: 'The password is too short.',
+                });
+            } else if (values.password.length > 255) {
+                result.password = intl.formatMessage({
+                    id: 'secma-react.password.errTooLong',
+                    defaultMessage: 'The password is too long (255 ' +
+                        'characters is the limit).',
+                });
+            } else if (!/[a-z]/.test(values.password)) {
+                result.password = intl.formatMessage({
+                    id: 'secma-react.password.errNoLower',
+                    defaultMessage: 'The password must contain at least one ' +
+                        'lowercase letter.',
+                });
+            } else if (!/[A-Z]/.test(values.password)) {
+                result.password = intl.formatMessage({
+                    id: 'secma-react.password.errNoUpper',
+                    defaultMessage: 'The password must contain at least one ' +
+                        'uppercase letter.',
+                });
+            } else if (!/[0-9]/.test(values.password)) {
+                result.password = intl.formatMessage({
+                    id: 'secma-react.password.errNoDigit',
+                    defaultMessage: 'The password must contain at least one ' +
+                        'digit.',
+                });
+            } else if (!/[^a-zA-Z0-9]/.test(values.password)) {
+                result.password = intl.formatMessage({
+                    id: 'secma-react.password.errNoSpecial',
+                    defaultMessage: 'The password must contain at least one ' +
+                        'special character.',
+                });
+            }
         }
 
-        console.log('[SignInForm] validation errors %O', result);
+        console.log('[%s] validation errors %O', strMode, result);
         return result;
-    }, [intl]);
+    }, [intl, isExisting]);
 
 
     // The callback used to submit the form.
     const submit = useCallback((values: SignInFormState) => {
-        console.log('[SignInForm] Sign in %O', values);
-        signIn(values.username, values.password);
+        console.log('[%s] Sign in %O', strMode, values);
+        signIn(values.username, values.password, isExisting);
+
         // TODO: Handle remember me by using a refresh token.
-    }, [signIn]);
+    }, [signIn, isExisting]);
 
 
     // Inform the parent if the user was signed in.
     useEffect(() => {
         if (onSignIn && user_name) {
             console.log(
-                '[SignInForm] onSignIn callback triggered for %s',
-                user_name
+                '[SignIn%sForm] onSignIn callback triggered for %s',
+                strMode, user_name
             );
             onSignIn();
         }
-    }, [onSignIn, user_name]);
+        if (navState && navState.from && user_name) {
+            const savedState: NavigationData = navState;
+            navigate(
+                navigationDataToUrl(savedState),
+                {
+                    state: savedState.from.state,
+                }
+            );
+        }
+    }, [onSignIn, user_name, navState]);
 
 
     // Render the form.

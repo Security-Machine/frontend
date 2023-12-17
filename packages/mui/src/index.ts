@@ -1,1 +1,5 @@
-export { SignInMuiForm } from './email-password';
+export {
+    SignInMuiForm, SignUpMuiForm, LostPasswordMuiForm
+} from './email-password';
+
+export { NotAuthorized } from './utility';

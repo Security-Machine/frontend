@@ -1,33 +1,101 @@
 {
   "secma-mui": {
+    "error": {
+      "notAuthorized": {
+        "content": {
+          "__id__": "secma-mui.error.notAuthorized.content",
+          "defaultMessage": "The permissions required to access this content are not yet associated with your account.",
+          "en": "The permissions required to access this content are not yet associated with your account.",
+          "ro": "The permissions required to access this content are not yet associated with your account."
+        },
+        "title": {
+          "__id__": "secma-mui.error.notAuthorized.title",
+          "defaultMessage": "Permission Denied",
+          "en": "Permission Denied",
+          "ro": "Permission Denied"
+        }
+      }
+    },
+    "lost": {
+      "button": {
+        "__id__": "secma-mui.lost.button",
+        "defaultMessage": "Send email"
+      },
+      "signIn": {
+        "__id__": "secma-mui.lost.signIn",
+        "defaultMessage": "Sign In"
+      },
+      "signUp": {
+        "__id__": "secma-mui.lost.signUp",
+        "defaultMessage": "Sign Up"
+      },
+      "title": {
+        "__id__": "secma-mui.lost.title",
+        "defaultMessage": "Recover password"
+      }
+    },
     "signIn": {
       "button": {
         "__id__": "secma-mui.signIn.button",
-        "defaultMessage": "Sign in"
+        "defaultMessage": "Sign in",
+        "en": "Sign in",
+        "ro": "Sign in"
       },
-      "forgotPassword": {
-        "__id__": "secma-mui.signIn.forgotPassword",
-        "defaultMessage": "Forgot password?"
+      "lostPassword": {
+        "__id__": "secma-mui.signIn.lostPassword",
+        "defaultMessage": "Lost password?",
+        "en": "Lost password?",
+        "ro": "Lost password?"
       },
       "password": {
         "__id__": "secma-mui.signIn.password",
-        "defaultMessage": "Password"
+        "defaultMessage": "Password",
+        "en": "Password",
+        "ro": "Password"
       },
       "rememberMe": {
         "__id__": "secma-mui.signIn.rememberMe",
-        "defaultMessage": "Remember me"
+        "defaultMessage": "Remember me",
+        "en": "Remember me",
+        "ro": "Remember me"
       },
       "signUp": {
         "__id__": "secma-mui.signIn.signUp",
-        "defaultMessage": "Don't have an account? Sign Up"
+        "defaultMessage": "Don't have an account? Sign Up",
+        "en": "Don't have an account? Sign Up",
+        "ro": "Don't have an account? Sign Up"
       },
       "title": {
         "__id__": "secma-mui.signIn.title",
-        "defaultMessage": "Sign in"
+        "defaultMessage": "Sign in",
+        "en": "Sign in",
+        "ro": "Sign in"
       },
       "username": {
         "__id__": "secma-mui.signIn.username",
-        "defaultMessage": "Username or email"
+        "defaultMessage": "Username or email",
+        "en": "Username or email",
+        "ro": "Username or email"
+      }
+    },
+    "signUp": {
+      "button": {
+        "__id__": "secma-mui.signUp.button",
+        "defaultMessage": "Sign in",
+        "en": "Sign Up",
+        "ro": "Sign Up"
+      },
+      "signIn": {
+        "__id__": "secma-mui.signUp.signIn",
+        "defaultMessage": "Already have an account? Sign In",
+        "en": "Already have an account? Sign In",
+        "ro": "Already have an account? Sign In"
+      },
+      "title": {
+        "__id__": "secma-mui.signUp.title",
+        "defaultMessage": "Sign in",
+        "en": "Sign in",
+        "ro": "Sign in"
       }
     }
   }

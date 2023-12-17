@@ -26,10 +26,10 @@ type TokenReply = Omit<TokenData, "token">;
 
 
 /**
- * The access point for the list of applications.
+ * The access point for retrieving a token for an existing user (log-in).
  */
-export class TokenAP extends AccessPoint<Payload, PathArgs, TokenData> {
-    protected static _instance: TokenAP;
+export class LogInTokenAP extends AccessPoint<Payload, PathArgs, TokenData> {
+    protected static _instance: LogInTokenAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
     get isMutation() { return false; }
@@ -49,10 +49,24 @@ export class TokenAP extends AccessPoint<Payload, PathArgs, TokenData> {
         }
     }
     override createBody(payload?: Payload): string | undefined {
-        if (!payload) throw new Error("[TokenAP] Missing payload");
+        if (!payload) throw new Error("[LogInTokenAP] Missing payload");
         const data = new FormData();
         data.append("username", payload.username);
         data.append("password", payload.password);
         return data as any;
     }
+}
+
+
+/**
+ * The access point for retrieving a token for a new user (sign-up).
+ */
+export class SignUpTokenAP extends LogInTokenAP {
+    protected static override _instance: SignUpTokenAP;
+    static override get i() {
+        return this._instance ?? (this._instance = new this());
+    }
+
+    override get isMutation() { return true; }
+    override get method() { return "PUT" as AccessPointMethod; }
 }
