@@ -9,6 +9,11 @@ export interface SecMaAppContext {
      * The path to the log-in page.
      */
     loginPath: string;
+
+    /**
+     * The base url for API calls.
+     */
+    apiUrl: string;
 }
 
 

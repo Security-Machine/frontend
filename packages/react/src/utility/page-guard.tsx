@@ -93,7 +93,7 @@ export const PageGuard: FC<PageGuardProps> = ({
 
     if (!user_name) {
         return <></>;
-    } else if (!userPerms.every(p => permissions.includes(p))) {
+    } else if (!permissions.every(p => userPerms.includes(p))) {
         console.error(
             '[PageGuard] user is not authorized (the page requires %O)',
             permissions

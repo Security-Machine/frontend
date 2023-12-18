@@ -2,6 +2,7 @@ import { AccessPoint, AccessPointError } from "@secma/base";
 import { useCallback, useReducer } from "react";
 import { useSecMaContext } from "../user-controller/context";
 import { useIntl } from "react-intl";
+import { useSecMaAppContext } from "../app-controller";
 
 
 /**
@@ -174,6 +175,10 @@ export function useAPI<
     console.log("[useAPI] apiPayload %O", apiPayload);
     console.log("[useAPI] pathArgs %O", pathArgs);
     console.log("[useAPI] headers %O", headers);
+
+    // Set the base for the API call.
+    const { apiUrl } = useSecMaAppContext();
+    AccessPoint.apiUrl = apiUrl;
 
     // Get the user from context.
     const userState = useSecMaContext();

@@ -35,14 +35,14 @@ beforeEach(() => {
 });
 
 
-it("should call the YYY API and return the result", async () => {
+it("should call the API and return the result", async () => {
     expect(async () => {
         await toTest.call(testUser, translator);
     }).rejects.toThrow("Missing payload");
 });
 
 
-it("should call the XXX API and return the result", async () => {
+it("should call the API TTTTTT and return the result", async () => {
     const tokenContent = {
         sub: "dolor",
         exp: "sit",

@@ -17,6 +17,11 @@ export type AccessPointMethod = "GET" | "POST" | "PUT" | "DELETE";
 export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
 
     /**
+     * The base URL for API calls.
+     */
+    static apiUrl = process.env["NX_AUTH_URL"];
+
+    /**
      * The controller that allows the cancellation of the call.
      */
     protected abortController?: AbortController = undefined;
@@ -74,6 +79,13 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
     }
 
     /**
+     * Additional headers to use.
+     */
+    get additionalHeaders(): Record<string, string> {
+        return {};
+    }
+
+    /**
      * Create the body of the request.
      *
      * @param payload The payload to send.
@@ -98,7 +110,13 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
         if (!args) {
             args = {} as any;
         }
-        return this.pathPattern.replace(/\{[a-zA-Z0-9\\-]+\}/g, (match) => {
+
+        let prefix = AccessPoint.apiUrl;
+        if (!prefix) {
+            throw new Error("The API URL is not set");
+        }
+
+        let suffix = this.pathPattern.replace(/\{[a-zA-Z0-9\\-]+\}/g, (match) => {
             const key = match.substring(1, match.length - 1);
             const value = (args as any)[key];
             if (value === undefined) {
@@ -106,6 +124,13 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
             }
             return value;
         });
+        if (prefix?.endsWith("/")) {
+            prefix = prefix.substring(0, prefix.length - 1);
+        }
+        if (!suffix.startsWith("/")) {
+            suffix += "/";
+        }
+        return prefix + suffix;
     }
 
     /**
@@ -174,6 +199,7 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
                 body,
                 headers: {
                     'Content-Type': 'application/json',
+                    ...this.additionalHeaders,
                     ...headers
                 },
                 signal: this.abortController.signal

@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode, useMemo } from 'react';
 import { SecMaAppContext, SecMaAppContextProvider } from './context';
 
 
@@ -19,12 +19,20 @@ export interface SecMaAppControllerProps extends SecMaAppContext {
  */
 export const SecMaAppController: FC<SecMaAppControllerProps> = ({
     loginPath,
+    apiUrl,
     children,
 }) => {
+
+    const value = useMemo(() => ({
+        apiUrl,
+        loginPath,
+    }), [
+        apiUrl,
+        loginPath,
+    ]);
+
     return (
-        <SecMaAppContextProvider value={{
-            loginPath
-        }}>
+        <SecMaAppContextProvider value={value}>
             {children}
         </SecMaAppContextProvider>
     )

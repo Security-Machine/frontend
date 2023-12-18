@@ -35,6 +35,11 @@ export class LogInTokenAP extends AccessPoint<Payload, PathArgs, TokenData> {
     get isMutation() { return false; }
     get method() { return "POST" as AccessPointMethod; }
     get pathPattern() { return "/token/{app}/{tenant}"; }
+    override get additionalHeaders() {
+        return {
+            "Content-Type": "application/x-www-form-urlencoded",
+        };
+    }
     override isAllowed(user: Readonly<SecMaUser>) {
         return true;
     }
@@ -50,7 +55,7 @@ export class LogInTokenAP extends AccessPoint<Payload, PathArgs, TokenData> {
     }
     override createBody(payload?: Payload): string | undefined {
         if (!payload) throw new Error("[LogInTokenAP] Missing payload");
-        const data = new FormData();
+        const data = new URLSearchParams();
         data.append("username", payload.username);
         data.append("password", payload.password);
         return data as any;

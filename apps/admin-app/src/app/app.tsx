@@ -7,6 +7,12 @@ import { appRouter } from "./router";
 import { SecMaAppController, SecMaController } from "@secma/react";
 
 
+// Make sure that the environment variables are set.
+if (!process.env.NX_AUTH_URL) {
+    throw new Error("Missing environment variable NX_AUTH_URL");
+}
+
+
 /**
  * Main application component.
  */
@@ -14,7 +20,10 @@ export function App() {
     return (
         <ThemeProvider theme={muiTheme}>
             <CssBaseline />
-            <SecMaAppController loginPath="/admin/email-password/sign-in">
+            <SecMaAppController
+                loginPath="/admin/email-password/sign-in"
+                apiUrl={process.env.NX_AUTH_URL!}
+            >
                 <RouterProvider router={appRouter} />
             </SecMaAppController>
         </ThemeProvider>

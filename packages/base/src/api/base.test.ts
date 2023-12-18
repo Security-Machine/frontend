@@ -38,7 +38,7 @@ describe("AccessPoint", () => {
         it("should replace the placeholders", () => {
             const toTest = new ToTest();
             const result = toTest.url({ id: 1, slug: "test" });
-            expect(result).toBe("/api/1/test");
+            expect(result).toBe("auth123/api/1/test");
         });
         it("should throw if a placeholder is missing", () => {
             const toTest = new ToTest();
@@ -54,7 +54,7 @@ describe("AccessPoint", () => {
             }
             const toTest = new ToTest2();
             const result = toTest.url();
-            expect(result).toBe("/api/1/2/3");
+            expect(result).toBe("auth123/api/1/2/3");
         });
     });
 
@@ -82,7 +82,7 @@ describe("AccessPoint", () => {
             });
             expect(fetchMock.mock.calls.length).toEqual(1);
 
-            expect(fetchMock.mock.calls[0][0]).toEqual("/api/1/test");
+            expect(fetchMock.mock.calls[0][0]).toEqual("auth123/api/1/test");
             const arg: any = fetchMock.mock.calls[0][1];
             expect(arg).toBeDefined();
             expect(arg.method).toEqual("POST");

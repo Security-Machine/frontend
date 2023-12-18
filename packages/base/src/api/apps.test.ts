@@ -1,4 +1,9 @@
 import { enableFetchMocks } from "jest-fetch-mock";
+import { IntlShape } from "react-intl";
+import { DateTime } from "luxon";
+
+import { SecMaUser } from "../user";
+import { ApplicationData } from "../models/apps";
 import {
     AppListAP,
     AppDetailsAP,
@@ -6,10 +11,6 @@ import {
     AppEditAP,
     AppDeleteAP
 } from "./apps";
-import { SecMaUser } from "../user";
-import { IntlShape } from "react-intl";
-import { ApplicationData } from "../models/apps";
-import { DateTime } from "luxon";
 
 
 enableFetchMocks();
@@ -152,7 +153,7 @@ describe("create", () => {
             description: "dolor"
         }) as ApplicationData;
 
-        expect(fetchMock.mock.calls[0][0]).toEqual("/mng/apps/");
+        expect(fetchMock.mock.calls[0][0]).toEqual("auth123/mng/apps/");
         checkDataPayload(result);
     });
 });
@@ -182,7 +183,7 @@ describe("read", () => {
             testUser, translator, undefined, { slug: "lorem" }
         ) as ApplicationData;
 
-        expect(fetchMock.mock.calls[0][0]).toEqual("/mng/apps/lorem");
+        expect(fetchMock.mock.calls[0][0]).toEqual("auth123/mng/apps/lorem");
         checkDataPayload(result);
     });
 });
@@ -216,7 +217,7 @@ describe("update", () => {
             }, { slug: "lorem" }
         ) as ApplicationData;
 
-        expect(fetchMock.mock.calls[0][0]).toEqual("/mng/apps/lorem");
+        expect(fetchMock.mock.calls[0][0]).toEqual("auth123/mng/apps/lorem");
         checkDataPayload(result);
     });
 });
@@ -246,7 +247,7 @@ describe("delete", () => {
             testUser, translator, undefined, { slug: "lorem" }
         ) as ApplicationData;
 
-        expect(fetchMock.mock.calls[0][0]).toEqual("/mng/apps/lorem");
+        expect(fetchMock.mock.calls[0][0]).toEqual("auth123/mng/apps/lorem");
         checkDataPayload(result);
     });
 });
