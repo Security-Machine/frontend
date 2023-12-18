@@ -1,6 +1,7 @@
 import React, { FC, ReactNode, useEffect } from "react";
-import { useSecMaAuthorized, useSecMaContext } from "../user-controller";
 import { useLocation, useNavigate } from "react-router-dom";
+
+import { useSecMaContext } from "../user-controller";
 import { useSecMaAppContext } from "../app-controller";
 import { NavigationData } from "./navigation-data";
 

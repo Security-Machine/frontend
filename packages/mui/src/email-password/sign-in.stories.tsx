@@ -1,7 +1,7 @@
 import { SecMaContextProvider, SignInFormProps } from "@secma/react";
 import type { StoryFn, Meta } from '@storybook/react';
 import { SimpleController as G11nController } from '@vebgen/g11n';
-import { SnackbarProvider, enqueueSnackbar } from 'notistack';
+import { enqueueSnackbar } from 'notistack';
 
 import enMessages from '../../i18n/en.json';
 import { SignInMuiForm } from "./sign-in";
@@ -27,7 +27,6 @@ export default storybookConfig;
 // Base for all stories in this file.
 export const Default: StoryFn<StoryProps> = (args) => (
     <G11nController messages={{ "en": enMessages }} initialLocale='en'>
-        <SnackbarProvider />
         <SecMaContextProvider value={{
             signIn: (username: string, password: string) => {
                 enqueueSnackbar(

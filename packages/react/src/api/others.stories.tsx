@@ -1,11 +1,11 @@
 import type { StoryFn, Meta } from '@storybook/react';
-import { SimpleController as G11nController } from '@vebgen/g11n';
+
 import { JsonViewer } from '@textea/json-viewer';
 
-import enMessages from '../../i18n/en.json';
 import { useStats, useVersion } from "./others";
 import { useState } from 'react';
 import { SecMaContextProvider } from '../user-controller';
+import { SecMaAppContextProvider } from '../app-controller';
 
 
 // The properties passed to each story.
@@ -157,7 +157,7 @@ const Permissions = ({
 const Template: StoryFn<StoryProps> = (args) => {
     const [permissions, setPermissions] = useState<string[]>([]);
     return (
-        <G11nController messages={{ "en": enMessages }} initialLocale='en'>
+        <>
             <Permissions
                 permissions={permissions}
                 setPermissions={setPermissions}
@@ -171,7 +171,7 @@ const Template: StoryFn<StoryProps> = (args) => {
             }}>
                 <Viewer />
             </SecMaContextProvider>
-        </G11nController>
+        </>
     );
 }
 

@@ -1,12 +1,14 @@
 import { FC, ReactNode, useCallback, useReducer } from "react";
 import {
     OnSignIn, OnSignOut, OnTokenError, LogInTokenAP, SignUpTokenAP,
-    TokenData
+    TokenData,
+    AccessPoint
 } from "@secma/base";
 import { useIntl } from "react-intl";
 
 import { SecMaContext, SecMaContextProvider } from "./context";
 import { initialUserState, secMaReducer } from "./state";
+import { useSecMaAppContext } from "../app-controller";
 
 
 /**
@@ -63,7 +65,10 @@ export const SecMaController: FC<SecMaControllerProps> = ({
     tenantSlug,
     children
 }) => {
-
+    // Set the base for the API call.
+    const { apiUrl } = useSecMaAppContext();
+    AccessPoint.apiUrl = apiUrl;
+    
     // Translation provider.
     const intl = useIntl();
 

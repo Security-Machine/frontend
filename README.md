@@ -9,6 +9,18 @@ Following packages are hosted in this repository:
 
 - TBD
 
+## Development
+
+Make sure to create an `.env.local` file in the root of the repository
+with the following content:
+
+```bash
+# The URL of the back-end API.
+NX_AUTH_URL=http://127.0.0.1:8989
+```
+
+Then run the core server at that address.
+
 ## Managing the Workspace
 
 VS Code does does a good job managing Nx workspaces through the

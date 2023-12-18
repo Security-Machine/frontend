@@ -1,11 +1,9 @@
 import type { StoryFn, Meta } from '@storybook/react';
-import { SimpleController as G11nController } from '@vebgen/g11n';
 import { JsonViewer } from '@textea/json-viewer'
 import jwt_encode from "jwt-encode";
+import { enqueueSnackbar } from 'notistack';
 
-import enMessages from "../../i18n/en.json"
 import { SecMaController, SecMaControllerProps } from "./controller";
-import { SnackbarProvider, enqueueSnackbar } from 'notistack';
 import { useSecMaContext } from './context';
 
 
@@ -23,7 +21,7 @@ const storybookConfig: Meta<StoryProps> = {
         onSignOut: () => { enqueueSnackbar("Signed out") },
         appSlug: "app",
         tenantSlug: "tenant",
-        timeout: 1000,
+        timeout: 2000,
     },
     parameters: {
         fetchMock: {
@@ -72,7 +70,7 @@ const ControllerViewer = ({
                 Sign Out
             </button>
             <button
-                onClick={() => signIn("abcd", "1234")}
+                onClick={() => signIn("abcd", "1234", true)}
                 type="button"
             >
                 Sign In
@@ -91,12 +89,9 @@ const ControllerViewer = ({
 
 // Base for all stories in this file.
 const Template: StoryFn<StoryProps> = (args) => (
-    <G11nController messages={{ "en": enMessages }} initialLocale='en'>
-        <SnackbarProvider />
-        <SecMaController {...args}>
-            <ControllerViewer {...args} />
-        </SecMaController>
-    </G11nController>
+    <SecMaController {...args}>
+        <ControllerViewer {...args} />
+    </SecMaController>
 );
 
 
