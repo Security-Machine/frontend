@@ -4,7 +4,7 @@ import { SimpleController as G11nController } from '@vebgen/g11n';
 import { enqueueSnackbar } from 'notistack';
 
 import enMessages from '../../i18n/en.json';
-import { SignInMuiForm } from "./sign-in";
+import { SignUpMuiForm } from "./sign-up";
 
 
 // The properties passed to each story.
@@ -13,9 +13,9 @@ type StoryProps = SignInFormProps;
 
 // Common configuration for all stories.
 const storybookConfig: Meta<StoryProps> = {
-    title: 'email-password/sign-in',
+    title: 'email-password/sign-up',
     tags: [],
-    component: SignInMuiForm,
+    component: SignUpMuiForm,
     args: {
         onSignIn: () => { enqueueSnackbar("Signed In"); },
     },
@@ -43,7 +43,7 @@ export const Default: StoryFn<StoryProps> = (args) => (
             permissions: [""],
             user_name: undefined,
         }}>
-            <SignInMuiForm {...args} />
+            <SignUpMuiForm {...args} />
         </SecMaContextProvider>
     </G11nController>
 )

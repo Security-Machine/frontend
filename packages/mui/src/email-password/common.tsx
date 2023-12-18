@@ -1,12 +1,12 @@
+import { ReactNode } from "react";
+import { Link } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { ReactNode } from "react";
-import { Text } from "@vebgen/mui-rff-text"
-import { Checkboxes } from "@vebgen/mui-rff-checkboxes";
-import { FormattedMessage } from "react-intl";
 import Button from "@mui/material/Button";
 import MuiLink from "@mui/material/Link";
-import { Link } from "react-router-dom";
+import { Text, TextProps } from "@vebgen/mui-rff-text"
+import { Checkboxes } from "@vebgen/mui-rff-checkboxes";
 import { SignInFormProps } from "@secma/react";
 
 
@@ -51,22 +51,22 @@ export const PageTitle = ({
 }
 
 
+
 /**
  * A text field.
  */
 export const TheText = ({
     children,
-    name
-}: {
-    children: ReactNode,
-    name: string,
-}) => (
+    name,
+    ...rest
+}: Omit<TextProps, "label">) => (
     <Box sx={sxRow}>
         <Text
             name={name}
             label={children}
             required
             autoFocus
+            {...rest}
         />
     </Box>
 );
@@ -98,6 +98,7 @@ export const PasswordField = () => (
             />}
             required
             type="password"
+            autoComplete="current-password"
         />
     </Box>
 )
