@@ -5,7 +5,7 @@ import { Preview } from '@storybook/react';
 import enMessages from '../i18n/en.json';
 import { SnackbarProvider } from 'notistack';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
-import { SecMaAppContextProvider, SecMaContextProvider } from '@secma/react';
+import { SecMaAppContextProvider } from '@secma/react';
 
 
 const messages = {
@@ -67,9 +67,6 @@ const NotLoggedIn = () => (
 );
 
 
-
-
-
 // Wrap all stories in common providers.
 const preview: Preview = {
     decorators: [
@@ -96,22 +93,16 @@ const preview: Preview = {
                 }}>
                     <G11nController messages={messages} initialLocale='en'>
                         <SnackbarProvider />
-                        <SecMaContextProvider value={{
-                            signIn: (() => { }) as any,
-                            signOut: () => { },
-                            user_name: "lorem",
-                            expires: 0,
-                            permissions: ["ipsum", "dolor"],
-                            token: "token"
-                        }}>
-                            <RouterProvider router={router} />
-                        </SecMaContextProvider>
+                        <RouterProvider router={router} />
                     </G11nController>
-                </SecMaAppContextProvider >
+                </SecMaAppContextProvider>
             )
         },
     ],
 };
+
+
+
 
 
 export default preview;

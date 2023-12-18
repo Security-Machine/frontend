@@ -1,8 +1,6 @@
 import type { StoryFn, Meta } from '@storybook/react';
 import { Link, RouterProvider, createMemoryRouter } from 'react-router-dom';
-import { SimpleController as G11nController } from '@vebgen/g11n';
 
-import enMessages from '../../i18n/en.json';
 import type { AppLayoutProps } from './layout';
 import { AppLayout } from './layout';
 
@@ -68,9 +66,7 @@ const router = createMemoryRouter([
 
 // Base for all stories in this file.
 const Template: StoryFn<StoryProps> = (args) => (
-    <G11nController messages={{ "en": enMessages }} initialLocale='en'>
-        <RouterProvider router={router} />
-    </G11nController>
+    <RouterProvider router={router} />
 );
 
 

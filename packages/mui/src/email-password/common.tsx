@@ -51,7 +51,6 @@ export const PageTitle = ({
 }
 
 
-
 /**
  * A text field.
  */
@@ -64,8 +63,6 @@ export const TheText = ({
         <Text
             name={name}
             label={children}
-            required
-            autoFocus
             {...rest}
         />
     </Box>
@@ -76,7 +73,11 @@ export const TheText = ({
  * The field for a username.
  */
 export const UsernameField = () => (
-    <TheText name="username">
+    <TheText
+        name="username"
+        required
+        autoFocus
+    >
         <FormattedMessage
             id="secma-mui.signIn.username"
             defaultMessage="Username or email"
@@ -89,19 +90,18 @@ export const UsernameField = () => (
  * The field for a password.
  */
 export const PasswordField = () => (
-    <Box sx={sxRow}>
-        <Text
-            name="password"
-            label={<FormattedMessage
-                id="secma-mui.signIn.password"
-                defaultMessage="Password"
-            />}
-            required
-            type="password"
-            autoComplete="current-password"
+    <TheText
+        name="password"
+        required
+        type="password"
+        autoComplete="current-password"
+    >
+        <FormattedMessage
+            id="secma-mui.signIn.password"
+            defaultMessage="Password"
         />
-    </Box>
-)
+    </TheText>
+);
 
 
 /**

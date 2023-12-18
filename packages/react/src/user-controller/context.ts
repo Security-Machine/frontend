@@ -69,5 +69,8 @@ export const useSecMaAuthorized = (perms: string | string[]) => {
     // If the user is not signed in, they are not authorized.
     // If the user is signed in, but does not have the required permissions,
     // they are not authorized.
+    console.log("[useSecMaAuthorized] user_name=%O", user_name);
+    console.log("[useSecMaAuthorized] needed perms=%O", perms);
+    console.log("[useSecMaAuthorized] owned permissions=%O", permissions);
     return (!!user_name && perms.every(p => permissions.includes(p)));
 };

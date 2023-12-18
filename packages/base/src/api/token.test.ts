@@ -42,7 +42,7 @@ it("should call the API and return the result", async () => {
 });
 
 
-it("should call the API TTTTTT and return the result", async () => {
+it("should call the API and return the result", async () => {
     const tokenContent = {
         sub: "dolor",
         exp: "sit",
