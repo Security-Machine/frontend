@@ -13,7 +13,7 @@ export const useAppList = (
     autoTrigger: Readonly<boolean> = true,
     timeout?: number,
 ) => {
-    return useAPI(
+    return useAPI<never, never, string[]>(
         AppListAP.i, // accessPoint
         undefined, // apiPayload
         undefined, // pathArgs
