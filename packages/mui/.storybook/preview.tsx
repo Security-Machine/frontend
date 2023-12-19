@@ -67,9 +67,6 @@ const NotLoggedIn = () => (
 );
 
 
-
-
-
 // Wrap all stories in common providers.
 const preview: Preview = {
     decorators: [

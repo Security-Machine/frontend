@@ -3,9 +3,26 @@ import { useSecMaContext } from "../user-controller";
 import { SecMaApiResult } from "../api";
 import { AccessPointError } from "@secma/base";
 
+/**
+ * The unique key of an item in the list.
+ */
 type ListKey = string | number;
 
-type ListMode = "list" | "view" | "edit" | "delete";
+
+/**
+ * The operating mode of the list.
+ *
+ * Following values are allowed:
+ * - `list` - The view should show the list of items and nothing else;
+ * - `view` - The view should show the details of the current item;
+ * - `edit` - The view should show the details of the current item and allow
+ *   editing;
+ * - `delete` - The view should show confirmation dialog for deleting the
+ *   current item;
+ * - `create` - The view should show the form for creating a new item.
+ */
+type ListMode = "list" | "view" | "edit" | "delete" | "create";
+
 
 /**
  * The internal state of the `use2StageList` hook.
@@ -39,6 +56,14 @@ export interface Use2StageListState<TFast, TDetail> {
 export type BeginEditAction = {
     type: "beginEdit";
     payload: ListKey;
+};
+
+
+/**
+ * The action for beginning to create a new item.
+ */
+export type BeginCreateAction = {
+    type: "beginCreate";
 };
 
 
@@ -85,6 +110,7 @@ export type SetDataAction<TFast, TDetail> = {
  */
 export type ListAction<TFast, TDetail> =
     | SetDataAction<TFast, TDetail>
+    | BeginCreateAction
     | BeginEditAction
     | BeginDeleteAction
     | SetCurrentAction
@@ -99,6 +125,13 @@ function reducer<TFast, TDetail>(
     action: ListAction<TFast, TDetail>
 ): Use2StageListState<TFast, TDetail> {
     switch (action.type) {
+        case "beginCreate":
+            return {
+                ...state,
+                current: null,
+                mode: "create",
+            };
+
         case "beginEdit":
             return {
                 ...state,
@@ -145,6 +178,11 @@ function reducer<TFast, TDetail>(
  */
 export interface Use2StageListResult<TFast, TDetail>
     extends Use2StageListState<TFast, TDetail> {
+
+    /**
+     * The callback used to begin creating an item.
+     */
+    beginCreate: () => void;
 
     /**
      * The callback used to begin editing an item.
@@ -375,6 +413,12 @@ export function use2StageList<
         });
     }, [listResult, errorInList, canRead]);
 
+    // The callback for beginning to create a new item.
+    const beginCreate = useCallback(() => {
+        if (canCreate) {
+            dispatch({ type: "beginCreate", });
+        }
+    }, [canCreate]);
 
     // The callback for beginning to edit an item.
     const beginEdit = useCallback((unique: ListKey) => {
@@ -411,6 +455,7 @@ export function use2StageList<
         canRead,
         canUpdate,
         canDelete,
+        beginCreate,
         beginEdit,
         beginDelete,
         setCurrent,

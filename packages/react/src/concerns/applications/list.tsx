@@ -104,5 +104,5 @@ export const AppListController: FC<AppListControllerProps> = ({
         <AppListContextProvider value={list}>
             {children}
         </AppListContextProvider>
-    )
+    );
 }
