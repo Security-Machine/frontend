@@ -250,8 +250,7 @@ export interface Use2StageListProps<
     /**
      * The hook to use for fetching the details of an item.
      */
-    fetchDetail: (unique: ListKey) =>
-        Promise<SecMaApiResult<TPayloadDetail, TPathArgsDetail, TDetail>>;
+    fetchDetail: (unique: ListKey) => Promise<TDetail | AccessPointError>;
 
     /**
      * The function that converts a fast item to unique key.

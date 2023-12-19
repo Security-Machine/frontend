@@ -141,7 +141,10 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
      * @param payload The payload to send.
      * @param pathArgs The arguments to use to compute the URL.
      * @param headers The headers to send.
-     * @param timeout The timeout in milliseconds (8 seconds by default).
+     * @param timeout The timeout in milliseconds (8 seconds by default). If
+     *  timeout is -1, the abort controller is not used.
+     * @returns A promise with the result of the call.
+     *
      */
     async call(
         user: Readonly<SecMaUser>,
@@ -156,7 +159,7 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
         console.log("[AccessPoint.call] headers", headers);
 
         // Cancel the previous call if any.
-        if (this.abortController) {
+        if (timeout !== -1 && this.abortController) {
             this.abortController.abort();
             this.abortController = undefined;
             console.log("[AccessPoint.call] Previous call aborted");
@@ -178,14 +181,16 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
         }
 
         // Create the abort controller.
-        this.abortController = new AbortController();
-        setTimeout(() => {
-            if (this.abortController) {
-                this.abortController.abort();
-                this.abortController = undefined;
-                console.log("[AccessPoint.call] Timeout");
-            }
-        }, timeout || 8000);
+        if (timeout !== -1) {
+            this.abortController = new AbortController();
+            setTimeout(() => {
+                if (this.abortController) {
+                    this.abortController.abort();
+                    this.abortController = undefined;
+                    console.log("[AccessPoint.call] Timeout");
+                }
+            }, timeout || 8000);
+        }
 
         // Compute the body of the request. The call may throw an
         // exception if the payload is invalid.
@@ -202,7 +207,9 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
                     ...this.additionalHeaders,
                     ...headers
                 },
-                signal: this.abortController.signal
+                signal: this.abortController
+                    ? this.abortController.signal
+                    : undefined
             });
             console.log(
                 "[AccessPoint.call] the response was retrieved: %O",
@@ -221,7 +228,9 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
             }
         } finally {
             console.log("[AccessPoint.call] signal cleared");
-            this.abortController = undefined;
+            if (timeout !== -1) {
+                this.abortController = undefined;
+            }
         };
 
         // Parse the response.

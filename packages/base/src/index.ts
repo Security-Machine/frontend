@@ -1,7 +1,9 @@
 export type {
     TokenReply, TokenData, OnTokenError, RetrieveTokenResult,
     AccessPointError, OnSignIn, OnSignOut,
+    ApplicationInput, ApplicationData,
 } from "./models";
+
 
 export {
     AccessPoint,
@@ -18,7 +20,9 @@ export type {
     AccessPointMethod
 } from "./api";
 
+
 export type { SecMaUser } from "./user";
+
 
 export const MANAGEMENT_APP = "management";
 export const MANAGEMENT_TENANT = "sec-ma";

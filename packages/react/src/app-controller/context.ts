@@ -25,7 +25,7 @@ export const secMaAppContext = createContext<SecMaAppContext | null>(null);
 
 /**
  * The provider used to wrap react components to allow them access to
- * user data.
+ * context data.
  */
 export const SecMaAppContextProvider = secMaAppContext.Provider;
 
