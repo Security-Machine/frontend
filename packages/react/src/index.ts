@@ -46,10 +46,15 @@ export {
 export type {
     AppListContextData,
     AppListControllerProps,
+    AppEditDialogInListProps,
+    AppEditDialogChildProps,
+    AppEditControllerProps,
 } from './concerns';
 export {
     appListContext,
     useAppListContext,
     AppListContextProvider,
     AppListController,
+    AppEditDialogInList,
+    AppEditController,
 } from './concerns';

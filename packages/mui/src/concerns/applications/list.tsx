@@ -1,8 +1,12 @@
 import { FC } from "react";
 import List from "@mui/material/List";
-import { AppListController, useAppListContext } from "@secma/react";
+import {
+    AppEditDialogInList, AppListController, useAppListContext
+} from "@secma/react";
+
 import { AppListItem } from "./list-item";
 import { CreateAppButton } from "./create-btn";
+import { AppEditDialog } from "./dialog";
 
 
 const listStyle = {
@@ -47,11 +51,12 @@ export const AppInnerList = () => {
 /**
  * The list of applications.
  */
-export const AppList: FC<AppListProps> = () => {
-    return (
-        <AppListController>
-            <AppInnerList />
-            <CreateAppButton />
-        </AppListController>
-    )
-}
+export const AppList: FC<AppListProps> = () => (
+    <AppListController>
+        <AppInnerList />
+        <CreateAppButton />
+        <AppEditDialogInList>
+            <AppEditDialog />
+        </AppEditDialogInList>
+    </AppListController>
+);

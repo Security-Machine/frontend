@@ -26,7 +26,10 @@ export interface ListItemControlsProps {
 
 
 /**
- * The controls for each item in the list.
+ * The edit and delete controls for each item in the list.
+ *
+ * You can disable one or both of the buttons by not passing the
+ * corresponding callback.
  */
 export const ListItemControls: FC<ListItemControlsProps> = ({
     unique,

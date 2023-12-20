@@ -24,5 +24,12 @@ export type {
 export type { SecMaUser } from "./user";
 
 
+export {
+    validateSlug,
+    validateTitle,
+    validateDescription,
+} from "./validations";
+
+
 export const MANAGEMENT_APP = "management";
 export const MANAGEMENT_TENANT = "sec-ma";
