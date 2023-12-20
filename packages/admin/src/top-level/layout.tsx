@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Outlet } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
+import { UserButton } from './user-button';
 
 
 /**
@@ -75,6 +76,7 @@ export const AppLayout: FC<AppLayoutProps> = ({
             <AppBar>
                 <Toolbar>
                     {logo}
+                    <UserButton />
                 </Toolbar>
             </AppBar>
             <Box

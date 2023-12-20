@@ -70,6 +70,7 @@
         "@storybook/addon-knobs": "^7.0.2",
         "@storybook/addon-links": "7.6.4",
         "@storybook/addon-storysource": "7.6.4",
+        "@storybook/addons": "^7.6.6",
         "@storybook/core-common": "^7.6.4",
         "@storybook/core-server": "7.6.4",
         "@storybook/jest": "0.2.3",

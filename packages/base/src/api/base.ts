@@ -196,17 +196,23 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
         // exception if the payload is invalid.
         const body = this.createBody(payload);
 
+        // Compute the headers to use.
+        const finalHeaders: Record<string, string> = {
+            'Content-Type': 'application/json',
+            ...this.additionalHeaders,
+            ...headers
+        };
+        if (user && user.token) {
+            finalHeaders['Authorization'] = 'Bearer ' + user.token;
+        }
+
         // Make the request.
         let response: Response;
         try {
             response = await fetch(this.url(pathArgs), {
                 method: this.method,
                 body,
-                headers: {
-                    'Content-Type': 'application/json',
-                    ...this.additionalHeaders,
-                    ...headers
-                },
+                headers: finalHeaders,
                 signal: this.abortController
                     ? this.abortController.signal
                     : undefined

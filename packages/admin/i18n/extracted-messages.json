@@ -8,6 +8,14 @@
         "ro": "Security Machine"
       }
     },
+    "apps": {
+      "menu": {
+        "__id__": "secma-admin.apps.menu",
+        "defaultMessage": "Applications",
+        "en": "Applications",
+        "ro": "Applications"
+      }
+    },
     "error": {
       "route": {
         "title": {
@@ -17,6 +25,28 @@
           "ro": "Unexpected Error"
         }
       }
+    },
+    "login": {
+      "3rd-party": {
+        "__id__": "secma-admin.login.3rd-party",
+        "defaultMessage": "Third-party login"
+      },
+      "password": {
+        "__id__": "secma-admin.login.password",
+        "defaultMessage": "Log-in using email and password"
+      },
+      "passwordless": {
+        "__id__": "secma-admin.login.passwordless",
+        "defaultMessage": "Password-less login",
+        "en": "Password-less login",
+        "ro": "Password-less login"
+      }
+    },
+    "sign-out": {
+      "__id__": "secma-admin.sign-out",
+      "defaultMessage": "Sign Out",
+      "en": "Sign Out",
+      "ro": "Sign Out"
     }
   }
 }

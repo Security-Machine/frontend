@@ -23,11 +23,15 @@
     "lost": {
       "errEmailPattern": {
         "__id__": "secma-react.lost.errEmailPattern",
-        "defaultMessage": "Please provide a valid email."
+        "defaultMessage": "Please provide a valid email.",
+        "en": "Please provide a valid email.",
+        "ro": "Please provide a valid email."
       },
       "errRequired": {
         "__id__": "secma-react.lost.errRequired",
-        "defaultMessage": "The email is required."
+        "defaultMessage": "The email is required.",
+        "en": "The email is required.",
+        "ro": "The email is required."
       }
     },
     "password": {

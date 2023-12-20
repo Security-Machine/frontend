@@ -18,12 +18,20 @@ export {
 export type {
     SignInFormProps, SignInFormState,
     LostPasswordFormProps, LostPasswordFormState,
- } from './email-password';
-export { SignInForm, LostPasswordForm } from './email-password';
+} from './email-password';
+export {
+    SignInForm, LostPasswordForm
+} from './email-password';
 
 
-export type { PageGuardProps, NavigationData } from "./utility";
-export { PageGuard, navigationDataToUrl } from "./utility";
+export type {
+    PageGuardProps, NavigationData,
+    UseButtonMenuResult,
+} from "./utility";
+export {
+    PageGuard, navigationDataToUrl,
+    useButtonMenu
+} from "./utility";
 
 
 export type {
@@ -32,13 +40,13 @@ export type {
 export {
     SecMaAppController, SecMaAppContextProvider,
     secMaAppContext, useSecMaAppContext
- } from "./app-controller";
+} from "./app-controller";
 
 
- export type {
+export type {
     AppListContextData,
     AppListControllerProps,
- } from './concerns';
+} from './concerns';
 export {
     appListContext,
     useAppListContext,

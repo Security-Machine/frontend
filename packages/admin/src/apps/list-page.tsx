@@ -1,5 +1,5 @@
 import { managementAppListPermission } from "@secma/base";
-import { NotAuthorized } from "@secma/mui";
+import { AppList, NotAuthorized } from "@secma/mui";
 import { PageGuard } from "@secma/react";
 import { FC } from "react";
 
@@ -15,7 +15,7 @@ export const ListPage: FC = () => {
             permissions={permissions}
             unauthorized={unauthorized}
         >
-            <h1>hello</h1>
+            <AppList />
         </PageGuard>
     )
 };

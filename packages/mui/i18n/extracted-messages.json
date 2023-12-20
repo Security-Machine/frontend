@@ -1,5 +1,15 @@
 {
   "secma-mui": {
+    "applications": {
+      "create": {
+        "btn": {
+          "__id__": "secma-mui.applications.create.btn",
+          "defaultMessage": "Create a New App",
+          "en": "Create a New App",
+          "ro": "Create a New App"
+        }
+      }
+    },
     "error": {
       "notAuthorized": {
         "content": {
@@ -19,19 +29,27 @@
     "lost": {
       "button": {
         "__id__": "secma-mui.lost.button",
-        "defaultMessage": "Send email"
+        "defaultMessage": "Send email",
+        "en": "Send email",
+        "ro": "Send email"
       },
       "signIn": {
         "__id__": "secma-mui.lost.signIn",
-        "defaultMessage": "Sign In"
+        "defaultMessage": "Sign In",
+        "en": "Sign In",
+        "ro": "Sign In"
       },
       "signUp": {
         "__id__": "secma-mui.lost.signUp",
-        "defaultMessage": "Sign Up"
+        "defaultMessage": "Sign Up",
+        "en": "Sign Up",
+        "ro": "Sign Up"
       },
       "title": {
         "__id__": "secma-mui.lost.title",
-        "defaultMessage": "Recover password"
+        "defaultMessage": "Recover password",
+        "en": "Recover password",
+        "ro": "Recover password"
       }
     },
     "signIn": {

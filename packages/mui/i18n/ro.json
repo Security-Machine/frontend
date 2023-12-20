@@ -9,6 +9,7 @@
   "secma-base.no-permission": "secma-base.no-permission",
   "secma-base.no-role": "No role with a `{roleId}` ID was found withing this tenant",
   "secma-base.no-user": "No user with a `{userId}` ID was found withing this tenant",
+  "secma-mui.applications.create.btn": "Create a New App",
   "secma-mui.error.notAuthorized.content": "The permissions required to access this content are not yet associated with your account.",
   "secma-mui.error.notAuthorized.title": "Permission Denied",
   "secma-mui.lost.button": "Send email",
