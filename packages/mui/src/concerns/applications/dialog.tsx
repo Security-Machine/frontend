@@ -29,11 +29,13 @@ export const AppEditDialog: FC<AppEditDialogProps> = ({
     onCancel,
     open = true,
     initialValues,
+    onSuccess,
 }) => {
     return (
         <Dialog onClose={onCancel} open={open}>
             <AppEditController
                 initialValues={initialValues}
+                onSuccess={onSuccess}
             >
                 <DialogTitle>
                     {initialValues ? (

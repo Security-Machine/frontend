@@ -42,13 +42,18 @@ export interface AppEditDialogInListProps {
  * shows the corresponding form and updates the list when the form is
  * submitted.
  *
- * You will have to provide the form yourself.
+ * You will have to provide the form control yourself; it should expect
+ * a set of properties defined by {@link AppEditDialogChildProps}.
+ *
  */
 export const AppEditDialogInList: FC<AppEditDialogInListProps> = ({
     children,
 }) => {
     // Get the data from the context.
-    const { mode, current, data, clearCurrent } = useAppListContext();
+    const {
+        mode, current, data, clearCurrent,
+        addNewItem, editItem,
+    } = useAppListContext();
     console.log("[AppEditDialogInList] mode %O", mode);
     console.log("[AppEditDialogInList] current %O", current);
     console.log("[AppEditDialogInList] data %O", data);
@@ -56,12 +61,25 @@ export const AppEditDialogInList: FC<AppEditDialogInListProps> = ({
     // The cancel function.
     const onCancel = useCallback(() => {
         clearCurrent();
+        console.log("[AppEditDialogInList] onCancel");
     }, [clearCurrent]);
+
 
     // The success function.
     const onSuccess = useCallback((value: ApplicationData) => {
+        if (mode === "create") {
+            console.log("[AppEditDialogInList] Creating a new application.");
+            addNewItem(value.slug, value);
+        } else if (mode === "edit" && current) {
+            console.log("[AppEditDialogInList] Editing an existing application.");
+            editItem(current, value.slug, value);
+        } else {
+            console.log("[AppEditDialogInList] Unexpected mode %O", mode);
+            return;
+        }
+        console.log("[AppEditDialogInList] onSuccess %O", value);
         clearCurrent();
-    }, [clearCurrent]);
+    }, [mode, current, clearCurrent]);
 
 
     // Make sure there's something to edit.

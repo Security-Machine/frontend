@@ -106,15 +106,76 @@ export type SetDataAction<TFast, TDetail> = {
 
 
 /**
+ * The action for adding a new item to the data.
+ */
+export type AddItemAction<TFast, TDetail> = {
+    type: "addNewItem";
+    payload: {
+        unique: ListKey;
+        data: TDetail | TFast;
+    };
+};
+
+
+/**
+ * The action for editing an existing item to the data.
+ */
+export type EditItemAction<TFast, TDetail> = {
+    type: "editItem";
+    payload: {
+        oldUnique: ListKey;
+        newUnique: ListKey;
+        data: TDetail | TFast;
+    };
+};
+
+
+/**
+ * The action for removing an existing item to the data.
+ */
+export type RemoveItemAction = {
+    type: "removeItem";
+    payload: ListKey;
+};
+
+
+/**
  * The action in list reducer.
  */
 export type ListAction<TFast, TDetail> =
+    | AddItemAction<TFast, TDetail>
+    | EditItemAction<TFast, TDetail>
+    | RemoveItemAction
     | SetDataAction<TFast, TDetail>
     | BeginCreateAction
     | BeginEditAction
     | BeginDeleteAction
     | SetCurrentAction
     | ClearCurrentAction;
+
+
+function replaceItem<TFast, TDetail>(
+    oldData: Record<ListKey, TFast | TDetail>,
+    options: EditItemAction<TFast, TDetail>["payload"]
+): Record<ListKey, TFast | TDetail> {
+
+    let found: boolean = false;
+    const result = Object.keys(oldData).reduce(
+        (acc, key) => {
+            if (key !== options.oldUnique) {
+                acc[key] = oldData[key];
+            } else {
+                found = true;
+                acc[options.newUnique] = options.data;
+            }
+            return acc;
+        }, {} as Record<ListKey, TFast | TDetail>
+    );
+    if (!found) {
+        result[options.newUnique] = options.data;
+    }
+    return result;
+}
 
 
 /**
@@ -166,6 +227,44 @@ function reducer<TFast, TDetail>(
                 data: action.payload,
             };
 
+        case "editItem":
+            if (action.payload.oldUnique !== action.payload.newUnique) {
+                return {
+                    ...state,
+                    data: replaceItem(state.data, action.payload),
+                };
+            } else {
+                return {
+                    ...state,
+                    data: {
+                        ...state.data,
+                        [action.payload.newUnique]: action.payload.data,
+                    },
+                };
+            }
+
+        case "addNewItem":
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    [action.payload.unique]: action.payload.data,
+                },
+            };
+
+        case "removeItem":
+            return {
+                ...state,
+                data: Object.keys(state.data).reduce(
+                    (acc, key) => {
+                        if (key !== action.payload) {
+                            acc[key] = state.data[key];
+                        }
+                        return acc;
+                    }, {} as Record<ListKey, TFast | TDetail>
+                ),
+            };
+
         default:
             return state;
     }
@@ -189,14 +288,14 @@ export interface Use2StageListResult<TFast, TDetail>
      *
      * @param unique The slug of the item.
      */
-    beginEdit: (unique: string) => void;
+    beginEdit: (unique: ListKey) => void;
 
     /**
      * The callback used to request deleting an item.
      *
      * @param unique The slug of the item.
      */
-    beginDelete: (unique: string) => void;
+    beginDelete: (unique: ListKey) => void;
 
     /**
      * The callback for setting current item.
@@ -204,12 +303,27 @@ export interface Use2StageListResult<TFast, TDetail>
      * The current item is also implicitly set by the `beginEdit` and
      * `beginDelete` callbacks.
      */
-    setCurrent: (unique: string, mode?: ListMode) => void;
+    setCurrent: (unique: ListKey, mode?: ListMode) => void;
 
     /**
      * The callback for clearing current item.
      */
     clearCurrent: () => void;
+
+    /**
+     * The callback for adding a new item.
+     */
+    addNewItem: (unique: ListKey, data: TDetail) => void;
+
+    /**
+     * The callback for editing an existing item.
+     */
+    editItem: (oldUnique: ListKey, newUnique: ListKey, data: TDetail) => void;
+
+    /**
+     * The callback for removing an existing item.
+     */
+    removeItem: (unique: ListKey) => void;
 
     /**
      * The user is allowed to create applications.
@@ -413,12 +527,14 @@ export function use2StageList<
         });
     }, [listResult, errorInList, canRead]);
 
+
     // The callback for beginning to create a new item.
     const beginCreate = useCallback(() => {
         if (canCreate) {
             dispatch({ type: "beginCreate", });
         }
     }, [canCreate]);
+
 
     // The callback for beginning to edit an item.
     const beginEdit = useCallback((unique: ListKey) => {
@@ -427,12 +543,14 @@ export function use2StageList<
         }
     }, [canUpdate]);
 
+
     // The callback for beginning to delete an item.
     const beginDelete = useCallback((unique: string) => {
         if (canDelete) {
             dispatch({ type: "beginDelete", payload: unique, });
         }
     }, [canDelete]);
+
 
     // The callback for setting current item.
     const setCurrent = useCallback((unique: string, mode?: ListMode) => {
@@ -444,9 +562,46 @@ export function use2StageList<
         });
     }, []);
 
+
     // The callback for clearing current item.
     const clearCurrent = useCallback(() => {
         dispatch({ type: "clearCurrent" });
+    }, []);
+
+
+    // The callback for adding a new item.
+    const addNewItem = useCallback((unique: ListKey, data: TDetail) => {
+        dispatch({
+            type: "addNewItem",
+            payload: {
+                unique,
+                data
+            },
+        });
+    }, []);
+
+
+    // The callback for editing an existing item.
+    const editItem = useCallback((
+        oldUnique: ListKey, newUnique: ListKey, data: TDetail
+    ) => {
+        dispatch({
+            type: "editItem",
+            payload: {
+                oldUnique,
+                newUnique,
+                data
+            },
+        });
+    }, []);
+
+
+    // The callback for removing an existing item.
+    const removeItem = useCallback((unique: ListKey) => {
+        dispatch({
+            type: "removeItem",
+            payload: unique,
+        });
     }, []);
 
 
@@ -464,6 +619,9 @@ export function use2StageList<
         errorInList,
         reloadList,
         resetList,
+        addNewItem,
+        editItem,
+        removeItem,
         ...state
     } as Use2StageListResult<TFast, TDetail>;
 }
