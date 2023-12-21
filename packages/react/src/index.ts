@@ -49,6 +49,7 @@ export type {
     AppEditDialogInListProps,
     AppEditDialogChildProps,
     AppEditControllerProps,
+    AppDelDialogInListProps,
 } from './concerns';
 export {
     appListContext,
@@ -57,4 +58,5 @@ export {
     AppListController,
     AppEditDialogInList,
     AppEditController,
+    AppDelDialogInList,
 } from './concerns';

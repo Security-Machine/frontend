@@ -5,6 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { muiTheme } from "./mui-theme";
 import { appRouter } from "./router";
 import { SecMaAppController, SecMaController } from "@secma/react";
+import { SnackbarProvider } from 'notistack';
 
 
 // Make sure that the environment variables are set.
@@ -20,6 +21,7 @@ export function App() {
     return (
         <ThemeProvider theme={muiTheme}>
             <CssBaseline />
+            <SnackbarProvider />
             <SecMaAppController
                 loginPath="/admin/email-password/sign-in"
                 apiUrl={process.env.NX_AUTH_URL!}

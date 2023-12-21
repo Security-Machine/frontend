@@ -6,7 +6,9 @@
       },
       "required": {
         "__id__": "secma-base.description.required",
-        "defaultMessage": "The description is required"
+        "defaultMessage": "The description is required",
+        "en": "The description is required",
+        "ro": "The description is required"
       },
       "short": {
         "__id__": "secma-base.description.short"
@@ -69,15 +71,21 @@
       },
       "long": {
         "__id__": "secma-base.slug.long",
-        "defaultMessage": "The slug is too long (255 characters maximum)"
+        "defaultMessage": "The slug is too long (255 characters maximum)",
+        "en": "The slug is too long (255 characters maximum)",
+        "ro": "The slug is too long (255 characters maximum)"
       },
       "required": {
         "__id__": "secma-base.slug.required",
-        "defaultMessage": "The slug is required"
+        "defaultMessage": "The slug is required",
+        "en": "The slug is required",
+        "ro": "The slug is required"
       },
       "short": {
         "__id__": "secma-base.slug.short",
-        "defaultMessage": "The slug is too short (3 characters minimum)"
+        "defaultMessage": "The slug is too short (3 characters minimum)",
+        "en": "The slug is too short (3 characters minimum)",
+        "ro": "The slug is too short (3 characters minimum)"
       }
     },
     "title": {
@@ -86,7 +94,9 @@
       },
       "required": {
         "__id__": "secma-base.title.required",
-        "defaultMessage": "The title is required"
+        "defaultMessage": "The title is required",
+        "en": "The title is required",
+        "ro": "The title is required"
       },
       "short": {
         "__id__": "secma-base.title.short"

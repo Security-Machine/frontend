@@ -14,39 +14,71 @@
       "add": {
         "d": {
           "__id__": "secma-mui.apps.add.d",
-          "defaultMessage": "Description"
+          "defaultMessage": "Description",
+          "en": "Description",
+          "ro": "Description"
         },
         "slug": {
           "__id__": "secma-mui.apps.add.slug",
-          "defaultMessage": "Slug"
+          "defaultMessage": "Slug",
+          "en": "Slug",
+          "ro": "Slug"
         },
         "title": {
           "__id__": "secma-mui.apps.add.title",
-          "defaultMessage": "Title"
+          "defaultMessage": "Title",
+          "en": "Title",
+          "ro": "Title"
+        }
+      },
+      "del": {
+        "dialog": {
+          "d": {
+            "__id__": "secma-mui.apps.del.dialog.d",
+            "defaultMessage": "Are you sure you want to delete the application {appName}?"
+          },
+          "t": {
+            "__id__": "secma-mui.apps.del.dialog.t",
+            "defaultMessage": "Delete application?"
+          }
         }
       },
       "dialog": {
         "add": {
           "__id__": "secma-mui.apps.dialog.add",
-          "defaultMessage": "Create a new application"
+          "defaultMessage": "Create a new application",
+          "en": "Create a new application",
+          "ro": "Create a new application"
         },
         "d": {
           "__id__": "secma-mui.apps.dialog.d",
-          "defaultMessage": "At the very minimum an application needs a unique slug. You may also provide a title and a description."
+          "defaultMessage": "At the very minimum an application needs a unique slug. You may also provide a title and a description.",
+          "en": "At the very minimum an application needs a unique slug. You may also provide a title and a description.",
+          "ro": "At the very minimum an application needs a unique slug. You may also provide a title and a description."
         },
         "edit": {
           "__id__": "secma-mui.apps.dialog.edit",
-          "defaultMessage": "Edit the {app} application"
+          "defaultMessage": "Edit the {app} application",
+          "en": "Edit the {app} application",
+          "ro": "Edit the {app} application"
         }
       }
     },
     "cancel": {
       "__id__": "secma-mui.cancel",
-      "defaultMessage": "Cancel"
+      "defaultMessage": "Cancel",
+      "en": "Cancel",
+      "ro": "Cancel"
     },
     "create": {
       "__id__": "secma-mui.create",
-      "defaultMessage": "Create"
+      "defaultMessage": "Create",
+      "en": "Create",
+      "ro": "Create"
+    },
+    "delete": {
+      "__id__": "secma-mui.delete",
+      "defaultMessage": "Delete"
     },
     "error": {
       "notAuthorized": {
@@ -92,11 +124,15 @@
     },
     "reset": {
       "__id__": "secma-mui.reset",
-      "defaultMessage": "Reset"
+      "defaultMessage": "Reset",
+      "en": "Reset",
+      "ro": "Reset"
     },
     "save": {
       "__id__": "secma-mui.save",
-      "defaultMessage": "Save"
+      "defaultMessage": "Save",
+      "en": "Save",
+      "ro": "Save"
     },
     "signIn": {
       "button": {

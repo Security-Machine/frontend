@@ -188,7 +188,7 @@ describe("AccessPoint", () => {
             expect(translator.formatMessage).toHaveBeenCalledWith({
                 "defaultMessage": "abc",
                 "id": "secma-base.def",
-            });
+            }, { "lorem": "ipsum" });
             expect(result).toEqual({
                 "code": "def",
                 "field": "string",

@@ -4,6 +4,7 @@ export type {
     AppEditDialogInListProps,
     AppEditDialogChildProps,
     AppEditControllerProps,
+    AppDelDialogInListProps,
  } from './applications';
 export {
     appListContext,
@@ -12,4 +13,5 @@ export {
     AppListController,
     AppEditDialogInList,
     AppEditController,
+    AppDelDialogInList,
 } from './applications';

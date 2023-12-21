@@ -287,8 +287,8 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
                 code: code,
                 message: intl.formatMessage({
                     id: `secma-base.${code}`,
-                    defaultMessage: jsonResponse["message"]
-                }),
+                    defaultMessage: jsonResponse["message"],
+                }, jsonResponse["params"]),
                 field: jsonResponse["field"],
                 params: jsonResponse["params"]
             }

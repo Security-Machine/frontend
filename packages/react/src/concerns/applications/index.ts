@@ -1,3 +1,7 @@
+export type { AppDelDialogInListProps } from './del-in-list';
+export { AppDelDialogInList } from './del-in-list';
+
+
 export type {
     AppEditDialogInListProps, AppEditDialogChildProps
 } from './dialog-in-list';

@@ -1,12 +1,14 @@
 import { FC } from "react";
 import List from "@mui/material/List";
 import {
+    AppDelDialogInList,
     AppEditDialogInList, AppListController, useAppListContext
 } from "@secma/react";
 
 import { AppListItem } from "./list-item";
 import { CreateAppButton } from "./create-btn";
 import { AppEditDialog } from "./dialog";
+import { AmmConfirmDeleteDialog } from "./del-dialog";
 
 
 const listStyle = {
@@ -58,5 +60,8 @@ export const AppList: FC<AppListProps> = () => (
         <AppEditDialogInList>
             <AppEditDialog />
         </AppEditDialogInList>
+        <AppDelDialogInList>
+            <AmmConfirmDeleteDialog />
+        </AppDelDialogInList>
     </AppListController>
 );
