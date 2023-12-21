@@ -17,6 +17,7 @@ export const adminRoutes = [
             <SecMaController
                 appSlug={MANAGEMENT_APP}
                 tenantSlug={MANAGEMENT_TENANT}
+                withLocalStorage="secma-admin"
             >
                 <AppLayout />
             </SecMaController>

@@ -29,11 +29,15 @@
     "login": {
       "3rd-party": {
         "__id__": "secma-admin.login.3rd-party",
-        "defaultMessage": "Third-party login"
+        "defaultMessage": "Third-party login",
+        "en": "Third-party login",
+        "ro": "Third-party login"
       },
       "password": {
         "__id__": "secma-admin.login.password",
-        "defaultMessage": "Log-in using email and password"
+        "defaultMessage": "Log-in using email and password",
+        "en": "Log-in using email and password",
+        "ro": "Log-in using email and password"
       },
       "passwordless": {
         "__id__": "secma-admin.login.passwordless",

@@ -1,14 +1,82 @@
-import { FC, ReactNode, useCallback, useReducer } from "react";
+import { FC, ReactNode, useCallback, useEffect, useReducer, useRef } from "react";
 import {
     OnSignIn, OnSignOut, OnTokenError, LogInTokenAP, SignUpTokenAP,
     TokenData,
-    AccessPoint
+    AccessPoint,
 } from "@secma/base";
 import { useIntl } from "react-intl";
+import { DateTime } from "luxon";
 
 import { SecMaContext, SecMaContextProvider } from "./context";
-import { initialUserState, secMaReducer } from "./state";
+import { SecMaState, initialUserState, secMaReducer } from "./state";
 import { useSecMaAppContext } from "../app-controller";
+import { jwtDecode } from "jwt-decode";
+
+
+// The content the token.
+type TokenReply = Omit<TokenData, "token">;
+
+
+/**
+ * Save the token to the local storage.
+ *
+ * @param token The token to save.
+ * @param key The key under which to save the token.
+ */
+const saveTokenToLocalStorage = (token: string, key?: string) => {
+    if (!key) return;
+    try {
+        localStorage.setItem(`${key}-token`, token);
+        console.log(
+            "[SecMaController] token saved to local storage"
+        );
+    } catch (e) {
+        console.log(
+            "[SecMaController] local storage not available," +
+            " token not saved"
+        );
+    }
+}
+
+
+/**
+ * Remove the token from the local storage.
+ *
+ * @param key The key under which the token was saved.
+ */
+const removeTokenFromLocalStorage = (key?: string) => {
+    if (!key) return;
+    try {
+        localStorage.removeItem(`${key}-token`);
+        console.log(
+            "[SecMaController] token removed from local storage"
+        );
+    } catch (e) {
+        console.log(
+            "[SecMaController] local storage not available, token not removed"
+        );
+    }
+}
+
+
+/**
+ * Try to retrieve the token from the local storage.
+ *
+ * @param key The key under which the token was saved.
+ * @returns The token or undefined if it was not found.
+ */
+function getTokenFromLocalStorage(key?: string): (string | undefined) {
+    if (!key) return undefined;
+    try {
+        const result = localStorage.getItem(`${key}-token`);
+        console.log("[SecMaController] token retrieved from local storage");
+        return result || undefined;
+    } catch (e) {
+        console.log("[SecMaController] local storage not available");
+        return undefined;
+    }
+}
+
 
 
 /**
@@ -47,6 +115,17 @@ export interface SecMaControllerProps {
     tenantSlug: string;
 
     /**
+     * If not empty, the controller will try to retrieve the token from
+     * the local storage and will save it there when it is retrieved from
+     * the API.
+     *
+     * The token is saved under a key that is the concatenation of this
+     * string and the string `-token`.
+     */
+    withLocalStorage?: string;
+
+
+    /**
      * What to render inside the controller.
      */
     children: ReactNode;
@@ -55,25 +134,83 @@ export interface SecMaControllerProps {
 
 /**
  * The controller that manages current user state for its children.
+ *
+ * The controller can optionally be configured to save the token to the
+ * local storage and retrieve it from there on first render.
+ *
+ * The controller will automatically sign out the user when the token
+ * expires.
+ *
+ * TODO: Add a way to refresh the token.
  */
 export const SecMaController: FC<SecMaControllerProps> = ({
     onError = undefined,
     onSignIn = undefined,
     onSignOut = undefined,
     timeout = 10000,
+    withLocalStorage = undefined,
     appSlug,
     tenantSlug,
     children
 }) => {
+
+    // We want to prevent the control from going into a signed-out state
+    // then into a signed in state when there is a token in the local storage.
+    // So we use this guard that is empty only on first render.
+    const firstRender = useRef(true);
+    let localInitialStates: SecMaState = undefined as any;
+    if (firstRender.current) {
+        localInitialStates = {
+            ...initialUserState
+        };
+        if (withLocalStorage) {
+            // Try to retrieve the token from the local storage.
+            // If local storage is not available the call will throw an error.
+            let token = getTokenFromLocalStorage(withLocalStorage);
+            if (token) {
+                // Decode it.
+                const tokenData = jwtDecode<TokenReply>(token);
+                console.log(
+                    "[SecMaController] tokenData from local storage %O",
+                    tokenData
+                );
+
+                // Check if it is expired.
+                const now = DateTime.utc();
+                const expires = DateTime.fromSeconds(
+                    tokenData.exp,
+                    { zone: "utc" }
+                );
+                if (expires.diff(now).as("seconds") <= 0) {
+                    // The token is expired.
+                    console.log(
+                        "[SecMaController] local storage token has expired"
+                    );
+                } else {
+                    // Make sure that the code here is kept in sync with the
+                    // `sign-in` action in the reducer.
+                    localInitialStates.user_name = tokenData.sub;
+                    localInitialStates.expires = tokenData.exp;
+                    localInitialStates.permissions = tokenData.scopes;
+                    localInitialStates.token = token;
+                }
+            }
+        }
+    }
+
+    // The timer ID for the token expiration.
+    const timeoutId = useRef<number | undefined>(undefined);
+
     // Set the base for the API call.
     const { apiUrl } = useSecMaAppContext();
     AccessPoint.apiUrl = apiUrl;
-    
+
     // Translation provider.
     const intl = useIntl();
 
     // The persistent state of the map.
-    const [state, dispatch] = useReducer(secMaReducer, initialUserState);
+    const [state, dispatch] = useReducer(secMaReducer, localInitialStates);
+
 
     // The sign in function.
     const signIn = useCallback(async (
@@ -112,20 +249,131 @@ export const SecMaController: FC<SecMaControllerProps> = ({
         return result;
     }, [timeout, onError, onSignIn, appSlug, tenantSlug]);
 
+
     // The sign out function.
-    const signOut = useCallback(() => {
-        if (state.user_name) {
-            // Update internal state.
-            dispatch({ type: "clear" });
-            // Inform the parent.
-            onSignOut?.({
-                token: state.token!,
-                sub: state.user_name!,
-                exp: state.expires!,
-                scopes: state.permissions!,
-            });
+    const signOut = useCallback((omitStorage?: boolean) => {
+        if (!state.user_name) {
+            console.log("[SecMaController] The user is already signed out.");
+            return;
         }
-    }, [onSignOut, state]);
+
+        // Update internal state.
+        dispatch({ type: "clear" });
+        // Inform the parent.
+        onSignOut?.({
+            token: state.token!,
+            sub: state.user_name!,
+            exp: state.expires!,
+            scopes: state.permissions!,
+        });
+        // Remove the token from the local storage.
+        if (!omitStorage) {
+            removeTokenFromLocalStorage(withLocalStorage);
+        }
+    }, [
+        onSignOut, withLocalStorage, state.user_name,
+        state.token, state.expires, state.permissions
+    ]);
+
+
+    // Effect run when the token changes.
+    useEffect(() => {
+        if (state.token) {
+
+            // Save the token to the local storage.
+            saveTokenToLocalStorage(state.token, withLocalStorage);
+
+            // Compute the time until the token expires.
+            const now = DateTime.utc();
+            const expires = DateTime.fromSeconds(
+                state.expires, { zone: "utc" }
+            );
+            let timeout = expires.diff(now).as("milliseconds");
+            if (timeout < 0) {
+                // The token is expired.
+                console.log("[SecMaController] token has expired");
+                signOut();
+                return;
+            }
+            timeout = timeout - 1000; // 1 second before the actual expiration.
+
+            // Clear previous timeout.
+            if (timeoutId.current) {
+                clearTimeout(timeoutId.current);
+            }
+
+            // Setup the timeout.
+            timeoutId.current = setTimeout(() => {
+                console.log("[SecMaController] token has expired");
+                signOut();
+            }, timeout) as any;
+
+        }
+    }, [state.token, state.expires, withLocalStorage]);
+
+
+    // On unmount clear the timeout.
+    useEffect(() => {
+        const onStorage = (e: StorageEvent) => {
+            if (e.key !== `${withLocalStorage}-token`) return;
+
+            if (e.newValue === null) {
+                // The token was removed from the local storage.
+                signOut(true);
+                console.log(
+                    "[SecMaController] signed out in another tab/window",
+                );
+            } else {
+                // The token was added to the local storage.
+                const tokenData = jwtDecode<TokenReply>(e.newValue);
+                console.log(
+                    "[SecMaController] tokenData from local storage %O",
+                    tokenData
+                );
+
+                // Check if it is expired.
+                const now = DateTime.utc();
+                const expires = DateTime.fromSeconds(
+                    tokenData.exp,
+                    { zone: "utc" }
+                );
+                if (expires.diff(now).as("seconds") <= 0) {
+                    // The token is expired.
+                    console.log(
+                        "[SecMaController] local storage token has expired"
+                    );
+                } else {
+                    // Make sure that the code here is kept in sync with
+                    // the `sign-in` action in the reducer.
+                    dispatch({
+                        type: "sign-in",
+                        payload: {
+                            token: e.newValue,
+                            sub: tokenData.sub,
+                            exp: tokenData.exp,
+                            scopes: tokenData.scopes,
+                        }
+                    });
+                }
+            }
+        }
+        window.addEventListener("storage", onStorage);
+
+        return () => {
+            // Remove the event listener.
+            window.removeEventListener("storage", onStorage);
+        };
+    }, [withLocalStorage]);
+
+
+    // On unmount clear the timeout.
+    useEffect(() => {
+        return () => {
+            if (timeoutId.current) {
+                clearTimeout(timeoutId.current);
+            }
+        }
+    }, []);
 
     // Compute the value that will be provided through the context.
     const value: SecMaContext = {
@@ -134,6 +382,8 @@ export const SecMaController: FC<SecMaControllerProps> = ({
         signOut,
     };
 
+    // Make sure to set the guard.
+    firstRender.current = false;
     return (
         <SecMaContextProvider value={value}>
             {children}

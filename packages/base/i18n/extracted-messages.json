@@ -1,5 +1,17 @@
 {
   "secma-base": {
+    "description": {
+      "long": {
+        "__id__": "secma-base.description.long"
+      },
+      "required": {
+        "__id__": "secma-base.description.required",
+        "defaultMessage": "The description is required"
+      },
+      "short": {
+        "__id__": "secma-base.description.short"
+      }
+    },
     "duplicate-app": {
       "__id__": "secma-base.duplicate-app"
     },
@@ -50,6 +62,35 @@
       "defaultMessage": "No user with a `{userId}` ID was found withing this tenant",
       "en": "No user with a `{userId}` ID was found withing this tenant",
       "ro": "No user with a `{userId}` ID was found withing this tenant"
+    },
+    "slug": {
+      "invalid": {
+        "__id__": "secma-base.slug.invalid"
+      },
+      "long": {
+        "__id__": "secma-base.slug.long",
+        "defaultMessage": "The slug is too long (255 characters maximum)"
+      },
+      "required": {
+        "__id__": "secma-base.slug.required",
+        "defaultMessage": "The slug is required"
+      },
+      "short": {
+        "__id__": "secma-base.slug.short",
+        "defaultMessage": "The slug is too short (3 characters minimum)"
+      }
+    },
+    "title": {
+      "long": {
+        "__id__": "secma-base.title.long"
+      },
+      "required": {
+        "__id__": "secma-base.title.required",
+        "defaultMessage": "The title is required"
+      },
+      "short": {
+        "__id__": "secma-base.title.short"
+      }
     }
   }
 }

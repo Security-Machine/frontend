@@ -10,6 +10,44 @@
         }
       }
     },
+    "apps": {
+      "add": {
+        "d": {
+          "__id__": "secma-mui.apps.add.d",
+          "defaultMessage": "Description"
+        },
+        "slug": {
+          "__id__": "secma-mui.apps.add.slug",
+          "defaultMessage": "Slug"
+        },
+        "title": {
+          "__id__": "secma-mui.apps.add.title",
+          "defaultMessage": "Title"
+        }
+      },
+      "dialog": {
+        "add": {
+          "__id__": "secma-mui.apps.dialog.add",
+          "defaultMessage": "Create a new application"
+        },
+        "d": {
+          "__id__": "secma-mui.apps.dialog.d",
+          "defaultMessage": "At the very minimum an application needs a unique slug. You may also provide a title and a description."
+        },
+        "edit": {
+          "__id__": "secma-mui.apps.dialog.edit",
+          "defaultMessage": "Edit the {app} application"
+        }
+      }
+    },
+    "cancel": {
+      "__id__": "secma-mui.cancel",
+      "defaultMessage": "Cancel"
+    },
+    "create": {
+      "__id__": "secma-mui.create",
+      "defaultMessage": "Create"
+    },
     "error": {
       "notAuthorized": {
         "content": {
@@ -51,6 +89,14 @@
         "en": "Recover password",
         "ro": "Recover password"
       }
+    },
+    "reset": {
+      "__id__": "secma-mui.reset",
+      "defaultMessage": "Reset"
+    },
+    "save": {
+      "__id__": "secma-mui.save",
+      "defaultMessage": "Save"
     },
     "signIn": {
       "button": {
