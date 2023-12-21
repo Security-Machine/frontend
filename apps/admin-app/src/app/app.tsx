@@ -1,11 +1,11 @@
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import { RouterProvider } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
+import { SecMaAppController } from "@secma/react";
+import { SnackbarProvider } from 'notistack';
 
 import { muiTheme } from "./mui-theme";
 import { appRouter } from "./router";
-import { SecMaAppController, SecMaController } from "@secma/react";
-import { SnackbarProvider } from 'notistack';
 
 
 // Make sure that the environment variables are set.

@@ -13,13 +13,13 @@ module.exports = composePlugins(
         console.log('Webpack config', config);
         // Update the webpack config as needed here.
         // e.g. `config.plugins.push(new MyPlugin())`
-        for (const plugin of config.plugins) {
+        // for (const plugin of config.plugins) {
             // console.log('Plugin', plugin.constructor.name);
             // console.log('Plugin options', plugin.options);
             // if (plugin.constructor.name === 'HtmlWebpackPlugin') {
             //     plugin.options.title = 'Admin App';
             // }
-        }
+        // }
         return config;
     },
 );

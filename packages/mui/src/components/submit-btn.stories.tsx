@@ -6,16 +6,11 @@ import { enqueueSnackbar } from 'notistack';
 import { Field } from 'react-final-form';
 
 
-// The properties passed to each story.
-type StoryProps = {};
-
-
 // Common configuration for all stories.
-const storybookConfig: Meta<StoryProps> = {
+const storybookConfig: Meta = {
     title: 'components/SubmitButton',
     tags: [],
     component: SubmitButton,
-    args: {},
 };
 export default storybookConfig;
 
@@ -33,7 +28,7 @@ const Content = () => (
 
 
 // Base for create variant.
-const TemplateCreate: StoryFn<StoryProps> = (args) => (
+const TemplateCreate: StoryFn = () => (
     <ContainerForm
         onSubmit={() => { enqueueSnackbar("onSubmit"); }}
     >
@@ -42,12 +37,11 @@ const TemplateCreate: StoryFn<StoryProps> = (args) => (
 );
 
 
-export const Create: StoryFn<StoryProps> = TemplateCreate.bind({});
-Create.args = {};
+export const Create: StoryFn = TemplateCreate.bind({});
 
 
 // Base for edit variant.
-const TemplateEdit: StoryFn<StoryProps> = (args) => (
+const TemplateEdit: StoryFn = (args) => (
     <ContainerForm
         initialValues={{ id: 1, name: "John Doe" }}
         onSubmit={() => { enqueueSnackbar("onSubmit"); }}
@@ -57,5 +51,4 @@ const TemplateEdit: StoryFn<StoryProps> = (args) => (
 );
 
 
-export const Edit: StoryFn<StoryProps> = TemplateEdit.bind({});
-Edit.args = {};
+export const Edit: StoryFn = TemplateEdit.bind({});

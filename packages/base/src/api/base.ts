@@ -240,7 +240,7 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
         };
 
         // Parse the response.
-        let textResponse: string = await response.text();
+        const textResponse: string = await response.text();
         console.log("[AccessPoint.call] text reply: %O", textResponse);
         let jsonResponse: Record<string, any>;
         try {
@@ -315,7 +315,7 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
  * code that is send in ErrorResponse.data.code is the id in these
  * messages without the `secma-base.` prefix.
  */
-function useAllErrorMessages() {
+function useAllErrorMessages() { // eslint-disable-line
     const { formatMessage } = useIntl();
     return [
 

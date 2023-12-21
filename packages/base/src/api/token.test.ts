@@ -3,9 +3,8 @@ import { enableFetchMocks } from "jest-fetch-mock";
 import jwt_encode from "jwt-encode";
 
 import { SecMaUser } from "../user";
-
-import { checkNoUser, checkNoPermission } from "./apps.test";
 import { LogInTokenAP } from "./token";
+
 
 // User data for tests.
 const testUser: SecMaUser = {

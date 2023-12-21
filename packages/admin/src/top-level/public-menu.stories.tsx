@@ -1,10 +1,10 @@
+import { useState } from 'react';
 import type { StoryFn, Meta } from '@storybook/react';
+import { enqueueSnackbar } from 'notistack';
+import { SecMaContextProvider } from '@secma/react';
 
 import type { PublicMenuProps } from './public-menu';
 import { PublicMenu } from './public-menu';
-import { SecMaContextProvider } from '@secma/react';
-import { useRef, useState } from 'react';
-import { enqueueSnackbar } from 'notistack';
 
 
 // The properties passed to each story.

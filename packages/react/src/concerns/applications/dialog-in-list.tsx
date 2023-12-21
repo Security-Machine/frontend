@@ -80,7 +80,7 @@ export const AppEditDialogInList: FC<AppEditDialogInListProps> = ({
         }
         console.log("[AppEditDialogInList] onSuccess %O", value);
         clearCurrent();
-    }, [mode, current, clearCurrent]);
+    }, [mode, current, clearCurrent, addNewItem, editItem]);
 
 
     // Make sure there's something to edit.

@@ -76,70 +76,68 @@ const ControllerViewer = () => {
 }
 
 const Inner = (args: any) => (
-    <>
-        <SecMaController
-            onError={() => { enqueueSnackbar("Error signing in") }}
-            onSignIn={() => { enqueueSnackbar("Signed in") }}
-            onSignOut={() => { enqueueSnackbar("Signed out") }}
-            appSlug="app"
-            tenantSlug="tenant"
-        >
-            <SignInForm {...args}>
-                <Field name="username">
-                    {({ input, meta }) => (
-                        <div>
-                            <input
-                                type="text"
-                                {...input}
-                                placeholder="Email or username"
-                            />
-                            {
-                                meta.touched &&
-                                meta.error &&
-                                <span>{meta.error}</span>
-                            }
-                        </div>
-                    )}
-                </Field>
-                <Field name="password">
-                    {({ input, meta }) => (
-                        <div>
-                            <input
-                                type="text"
-                                {...input}
-                                placeholder="Password"
-                            />
-                            {
-                                meta.touched &&
-                                meta.error &&
-                                <span>{meta.error}</span>
-                            }
-                        </div>
-                    )}
-                </Field>
-                <Field name="rememberMe" type="checkbox">
-                    {({ input, meta }) => (
-                        <div>
-                            <input
-                                type="checkbox"
-                                title='Remember me'
-                                {...input}
-                            />
-                            {
-                                meta.touched &&
-                                meta.error &&
-                                <span>{meta.error}</span>
-                            }
-                            <label>Remember me</label>
-                        </div>
-                    )}
-                </Field>
-                <button type="submit">Sign in</button>
-                <ControllerViewer />
-                <FormDebugger />
-            </SignInForm>
-        </SecMaController>
-    </>
+    <SecMaController
+        onError={() => { enqueueSnackbar("Error signing in") }}
+        onSignIn={() => { enqueueSnackbar("Signed in") }}
+        onSignOut={() => { enqueueSnackbar("Signed out") }}
+        appSlug="app"
+        tenantSlug="tenant"
+    >
+        <SignInForm {...args}>
+            <Field name="username">
+                {({ input, meta }) => (
+                    <div>
+                        <input
+                            type="text"
+                            {...input}
+                            placeholder="Email or username"
+                        />
+                        {
+                            meta.touched &&
+                            meta.error &&
+                            <span>{meta.error}</span>
+                        }
+                    </div>
+                )}
+            </Field>
+            <Field name="password">
+                {({ input, meta }) => (
+                    <div>
+                        <input
+                            type="text"
+                            {...input}
+                            placeholder="Password"
+                        />
+                        {
+                            meta.touched &&
+                            meta.error &&
+                            <span>{meta.error}</span>
+                        }
+                    </div>
+                )}
+            </Field>
+            <Field name="rememberMe" type="checkbox">
+                {({ input, meta }) => (
+                    <div>
+                        <input
+                            type="checkbox"
+                            title='Remember me'
+                            {...input}
+                        />
+                        {
+                            meta.touched &&
+                            meta.error &&
+                            <span>{meta.error}</span>
+                        }
+                        <label>Remember me</label>
+                    </div>
+                )}
+            </Field>
+            <button type="submit">Sign in</button>
+            <ControllerViewer />
+            <FormDebugger />
+        </SignInForm>
+    </SecMaController>
 )
 
 

@@ -1,6 +1,7 @@
 import { Children, FC, cloneElement, useCallback } from "react";
-import { useAppDelete, useAppListContext } from "@secma/react";
 import { enqueueSnackbar } from 'notistack';
+import { useAppListContext } from "./list";
+import { useAppDelete } from "../../api";
 
 /**
  * Properties for the {@link AppDelDialogInList} component.
@@ -54,7 +55,7 @@ export const AppDelDialogInList: FC<AppDelDialogInListProps> = ({
 
         console.log("[AppDelDialogInList] onSuccess %O", current);
         clearCurrent();
-    }, [mode, current, clearCurrent]);
+    }, [mode, current, clearCurrent, removeItem, trigger]);
 
     // Make sure there's something to edit.
     if (!mode || !data || !current) {

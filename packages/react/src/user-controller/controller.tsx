@@ -166,7 +166,7 @@ export const SecMaController: FC<SecMaControllerProps> = ({
         if (withLocalStorage) {
             // Try to retrieve the token from the local storage.
             // If local storage is not available the call will throw an error.
-            let token = getTokenFromLocalStorage(withLocalStorage);
+            const token = getTokenFromLocalStorage(withLocalStorage);
             if (token) {
                 // Decode it.
                 const tokenData = jwtDecode<TokenReply>(token);
@@ -247,7 +247,7 @@ export const SecMaController: FC<SecMaControllerProps> = ({
         }
 
         return result;
-    }, [timeout, onError, onSignIn, appSlug, tenantSlug]);
+    }, [timeout, onError, onSignIn, appSlug, tenantSlug, intl]);
 
 
     // The sign out function.
@@ -309,7 +309,7 @@ export const SecMaController: FC<SecMaControllerProps> = ({
             }, timeout) as any;
 
         }
-    }, [state.token, state.expires, withLocalStorage]);
+    }, [state.token, state.expires, withLocalStorage, signOut]);
 
 
     // On unmount clear the timeout.
@@ -363,7 +363,7 @@ export const SecMaController: FC<SecMaControllerProps> = ({
             // Remove the event listener.
             window.removeEventListener("storage", onStorage);
         };
-    }, [withLocalStorage]);
+    }, [withLocalStorage, signOut]);
 
 
     // On unmount clear the timeout.

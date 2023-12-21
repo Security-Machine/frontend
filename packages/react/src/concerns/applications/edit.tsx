@@ -91,7 +91,7 @@ export const AppEditController: FC<AppEditControllerProps> = ({
 
         // console.log("[SecMaAppCreateController] validate %O", result);
         return result;
-    }, []);
+    }, [formatMessage]);
 
 
     return (

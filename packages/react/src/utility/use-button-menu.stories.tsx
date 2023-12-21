@@ -5,7 +5,6 @@ import Menu from '@mui/material/Menu';
 import { PopoverOrigin } from '@mui/material/Popover';
 import MenuItem from '@mui/material/MenuItem';
 
-import type { UseButtonMenuResult } from "./use-button-menu";
 import { useButtonMenu } from "./use-button-menu";
 
 
@@ -36,7 +35,7 @@ const transformOrigin: PopoverOrigin = {
 
 
 // Base for all stories in this file.
-const Template: StoryFn<StoryProps> = ({ }) => {
+const Template: StoryFn<StoryProps> = () => {
     const {
         menuId,
         anchorEl,

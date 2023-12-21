@@ -3,12 +3,8 @@ import type { StoryFn, Meta } from '@storybook/react';
 import { AppEditor } from './editor';
 
 
-// The properties passed to each story.
-type StoryProps = {};
-
-
 // Common configuration for all stories.
-const storybookConfig: Meta<StoryProps> = {
+const storybookConfig: Meta = {
     title: 'top-level/Error 404',
     tags: ['controller'],
     component: AppEditor,
@@ -18,7 +14,7 @@ export default storybookConfig;
 
 
 // Base for all stories in this file.
-const Template: StoryFn<StoryProps> = () => (
+const Template: StoryFn = () => (
     <AppEditor />
 );
 
@@ -26,5 +22,5 @@ const Template: StoryFn<StoryProps> = () => (
 /**
  * The default story.
  */
-export const Default: StoryFn<StoryProps> = Template.bind({});
+export const Default: StoryFn = Template.bind({});
 Default.args = {};

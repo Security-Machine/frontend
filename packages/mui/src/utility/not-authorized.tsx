@@ -7,9 +7,9 @@ import { FormattedMessage } from "react-intl";
  * Error page to indicate to the user that they do not have
  * all required permissions to access this page.
  */
-export const NotAuthorized = ({}: {
+export const NotAuthorized = (/*{}: {
     permissions: string[];
-}) => (
+}*/) => (
     <Box m={3} p={3} width="100%">
         <Typography
             align="center"

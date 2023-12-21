@@ -54,12 +54,14 @@ export const UserMenu: FC<UserMenuProps> = ({
     handleClose
 }) => {
 
+    // Get the signOut function from the context.
     const { signOut } = useSecMaContext();
 
+    // Create a function that signs the user out and closes the menu.
     const handleSignOut = useCallback(() => {
         if (signOut) signOut();
         handleClose();
-    }, [signOut]);
+    }, [signOut, handleClose]);
 
     return (
         <Menu

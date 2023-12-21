@@ -2,7 +2,8 @@ import { FC } from "react";
 import { SignInForm } from "@secma/react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import { FormattedMessage, useIntl } from "react-intl";
+import { FormattedMessage } from "react-intl";
+
 import {
     LostPasswordLink, MainButton, PageTitle, PasswordField,
     RememberField, SignInMuiFormProps, TheLink, UsernameField
@@ -13,7 +14,6 @@ import {
  * The form for signing up.
  */
 export const SignUpMuiForm: FC<SignInMuiFormProps> = (props) => {
-    const intl = useIntl();
     return (
         <SignInForm isExisting={true} {...props}>
             <Container maxWidth="xs">

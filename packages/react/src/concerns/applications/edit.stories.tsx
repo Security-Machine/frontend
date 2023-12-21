@@ -19,19 +19,8 @@ const storybookConfig: Meta<StoryProps> = {
     title: 'concerns/apps/edit',
     tags: [],
     component: AppEditController,
-    args: {
-
-    },
-    parameters: {
-        fetchMock: {
-            mocks: [
-
-            ]
-        }
-    }
 };
 export default storybookConfig;
-
 
 
 // Form content.
@@ -40,7 +29,7 @@ const Viewer = () => {
         errors,
         submitErrors
     } = useFormState();
-    return (
+return (
         <div>
             <Field name="slug">
                 {({ input, meta }) => (
@@ -79,9 +68,7 @@ const Viewer = () => {
 
 
 // Base for all stories in this file.
-const Template: StoryFn<StoryProps> = ({
-
-}) => {
+const Template: StoryFn<StoryProps> = () => {
 
     const onSuccess = (result: ApplicationData) => {
         enqueueSnackbar("[EditController] onSuccess");

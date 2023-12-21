@@ -74,9 +74,7 @@ const Viewer = () => {
 
 
 // Base for all stories in this file.
-const Template: StoryFn<StoryProps> = ({
-
-}) => {
+const Template: StoryFn<StoryProps> = () => {
     const validate = (values: FormData) => {
         const result: Record<string, string> = {};
         console.log("[EditController] validate %O", values);

@@ -1,6 +1,5 @@
 import type { StoryFn, Meta } from '@storybook/react';
 import { AppListController, SecMaContextProvider } from '@secma/react';
-import { enqueueSnackbar } from 'notistack';
 
 import type { AppListProps } from './list';
 import { AppList } from './list';

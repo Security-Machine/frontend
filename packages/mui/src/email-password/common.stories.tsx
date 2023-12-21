@@ -14,12 +14,8 @@ import {
 import { Form } from 'react-final-form';
 
 
-
-// The properties passed to each story.
-type StoryProps = {};
-
 // Common configuration for all stories.
-const storybookConfig: Meta<StoryProps> = {
+const storybookConfig: Meta = {
     title: 'email-password/common',
     tags: [],
     args: {},
@@ -27,14 +23,14 @@ const storybookConfig: Meta<StoryProps> = {
 export default storybookConfig;
 
 
-export const PageTitle: StoryFn<StoryProps> = () => (
+export const PageTitle: StoryFn = () => (
     <PageTitleComponent>
         Content
     </PageTitleComponent>
 );
 
 
-export const TheText: StoryFn<StoryProps> = () => (
+export const TheText: StoryFn = () => (
     <Form
         onSubmit={() => { enqueueSnackbar("[TheText] Form Submit") }}
         render={({ handleSubmit }) => (
@@ -48,7 +44,7 @@ export const TheText: StoryFn<StoryProps> = () => (
 );
 
 
-export const UsernameField: StoryFn<StoryProps> = () => (
+export const UsernameField: StoryFn = () => (
     <Form
         onSubmit={() => { enqueueSnackbar("[UsernameField] Form Submit") }}
         render={({ handleSubmit }) => (
@@ -60,7 +56,7 @@ export const UsernameField: StoryFn<StoryProps> = () => (
 );
 
 
-export const PasswordField: StoryFn<StoryProps> = () => (
+export const PasswordField: StoryFn = () => (
     <Form
         onSubmit={() => { enqueueSnackbar("[PasswordField] Form Submit") }}
         render={({ handleSubmit }) => (
@@ -72,7 +68,7 @@ export const PasswordField: StoryFn<StoryProps> = () => (
 );
 
 
-export const RememberField: StoryFn<StoryProps> = () => (
+export const RememberField: StoryFn = () => (
     <Form
         onSubmit={() => { enqueueSnackbar("[RememberField] Form Submit") }}
         render={({ handleSubmit }) => (
@@ -84,7 +80,7 @@ export const RememberField: StoryFn<StoryProps> = () => (
 );
 
 
-export const MainButton: StoryFn<StoryProps> = () => (
+export const MainButton: StoryFn = () => (
     <Form
         onSubmit={() => { enqueueSnackbar("[MainButton] Form Submit") }}
         render={({ handleSubmit }) => (
@@ -98,7 +94,7 @@ export const MainButton: StoryFn<StoryProps> = () => (
 );
 
 
-export const TheLink: StoryFn<StoryProps> = () => (
+export const TheLink: StoryFn = () => (
     <Form
         onSubmit={() => { enqueueSnackbar("[TheLink] Form Submit") }}
         render={({ handleSubmit }) => (
@@ -112,7 +108,7 @@ export const TheLink: StoryFn<StoryProps> = () => (
 );
 
 
-export const LostPasswordLink: StoryFn<StoryProps> = () => (
+export const LostPasswordLink: StoryFn = () => (
     <Form
         onSubmit={() => { enqueueSnackbar("[TheLink] Form Submit") }}
         render={({ handleSubmit }) => (

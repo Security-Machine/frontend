@@ -14,16 +14,6 @@ const storybookConfig: Meta<StoryProps> = {
     title: 'concerns/apps/dialog-in-list',
     tags: [],
     component: AppEditDialogInList,
-    args: {
-
-    },
-    parameters: {
-        fetchMock: {
-            mocks: [
-
-            ]
-        }
-    }
 };
 export default storybookConfig;
 
@@ -38,9 +28,7 @@ const Inner = () => {
 
 
 // Base for all stories in this file.
-const Template: StoryFn<StoryProps> = ({
-
-}) => {
+const Template: StoryFn<StoryProps> = () => {
     return (
         <AppEditDialogInList>
             <Inner />

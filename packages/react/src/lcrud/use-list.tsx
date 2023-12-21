@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useReducer } from "react";
+import { AccessPointError } from "@secma/base";
+
 import { useSecMaContext } from "../user-controller";
 import { SecMaApiResult } from "../api";
-import { AccessPointError } from "@secma/base";
+
 
 /**
  * The unique key of an item in the list.
@@ -525,7 +527,7 @@ export function use2StageList<
                 )
             });
         });
-    }, [listResult, errorInList, canRead]);
+    }, [listResult, errorInList, canRead, fetchDetail, toKey]);
 
 
     // The callback for beginning to create a new item.

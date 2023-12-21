@@ -1,8 +1,7 @@
+import { FC } from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { PopoverOrigin } from "@mui/material/Popover";
-import { useSecMaContext } from "@secma/react";
-import { FC } from "react";
 import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 
@@ -48,10 +47,6 @@ export const PublicMenu: FC<PublicMenuProps> = ({
     anchorEl,
     handleClose
 }) => {
-    // Access the current user.
-    const {
-        user_name
-    } = useSecMaContext();
     return (
         <Menu
             anchorOrigin={anchorOrigin}

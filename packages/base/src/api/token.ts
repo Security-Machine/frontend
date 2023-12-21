@@ -40,7 +40,7 @@ export class LogInTokenAP extends AccessPoint<Payload, PathArgs, TokenData> {
             "Content-Type": "application/x-www-form-urlencoded",
         };
     }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override isAllowed(user: Readonly<SecMaUser>) { // eslint-disable-line
         return true;
     }
     override processResult(result: any) {

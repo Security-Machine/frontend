@@ -153,7 +153,7 @@ export const SignInForm: FC<SignInFormProps> = ({
 
         console.log('[%s] validation errors %O', strMode, result);
         return result;
-    }, [intl, isExisting]);
+    }, [intl, isExisting, strMode]);
 
 
     // The callback used to submit the form.
@@ -162,7 +162,7 @@ export const SignInForm: FC<SignInFormProps> = ({
         signIn(values.username, values.password, isExisting);
 
         // TODO: Handle remember me by using a refresh token.
-    }, [signIn, isExisting]);
+    }, [signIn, isExisting, strMode]);
 
 
     // Inform the parent if the user was signed in.
@@ -183,7 +183,7 @@ export const SignInForm: FC<SignInFormProps> = ({
                 }
             );
         }
-    }, [onSignIn, user_name, navState]);
+    }, [onSignIn, user_name, navState, navigate, strMode]);
 
 
     // Render the form.

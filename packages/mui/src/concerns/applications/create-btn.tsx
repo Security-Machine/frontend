@@ -1,7 +1,4 @@
 import { FC } from "react";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import { ListItemControls } from "../../components";
 import { FormattedMessage } from "react-intl";
 import { useAppListContext } from "@secma/react";
 import Button, { ButtonProps } from "@mui/material/Button";

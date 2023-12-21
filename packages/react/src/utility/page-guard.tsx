@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useEffect } from "react";
+import { FC, ReactNode, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { useSecMaContext } from "../user-controller";
@@ -90,18 +90,18 @@ export const PageGuard: FC<PageGuardProps> = ({
                 state: savedState
             });
         }
-    }, [user_name]);
+    }, [user_name, navigate, loginPath, pathname, search, hash, state]);
 
     if (!user_name) {
-        return <></>;
+        return null;
     } else if (!permissions.every(p => userPerms.includes(p))) {
         console.error(
             '[PageGuard] user is not authorized (the page requires %O)',
             permissions
         );
-        return <>{unauthorized}</>;
+        return unauthorized;
     } else {
-        return <>{children}</>;
+        return children;
     }
 };
 

@@ -8,10 +8,6 @@ import {
 } from "./apps";
 
 
-// The properties passed to each story.
-type StoryProps = {};
-
-
 const ViewAppList = () => {
     const {
         trigger,
@@ -120,7 +116,7 @@ const defaultApp = {
 
 
 // Common configuration for all stories.
-const storybookConfig: Meta<StoryProps> = {
+const storybookConfig: Meta = {
     title: 'top-level/App Hooks',
     tags: [],
     component: Viewer,
@@ -233,7 +229,7 @@ const Permissions = ({
 
 
 // Base for all stories in this file.
-const Template: StoryFn<StoryProps> = (args) => {
+const Template: StoryFn = (args) => {
     const [permissions, setPermissions] = useState<string[]>([]);
     return (
         <>
@@ -258,4 +254,4 @@ const Template: StoryFn<StoryProps> = (args) => {
 /**
  * The default story.
  */
-export const Default: StoryFn<StoryProps> = Template.bind({});
+export const Default: StoryFn = Template.bind({});
