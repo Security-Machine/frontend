@@ -11,7 +11,7 @@ export type CreateTenantButtonProps = Omit<ButtonProps, "onClick">;
 
 
 /**
- * The button that changes current mode to create a new application.
+ * The button that changes current mode to create a new tenant.
  */
 export const CreateTenantButton: FC<CreateTenantButtonProps> = ({
     ...rest

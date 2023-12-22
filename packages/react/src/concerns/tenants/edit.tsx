@@ -14,6 +14,11 @@ import { SecMaApiResult, useTenantCreate, useTenantEdit } from "../../api";
  */
 export interface TenantEditControllerProps {
     /**
+     * The slug of the application where the tenants are stored.
+     */
+    appSlug: string;
+
+    /**
      * The initial values of the form.
      *
      * If this field is set we're dealing with an edit form. If it's not set
@@ -52,6 +57,7 @@ export interface TenantEditControllerProps {
 export const TenantEditController: FC<TenantEditControllerProps> = ({
     initialValues,
     children,
+    appSlug,
     onSuccess,
 }) => {
     // The translation provider.
@@ -63,9 +69,9 @@ export const TenantEditController: FC<TenantEditControllerProps> = ({
     // prop to have same value throughout the lifetime of the component.
     let hookValue: SecMaApiResult<any, any, TenantData>;
     if (initialValues === undefined) {
-        hookValue = useTenantCreate();
+        hookValue = useTenantCreate(appSlug);
     } else {
-        hookValue = useTenantEdit(initialValues.slug);
+        hookValue = useTenantEdit(appSlug, initialValues.slug);
     }
 
     // The callback used to validate the form.

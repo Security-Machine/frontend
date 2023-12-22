@@ -53,7 +53,7 @@ export const TenantInnerList: FC<TenantListProps> = ({
 
 
 /**
- * The list of applications.
+ * The list of tenants in an application.
  */
 export const TenantList: FC<TenantListProps> = ({
     appSlug
@@ -62,7 +62,7 @@ export const TenantList: FC<TenantListProps> = ({
         <TenantInnerList appSlug={appSlug}/>
         <CreateTenantButton />
         <TenantEditDialogInList appSlug={appSlug}>
-            <TenantEditDialog />
+            <TenantEditDialog appSlug={appSlug} />
         </TenantEditDialogInList>
         <TenantDelDialogInList appSlug={appSlug}>
             <TenantConfirmDeleteDialog />

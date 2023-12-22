@@ -30,14 +30,14 @@ export interface TenantConfirmDeleteDialogProps {
     onConfirm?: () => void;
 
     /**
-    * The application to delete.
+    * The tenant to delete.
     */
     record?: TenantData | string;
 }
 
 
 /**
- * A dialog that asks the user to confirm the deletion of an application.
+ * A dialog that asks the user to confirm the deletion of a tenant.
  */
 export const TenantConfirmDeleteDialog: FC<TenantConfirmDeleteDialogProps> = ({
     open = true,
@@ -49,7 +49,7 @@ export const TenantConfirmDeleteDialog: FC<TenantConfirmDeleteDialogProps> = ({
         <DialogTitle id="alert-dialog-title">
             <FormattedMessage
                 id="secma-mui.tenants.del.dialog.t"
-                defaultMessage="Delete application?"
+                defaultMessage="Delete tenant?"
             />
         </DialogTitle>
         <DialogContent>
@@ -58,10 +58,10 @@ export const TenantConfirmDeleteDialog: FC<TenantConfirmDeleteDialogProps> = ({
                     id="secma-mui.tenants.del.dialog.d"
                     defaultMessage={
                         "Are you sure you want to delete the " +
-                        "application {appName}?"
+                        "tenant {tenant}?"
                     }
                     values={{
-                        appName: (
+                        tenant: (
                             typeof record === "string"
                                 ? record
                                 : (record.title || record.slug)

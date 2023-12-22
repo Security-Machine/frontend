@@ -58,11 +58,15 @@
       "list": {
         "description": {
           "__id__": "secma-mui.apps.list.description",
-          "defaultMessage": "These are all the applications that are available on this server. Note that the management application is the only one that cannot be deleted."
+          "defaultMessage": "These are all the applications that are available on this server. Note that the management application is the only one that cannot be deleted.",
+          "en": "These are all the applications that are available on this server. Note that the management application is the only one that cannot be deleted.",
+          "ro": "These are all the applications that are available on this server. Note that the management application is the only one that cannot be deleted."
         },
         "title": {
           "__id__": "secma-mui.apps.list.title",
-          "defaultMessage": "Applications"
+          "defaultMessage": "Applications",
+          "en": "Applications",
+          "ro": "Applications"
         }
       }
     }

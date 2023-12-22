@@ -5,7 +5,7 @@ import { FormattedMessage } from "react-intl";
 
 /**
  * A control that includes all the fields that are required to edit or create
- * an application.
+ * a tenant.
  *
  * The component needs to be wrapped in a form, as it uses the form context
  * to get and set the values.

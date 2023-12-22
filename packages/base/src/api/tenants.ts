@@ -106,7 +106,7 @@ export class TenantCreateAP
 
     get isMutation() { return true; }
     get method() { return "PUT" as AccessPointMethod; }
-    get pathPattern() { return "/tenants/{appSlug}/{tenSlug}"; }
+    get pathPattern() { return "/tenants/{appSlug}"; }
     override isAllowed(user: Readonly<SecMaUser>) {
         return (
             !!user.user_name &&

@@ -26,33 +26,35 @@ export interface TenantEditDialogProps
 
 
 /**
- * The dialog used to edit or create an application.
+ * The dialog used to edit or create a tenant.
  */
 export const TenantEditDialog: FC<TenantEditDialogProps> = ({
     onCancel,
     open = true,
     initialValues,
     onSuccess,
+    appSlug,
 }) => {
     return (
         <Dialog onClose={onCancel} open={open}>
             <TenantEditController
                 initialValues={initialValues}
                 onSuccess={onSuccess}
+                appSlug={appSlug!}
             >
                 <DialogTitle>
                     {initialValues ? (
                         <FormattedMessage
                             key="edit"
                             id="secma-mui.tenants.dialog.edit"
-                            defaultMessage="Edit the {app} application"
-                            values={{ app: initialValues.slug }}
+                            defaultMessage="Edit the {tenant} tenant"
+                            values={{ tenant: initialValues.slug }}
                         />
                     ) : (
                         <FormattedMessage
                             key="create"
                             id="secma-mui.tenants.dialog.add"
-                            defaultMessage="Create a new application"
+                            defaultMessage="Create a new tenant"
                         />
                     )}
                 </DialogTitle>
@@ -61,7 +63,7 @@ export const TenantEditDialog: FC<TenantEditDialogProps> = ({
                         <FormattedMessage
                             id="secma-mui.tenants.dialog.d"
                             defaultMessage={
-                                "At the very minimum an application needs a " +
+                                "At the very minimum a tenant needs a " +
                                 "unique slug. You may also provide a title " +
                                 "and a description."
                             }

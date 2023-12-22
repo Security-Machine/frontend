@@ -24,7 +24,9 @@
       "create": {
         "btn": {
           "__id__": "secma-mui.apps.create.btn",
-          "defaultMessage": "Create a New App"
+          "defaultMessage": "Create a New App",
+          "en": "Create a New App",
+          "ro": "Create a New App"
         }
       },
       "del": {
@@ -127,11 +129,15 @@
     "pageHeader": {
       "created": {
         "__id__": "secma-mui.pageHeader.created",
-        "defaultMessage": "Created:"
+        "defaultMessage": "Created:",
+        "en": "Created:",
+        "ro": "Created:"
       },
       "updated": {
         "__id__": "secma-mui.pageHeader.updated",
-        "defaultMessage": "Last update:"
+        "defaultMessage": "Last update:",
+        "en": "Last update:",
+        "ro": "Last update:"
       }
     },
     "reset": {
@@ -214,47 +220,65 @@
       "add": {
         "d": {
           "__id__": "secma-mui.tenants.add.d",
-          "defaultMessage": "Description"
+          "defaultMessage": "Description",
+          "en": "Description",
+          "ro": "Description"
         },
         "slug": {
           "__id__": "secma-mui.tenants.add.slug",
-          "defaultMessage": "Slug"
+          "defaultMessage": "Slug",
+          "en": "Slug",
+          "ro": "Slug"
         },
         "title": {
           "__id__": "secma-mui.tenants.add.title",
-          "defaultMessage": "Title"
+          "defaultMessage": "Title",
+          "en": "Title",
+          "ro": "Title"
         }
       },
       "create": {
         "btn": {
           "__id__": "secma-mui.tenants.create.btn",
-          "defaultMessage": "Create a New Tenant"
+          "defaultMessage": "Create a New Tenant",
+          "en": "Create a New Tenant",
+          "ro": "Create a New Tenant"
         }
       },
       "del": {
         "dialog": {
           "d": {
             "__id__": "secma-mui.tenants.del.dialog.d",
-            "defaultMessage": "Are you sure you want to delete the application {appName}?"
+            "defaultMessage": "Are you sure you want to delete the tenant {tenant}?",
+            "en": "Are you sure you want to delete the application {appName}?",
+            "ro": "Are you sure you want to delete the application {appName}?"
           },
           "t": {
             "__id__": "secma-mui.tenants.del.dialog.t",
-            "defaultMessage": "Delete application?"
+            "defaultMessage": "Delete tenant?",
+            "en": "Delete application?",
+            "ro": "Delete application?"
           }
         }
       },
       "dialog": {
         "add": {
           "__id__": "secma-mui.tenants.dialog.add",
-          "defaultMessage": "Create a new application"
+          "defaultMessage": "Create a new tenant",
+          "en": "Create a new application",
+          "ro": "Create a new application"
         },
         "d": {
           "__id__": "secma-mui.tenants.dialog.d",
-          "defaultMessage": "At the very minimum an application needs a unique slug. You may also provide a title and a description."
+          "defaultMessage": "At the very minimum a tenant needs a unique slug. You may also provide a title and a description.",
+          "en": "At the very minimum an application needs a unique slug. You may also provide a title and a description.",
+          "ro": "At the very minimum an application needs a unique slug. You may also provide a title and a description."
         },
         "edit": {
           "__id__": "secma-mui.tenants.dialog.edit",
-          "defaultMessage": "Edit the {app} application"
+          "defaultMessage": "Edit the {tenant} tenant",
+          "en": "Edit the {app} application",
+          "ro": "Edit the {app} application"
         }
       }
     }
