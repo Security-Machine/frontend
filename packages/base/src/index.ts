@@ -2,10 +2,12 @@ export type {
     TokenReply, TokenData, OnTokenError, RetrieveTokenResult,
     AccessPointError, OnSignIn, OnSignOut,
     ApplicationInput, ApplicationData,
+    TenantInput, TenantData,
 } from "./models";
 
 
 export {
+    LogInTokenAP, SignUpTokenAP,
     AccessPoint,
     StatsAP, VersionAP,
     AppCreateAP, AppDetailsAP, AppEditAP, AppDeleteAP, AppListAP,
@@ -14,7 +16,12 @@ export {
     managementAppReadPermission,
     managementAppEditPermission,
     managementAppDeletePermission,
-    LogInTokenAP, SignUpTokenAP,
+    TenantCreateAP, TenantDeleteAP, TenantDetailsAP, TenantEditAP, TenantListAP,
+    managementTenantListPermission,
+    managementTenantCreatePermission,
+    managementTenantReadPermission,
+    managementTenantEditPermission,
+    managementTenantDeletePermission,
 } from "./api";
 export type {
     AccessPointMethod

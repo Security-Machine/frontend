@@ -1,16 +1,16 @@
 import type { StoryFn, Meta } from '@storybook/react';
-import type { AmmConfirmDeleteDialogProps } from "./del-dialog";
-import { AmmConfirmDeleteDialog } from "./del-dialog";
+import type { AppConfirmDeleteDialogProps } from "./del-dialog";
+import { AppConfirmDeleteDialog } from "./del-dialog";
 
 
 // The properties passed to each story.
-type StoryProps = AmmConfirmDeleteDialogProps;
+type StoryProps = AppConfirmDeleteDialogProps;
 
 // Common configuration for all stories.
 const storybookConfig: Meta<StoryProps> = {
     title: 'concerns/applications/Delete Dialog',
     tags: [],
-    component: AmmConfirmDeleteDialog,
+    component: AppConfirmDeleteDialog,
     args: {
 
     },
@@ -20,7 +20,7 @@ export default storybookConfig;
 
 // Base for all stories in this file.
 const Template: StoryFn<StoryProps> = (args) => (
-    <AmmConfirmDeleteDialog {...args} />
+    <AppConfirmDeleteDialog {...args} />
 );
 
 

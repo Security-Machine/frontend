@@ -6,13 +6,13 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { ApplicationData } from "@secma/base";
+import { TenantData } from "@secma/base";
 
 
 /**
- * Properties for the {@link AppConfirmDeleteDialog} component.
+ * Properties for the {@link TenantConfirmDeleteDialog} component.
  */
-export interface AppConfirmDeleteDialogProps {
+export interface TenantConfirmDeleteDialogProps {
 
     /**
     * Is the dialog currently open?
@@ -32,14 +32,14 @@ export interface AppConfirmDeleteDialogProps {
     /**
     * The application to delete.
     */
-    record?: ApplicationData | string;
+    record?: TenantData | string;
 }
 
 
 /**
  * A dialog that asks the user to confirm the deletion of an application.
  */
-export const AppConfirmDeleteDialog: FC<AppConfirmDeleteDialogProps> = ({
+export const TenantConfirmDeleteDialog: FC<TenantConfirmDeleteDialogProps> = ({
     open = true,
     onCancel,
     onConfirm,
@@ -48,14 +48,14 @@ export const AppConfirmDeleteDialog: FC<AppConfirmDeleteDialogProps> = ({
     <Dialog open={open} onClose={onCancel}>
         <DialogTitle id="alert-dialog-title">
             <FormattedMessage
-                id="secma-mui.apps.del.dialog.t"
+                id="secma-mui.tenants.del.dialog.t"
                 defaultMessage="Delete application?"
             />
         </DialogTitle>
         <DialogContent>
             <DialogContentText id="alert-dialog-description">
                 <FormattedMessage
-                    id="secma-mui.apps.del.dialog.d"
+                    id="secma-mui.tenants.del.dialog.d"
                     defaultMessage={
                         "Are you sure you want to delete the " +
                         "application {appName}?"

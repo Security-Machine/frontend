@@ -58,7 +58,18 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
      *
      * @param result The json-parsed result of the call.
      */
-    processResult(result: any): TResult {
+    processResult(
+        result: any,
+        user: Readonly<SecMaUser>,
+        intl: Readonly<IntlShape>,
+        payload?: Readonly<TPayload>,
+        pathArgs?: Readonly<TPathArgs>,
+        headers?: Readonly<Record<string, string>>,
+    ): TResult {
+        console.log(
+            "[AccessPoint.processResult] default (no processing)",
+            result
+        );
         return result as TResult;
     }
 
@@ -71,6 +82,13 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
      * @returns The result with the dates converted to `DateTime`.
      */
     processDates(result: any): TResult {
+
+        console.log("[AccessPoint.processDates] result", result);
+        const c = DateTime.fromISO(result.created);
+        console.log(
+            "[AccessPoint.processDates] created",
+            c, typeof c, c instanceof DateTime
+        );
         return {
             ...result,
             created: DateTime.fromISO(result.created),
@@ -261,7 +279,14 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
 
         // If this is a success, return the result.
         if (response.ok) {
-            return this.processResult(jsonResponse);
+            return this.processResult(
+                jsonResponse,
+                user,
+                intl,
+                payload,
+                pathArgs,
+                finalHeaders,
+            );
         }
         console.log("[AccessPoint.call] not OK");
 

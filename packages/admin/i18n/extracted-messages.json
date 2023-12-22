@@ -52,5 +52,19 @@
       "en": "Sign Out",
       "ro": "Sign Out"
     }
+  },
+  "secma-mui": {
+    "apps": {
+      "list": {
+        "description": {
+          "__id__": "secma-mui.apps.list.description",
+          "defaultMessage": "These are all the applications that are available on this server. Note that the management application is the only one that cannot be deleted."
+        },
+        "title": {
+          "__id__": "secma-mui.apps.list.title",
+          "defaultMessage": "Applications"
+        }
+      }
+    }
   }
 }

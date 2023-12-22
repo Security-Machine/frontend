@@ -8,10 +8,10 @@ import {
 import { AppListItem } from "./list-item";
 import { CreateAppButton } from "./create-btn";
 import { AppEditDialog } from "./dialog";
-import { AmmConfirmDeleteDialog } from "./del-dialog";
+import { AppConfirmDeleteDialog } from "./del-dialog";
 
 
-const listStyle = {
+const sxList = {
     minWidth: 360,
 }
 
@@ -36,7 +36,7 @@ export const AppInnerList = () => {
         canDelete,
     } = useAppListContext();
     return (
-        <List sx={listStyle}>
+        <List sx={sxList}>
             {Object.keys(data).map((key) => (
                 <AppListItem
                     key={key}
@@ -61,7 +61,7 @@ export const AppList: FC<AppListProps> = () => (
             <AppEditDialog />
         </AppEditDialogInList>
         <AppDelDialogInList>
-            <AmmConfirmDeleteDialog />
+            <AppConfirmDeleteDialog />
         </AppDelDialogInList>
     </AppListController>
 );

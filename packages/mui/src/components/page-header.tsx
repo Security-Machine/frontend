@@ -58,65 +58,71 @@ export const PageHeader: FC<PageHeaderProps> = ({
     description,
     created,
     updated
-}) => (
-    <Box>
+}) => {
+    console.log("[PageHeader] title %O", title);
+    console.log("[PageHeader] description %O", description);
+    console.log("[PageHeader] created %O", created);
+    console.log("[PageHeader] updated %O", updated);
+    return (
         <Box>
-            <Typography variant="h4" sx={sxTitle}>
-                {title}
-            </Typography>
-        </Box>
-        <Box>
-            <Typography variant="body1" sx={sxDescription}>
-                {description}
-            </Typography>
-        </Box>
-        <Grid container spacing={2}>
-            <Grid xs={6}>
-                <Typography variant="body2" sx={sxDate}>
-                    {created ? (
-                        <>
-                            <FormattedMessage
-                                id="secma-mui.pageHeader.created"
-                                defaultMessage="Created: "
-                            />
-                            <FormattedTime
-                                value={created.toISO() as string}
-                                hour="numeric"
-                                minute="numeric"
-                            />{", "}
-                            <FormattedDate
-                                value={created.toISO() as string}
-                                year="numeric"
-                                month="long"
-                                day="numeric"
-                            />
-                        </>
-                    ) : null}
+            <Box>
+                <Typography variant="h4" sx={sxTitle}>
+                    {title}
                 </Typography>
-            </Grid>
-            <Grid xs={6}>
-                <Typography variant="body2" sx={sxDate}>
-                    {updated ? (
-                        <>
-                            <FormattedMessage
-                                id="secma-mui.pageHeader.updated"
-                                defaultMessage="Last update: "
-                            />
-                            <FormattedTime
-                                value={updated.toISO() as string}
-                                hour="numeric"
-                                minute="numeric"
-                            />{", "}
-                            <FormattedDate
-                                value={updated.toISO() as string}
-                                year="numeric"
-                                month="long"
-                                day="numeric"
-                            />
-                        </>
-                    ) : null}
+            </Box>
+            <Box>
+                <Typography variant="body1" sx={sxDescription}>
+                    {description}
                 </Typography>
+            </Box>
+            <Grid container spacing={2}>
+                <Grid xs={6}>
+                    <Typography variant="body2" sx={sxDate}>
+                        {created ? (
+                            <>
+                                <FormattedMessage
+                                    id="secma-mui.pageHeader.created"
+                                    defaultMessage="Created: "
+                                />
+                                <FormattedTime
+                                    value={created.toISO() as string}
+                                    hour="numeric"
+                                    minute="numeric"
+                                />{", "}
+                                <FormattedDate
+                                    value={created.toISO() as string}
+                                    year="numeric"
+                                    month="long"
+                                    day="numeric"
+                                />
+                            </>
+                        ) : null}
+                    </Typography>
+                </Grid>
+                <Grid xs={6}>
+                    <Typography variant="body2" sx={sxDate}>
+                        {updated ? (
+                            <>
+                                <FormattedMessage
+                                    id="secma-mui.pageHeader.updated"
+                                    defaultMessage="Last update: "
+                                />
+                                <FormattedTime
+                                    value={updated.toISO() as string}
+                                    hour="numeric"
+                                    minute="numeric"
+                                />{", "}
+                                <FormattedDate
+                                    value={updated.toISO() as string}
+                                    year="numeric"
+                                    month="long"
+                                    day="numeric"
+                                />
+                            </>
+                        ) : null}
+                    </Typography>
+                </Grid>
             </Grid>
-        </Grid>
-    </Box>
-);
+        </Box>
+    );
+}

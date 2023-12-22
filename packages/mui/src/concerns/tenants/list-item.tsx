@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import { ApplicationData } from "@secma/base";
+import { TenantData } from "@secma/base";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
@@ -18,13 +18,13 @@ const sxButton = {
 
 
 /**
- * The properties for the (@link AppListItem).
+ * The properties for the (@link TenantListItem).
  */
-export interface AppListItemProps {
+export interface TenantListItemProps {
     /**
-     * The application represented by this list item.
+     * The tenant represented by this list item.
      */
-    app: string | ApplicationData;
+    tenant: string | TenantData;
 
     /**
      * The callback for when the edit button is clicked.
@@ -43,14 +43,14 @@ export interface AppListItemProps {
 
 
 /**
- * The list of applications.
+ * The list of tenants in an application.
  */
-export const AppListItem: FC<AppListItemProps> = ({
-    app,
+export const TenantListItem: FC<TenantListItemProps> = ({
+    tenant,
     onEdit,
     onDelete,
 }) => {
-    const unique = typeof app === "string" ? app : app.slug;
+    const unique = typeof tenant === "string" ? tenant : tenant.slug;
     return (
         <ListItem
             secondaryAction={
@@ -66,19 +66,19 @@ export const AppListItem: FC<AppListItemProps> = ({
                 sx={sxButton}
                 component={Link}
                 to={unique}
-                state={app}
+                state={tenant}
             >
                 <ListItemIcon>
                     <AutoAwesomeIcon />
                 </ListItemIcon>
-                {typeof app === "string" ? (
+                {typeof tenant === "string" ? (
                     <ListItemText
-                        primary={app}
+                        primary={tenant}
                     />
                 ) : (
                     <ListItemText
-                        primary={app.title || app.slug}
-                        secondary={app.description}
+                        primary={tenant.title || tenant.slug}
+                        secondary={tenant.description}
                     />
                 )}
             </ListItemButton>

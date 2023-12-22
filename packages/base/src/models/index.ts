@@ -6,4 +6,7 @@ export type{
 export type { AccessPointError } from "./errors";
 
 
-export { ApplicationInput, ApplicationData } from "./apps";
+export type { ApplicationInput, ApplicationData } from "./apps";
+
+
+export type { TenantInput, TenantData } from "./tenants";

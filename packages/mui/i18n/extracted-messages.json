@@ -1,15 +1,5 @@
 {
   "secma-mui": {
-    "applications": {
-      "create": {
-        "btn": {
-          "__id__": "secma-mui.applications.create.btn",
-          "defaultMessage": "Create a New App",
-          "en": "Create a New App",
-          "ro": "Create a New App"
-        }
-      }
-    },
     "apps": {
       "add": {
         "d": {
@@ -31,15 +21,25 @@
           "ro": "Title"
         }
       },
+      "create": {
+        "btn": {
+          "__id__": "secma-mui.apps.create.btn",
+          "defaultMessage": "Create a New App"
+        }
+      },
       "del": {
         "dialog": {
           "d": {
             "__id__": "secma-mui.apps.del.dialog.d",
-            "defaultMessage": "Are you sure you want to delete the application {appName}?"
+            "defaultMessage": "Are you sure you want to delete the application {appName}?",
+            "en": "Are you sure you want to delete the application {appName}?",
+            "ro": "Are you sure you want to delete the application {appName}?"
           },
           "t": {
             "__id__": "secma-mui.apps.del.dialog.t",
-            "defaultMessage": "Delete application?"
+            "defaultMessage": "Delete application?",
+            "en": "Delete application?",
+            "ro": "Delete application?"
           }
         }
       },
@@ -78,7 +78,9 @@
     },
     "delete": {
       "__id__": "secma-mui.delete",
-      "defaultMessage": "Delete"
+      "defaultMessage": "Delete",
+      "en": "Delete",
+      "ro": "Delete"
     },
     "error": {
       "notAuthorized": {
@@ -120,6 +122,16 @@
         "defaultMessage": "Recover password",
         "en": "Recover password",
         "ro": "Recover password"
+      }
+    },
+    "pageHeader": {
+      "created": {
+        "__id__": "secma-mui.pageHeader.created",
+        "defaultMessage": "Created:"
+      },
+      "updated": {
+        "__id__": "secma-mui.pageHeader.updated",
+        "defaultMessage": "Last update:"
       }
     },
     "reset": {
@@ -196,6 +208,54 @@
         "defaultMessage": "Sign in",
         "en": "Sign in",
         "ro": "Sign in"
+      }
+    },
+    "tenants": {
+      "add": {
+        "d": {
+          "__id__": "secma-mui.tenants.add.d",
+          "defaultMessage": "Description"
+        },
+        "slug": {
+          "__id__": "secma-mui.tenants.add.slug",
+          "defaultMessage": "Slug"
+        },
+        "title": {
+          "__id__": "secma-mui.tenants.add.title",
+          "defaultMessage": "Title"
+        }
+      },
+      "create": {
+        "btn": {
+          "__id__": "secma-mui.tenants.create.btn",
+          "defaultMessage": "Create a New Tenant"
+        }
+      },
+      "del": {
+        "dialog": {
+          "d": {
+            "__id__": "secma-mui.tenants.del.dialog.d",
+            "defaultMessage": "Are you sure you want to delete the application {appName}?"
+          },
+          "t": {
+            "__id__": "secma-mui.tenants.del.dialog.t",
+            "defaultMessage": "Delete application?"
+          }
+        }
+      },
+      "dialog": {
+        "add": {
+          "__id__": "secma-mui.tenants.dialog.add",
+          "defaultMessage": "Create a new application"
+        },
+        "d": {
+          "__id__": "secma-mui.tenants.dialog.d",
+          "defaultMessage": "At the very minimum an application needs a unique slug. You may also provide a title and a description."
+        },
+        "edit": {
+          "__id__": "secma-mui.tenants.dialog.edit",
+          "defaultMessage": "Edit the {app} application"
+        }
       }
     }
   }

@@ -1,26 +1,26 @@
 import { FC } from "react";
 import { FormattedMessage } from "react-intl";
-import { useAppListContext } from "@secma/react";
+import { useTenantListContext } from "@secma/react";
 import Button, { ButtonProps } from "@mui/material/Button";
 
 
 /**
- * The properties for the (@link CreateAppButton).
+ * The properties for the (@link CreateTenantButton).
  */
-export type CreateAppButtonProps = Omit<ButtonProps, "onClick">;
+export type CreateTenantButtonProps = Omit<ButtonProps, "onClick">;
 
 
 /**
  * The button that changes current mode to create a new application.
  */
-export const CreateAppButton: FC<CreateAppButtonProps> = ({
+export const CreateTenantButton: FC<CreateTenantButtonProps> = ({
     ...rest
 }) => {
     // Get information from list context.
     const {
         canCreate,
         beginCreate
-    } = useAppListContext();
+    } = useTenantListContext();
 
     // Nothing to do if we can't create.
     if (!canCreate) return null;
@@ -31,8 +31,8 @@ export const CreateAppButton: FC<CreateAppButtonProps> = ({
             onClick={beginCreate}
         >
             <FormattedMessage
-                id="secma-mui.apps.create.btn"
-                defaultMessage="Create a New App"
+                id="secma-mui.tenants.create.btn"
+                defaultMessage="Create a New Tenant"
             />
         </Button>
     )

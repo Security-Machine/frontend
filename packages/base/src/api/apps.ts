@@ -2,6 +2,7 @@ import { ApplicationData, ApplicationInput } from "../models/apps";
 import { AccessPoint, AccessPointMethod } from "./base";
 import { SecMaUser } from "../user";
 
+
 /**
  * The permissions required for reading all application slugs.
  */
@@ -66,6 +67,7 @@ export class AppDetailsAP
         );
     }
     override processResult(result: any): ApplicationData {
+        console.log("[AppDetailsAP.processResult]", result)
         return this.processDates(result);
     }
 }
