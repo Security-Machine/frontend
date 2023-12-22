@@ -5,7 +5,7 @@ import { AppEditor } from './editor';
 
 // Common configuration for all stories.
 const storybookConfig: Meta = {
-    title: 'top-level/Error 404',
+    title: 'concerns/applications/Editor',
     tags: ['controller'],
     component: AppEditor as any,
 };

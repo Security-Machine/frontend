@@ -1,9 +1,19 @@
 import { FC } from "react";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import { ListItemControls } from "../../components";
 import { ApplicationData } from "@secma/base";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 
+import { ListItemControls } from "../../components";
+import { Link } from "react-router-dom";
+
+// We need to add a margin to the button because the default incarnation
+// leaves room for a single icon and we have two buttons.
+const sxButton = {
+    mr: 8,
+}
 
 /**
  * The properties for the (@link AppListItem).
@@ -40,23 +50,36 @@ export const AppListItem: FC<AppListItemProps> = ({
 }) => {
     const unique = typeof app === "string" ? app : app.slug;
     return (
-        <ListItem secondaryAction={
-            <ListItemControls
-                unique={unique}
-                onEdit={onEdit}
-                onDelete={onDelete}
-            />
-        }>
-            {typeof app === "string" ? (
-                <ListItemText
-                    primary={app}
+        <ListItem
+            secondaryAction={
+                <ListItemControls
+                    unique={unique}
+                    onEdit={onEdit}
+                    onDelete={onDelete}
                 />
-            ) : (
-                <ListItemText
-                    primary={app.title}
-                    secondary={app.description}
-                />
-            )}
+            }
+        >
+            <ListItemButton
+                role={undefined}
+                sx={sxButton}
+                component={Link}
+                to={unique}
+                state={app}
+            >
+                <ListItemIcon>
+                    <AutoAwesomeIcon />
+                </ListItemIcon>
+                {typeof app === "string" ? (
+                    <ListItemText
+                        primary={app}
+                    />
+                ) : (
+                    <ListItemText
+                        primary={app.title}
+                        secondary={app.description}
+                    />
+                )}
+            </ListItemButton>
         </ListItem>
     );
 }

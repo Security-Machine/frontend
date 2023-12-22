@@ -61,7 +61,7 @@ export const useAppDetails = (
         undefined, // apiPayload
         appSlug ? { slug: appSlug, } : undefined, // pathArgs
         undefined, // headers
-        false, // autoTrigger
+        autoTrigger,
         timeout,
     );
 };

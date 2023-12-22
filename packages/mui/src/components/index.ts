@@ -10,6 +10,10 @@ export type { MenuItemPermProps } from './menu-item-perm';
 export { MenuItemPerm } from './menu-item-perm';
 
 
+export type { PageHeaderProps } from "./page-header";
+export { PageHeader } from "./page-header";
+
+
 export { ResetButton } from './reset-btn';
 
 

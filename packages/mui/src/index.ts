@@ -10,15 +10,17 @@ export type {
     ListItemControlsProps,
     MenuItemPermProps,
     SimpleTableProps,
- } from './components';
+    PageHeaderProps,
+} from './components';
 export {
     ListItemControls,
     MenuItemPerm,
     SimpleTable,
- } from './components';
+    PageHeader,
+} from './components';
 
 
- export type {
+export type {
     AppListItemProps,
     AppListProps,
 } from './concerns';
