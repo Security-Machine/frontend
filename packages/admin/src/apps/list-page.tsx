@@ -12,7 +12,7 @@ const unauthorized = <NotAuthorized permissions={permissions} />;
 /**
  * The page that lists all the applications.
  */
-export const ListPage: FC = () => {
+export const AppListPage: FC = () => {
     const { formatMessage } = useIntl();
     return (
         <PageGuard

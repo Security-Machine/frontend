@@ -9,3 +9,9 @@ export {
 
 
 export { adminRoutes } from './routes';
+
+
+export { TenantDetailsPage, TenantDetailsInner } from './tenants';
+
+
+export { AppDetailsPage, AppDetailsInner, AppListPage } from './apps';

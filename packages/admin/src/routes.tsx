@@ -5,8 +5,8 @@ import {
 } from "./email-password";
 
 import { AppLayout, Error404Page } from "./top-level";
-import { ListPage } from "./apps/list-page";
-import { AppDetailsPage } from "./apps/details-page";
+import { AppListPage, AppDetailsPage } from "./apps";
+import { TenantDetailsPage } from "./tenants";
 
 
 /**
@@ -35,11 +35,14 @@ export const adminRoutes = [
                 path: "email-password/lost-password",
                 element: <LostPasswordPage />,
             }, {
+                path: "apps/:appSlug/:tenSlug",
+                element: <TenantDetailsPage />,
+            }, {
                 path: "apps/:slug",
                 element: <AppDetailsPage />,
             }, {
                 path: "apps",
-                element: <ListPage />,
+                element: <AppListPage />,
             }
         ]
     }
