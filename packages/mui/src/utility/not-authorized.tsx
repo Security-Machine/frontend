@@ -1,15 +1,22 @@
+import { FC } from "react";
+import { FormattedMessage } from "react-intl";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { FormattedMessage } from "react-intl";
+
+
+export interface NotAuthorizedProps {
+    /**
+     * The permissions required to access this page.
+     */
+    permissions: string[];
+}
 
 
 /**
  * Error page to indicate to the user that they do not have
  * all required permissions to access this page.
  */
-export const NotAuthorized = (/*{}: {
-    permissions: string[];
-}*/) => (
+export const NotAuthorized: FC<NotAuthorizedProps> = () => (
     <Box m={3} p={3} width="100%">
         <Typography
             align="center"

@@ -1,4 +1,4 @@
-import { FC, ReactNode, createContext, useContext } from "react";
+import { FC, ReactNode, createContext, useContext,  useCallback } from "react";
 import { useIntl } from "react-intl";
 import {
     AppDetailsAP,
@@ -79,6 +79,16 @@ export const AppListController: FC<AppListControllerProps> = ({
     // Read the user and its permissions from the context.
     const userContext = useSecMaContext();
 
+    // Prepared call.
+    const fetchDetail = useCallback((appSlug: any) => AppDetailsAP.i.call(
+        userContext, // user
+        intl,
+        undefined, // payload
+        { slug: appSlug }, // pathArgs
+        undefined, // headers
+        -1, // timeout (-1 without timeout, no controller)
+    ), [userContext, intl]);
+
     // Hook for managing the list of applications.
     const list = use2StageList<
         never, never, string,
@@ -89,14 +99,7 @@ export const AppListController: FC<AppListControllerProps> = ({
         updatePerms,
         deletePerms,
         useFetchList: useAppList,
-        fetchDetail: (appSlug) => AppDetailsAP.i.call(
-            userContext, // user
-            intl,
-            undefined, // payload
-            { slug: appSlug as string }, // pathArgs
-            undefined, // headers
-            -1, // timeout (-1 without timeout, no controller)
-        ),
+        fetchDetail,
         toKey,
     });
 
