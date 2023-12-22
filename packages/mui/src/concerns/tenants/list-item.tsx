@@ -5,7 +5,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { TenantData } from "@secma/base";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import Groups2Icon from '@mui/icons-material/Groups2';
 
 import { ListItemControls } from "../../components";
 
@@ -69,7 +69,7 @@ export const TenantListItem: FC<TenantListItemProps> = ({
                 state={tenant}
             >
                 <ListItemIcon>
-                    <AutoAwesomeIcon />
+                    <Groups2Icon />
                 </ListItemIcon>
                 {typeof tenant === "string" ? (
                     <ListItemText
