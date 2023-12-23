@@ -20,15 +20,18 @@ export interface SecMaAppControllerProps extends SecMaAppContext {
 export const SecMaAppController: FC<SecMaAppControllerProps> = ({
     loginPath,
     apiUrl,
+    adminPrefix = "/admin",
     children,
 }) => {
 
     const value = useMemo(() => ({
         apiUrl,
         loginPath,
+        adminPrefix,
     }), [
         apiUrl,
         loginPath,
+        adminPrefix,
     ]);
 
     return (

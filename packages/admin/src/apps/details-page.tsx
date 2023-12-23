@@ -4,6 +4,7 @@ import { NotAuthorized, PageHeader, TenantList } from "@secma/mui";
 import { PageGuard, useAppDetails } from "@secma/react";
 import { useLocation, useParams } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";
+import { DateTime } from "luxon";
 
 
 const permissions = [managementAppReadPermission];
@@ -30,7 +31,11 @@ export const AppDetailsInner: FC = () => {
         result,
         error: detailsError,
     } = useAppDetails(slug!, !hasState);
-    const appDetails = hasState ? state : result;
+    const appDetails = hasState ? {
+        ...state,
+        created: DateTime.fromISO(state.created),
+        updated: DateTime.fromISO(state.updated),
+    } : result;
     console.log("[AppDetailsPage] result %O, error %O", result, detailsError);
 
 
@@ -60,7 +65,7 @@ export const AppDetailsInner: FC = () => {
                 created={appDetails ? appDetails.created : undefined}
                 updated={appDetails ? appDetails.updated : undefined}
             />
-            <TenantList appSlug={slug!}/>
+            <TenantList appSlug={slug!} />
         </>
     );
 }

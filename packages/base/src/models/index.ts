@@ -10,3 +10,6 @@ export type { ApplicationInput, ApplicationData } from "./apps";
 
 
 export type { TenantInput, TenantData } from "./tenants";
+
+
+export type { UserInput, UserData } from "./users";

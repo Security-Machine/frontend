@@ -8,6 +8,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Groups2Icon from '@mui/icons-material/Groups2';
 
 import { ListItemControls } from "../../components";
+import { useAdminUrl } from "@secma/react";
 
 
 // We need to add a margin to the button because the default incarnation
@@ -21,6 +22,11 @@ const sxButton = {
  * The properties for the (@link TenantListItem).
  */
 export interface TenantListItemProps {
+    /**
+     * The slug of the application.
+     */
+    appSlug: string;
+
     /**
      * The tenant represented by this list item.
      */
@@ -46,11 +52,19 @@ export interface TenantListItemProps {
  * The list of tenants in an application.
  */
 export const TenantListItem: FC<TenantListItemProps> = ({
+    appSlug,
     tenant,
     onEdit,
     onDelete,
 }) => {
     const unique = typeof tenant === "string" ? tenant : tenant.slug;
+    const urlData = typeof tenant === "string" ? tenant : {
+        ...tenant,
+        created: tenant.created.toISO(),
+        updated: tenant.updated.toISO(),
+    };
+    const url = useAdminUrl("tenant", appSlug, unique);
+
     return (
         <ListItem
             secondaryAction={
@@ -65,8 +79,8 @@ export const TenantListItem: FC<TenantListItemProps> = ({
                 role={undefined}
                 sx={sxButton}
                 component={Link}
-                to={unique}
-                state={tenant}
+                to={url}
+                state={urlData}
             >
                 <ListItemIcon>
                     <Groups2Icon />

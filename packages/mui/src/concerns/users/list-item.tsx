@@ -2,12 +2,13 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import { ApplicationData } from "@secma/base";
+import { UserData } from "@secma/base";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import Groups2Icon from '@mui/icons-material/Groups2';
 
 import { ListItemControls } from "../../components";
+import { useAdminUrl } from "@secma/react";
 
 
 // We need to add a margin to the button because the default incarnation
@@ -18,13 +19,24 @@ const sxButton = {
 
 
 /**
- * The properties for the (@link AppListItem).
+ * The properties for the (@link UserListItem).
  */
-export interface AppListItemProps {
+export interface UserListItemProps {
+
     /**
-     * The application represented by this list item.
+     * The slug of the parent application.
      */
-    app: string | ApplicationData;
+    appSlug: string;
+
+    /**
+     * The slug of the parent tenant.
+     */
+    tenSlug: string;
+
+    /**
+     * The user represented by this list item.
+     */
+    user: string | UserData;
 
     /**
      * The callback for when the edit button is clicked.
@@ -43,19 +55,23 @@ export interface AppListItemProps {
 
 
 /**
- * The list of applications.
+ * The list of users in an application.
  */
-export const AppListItem: FC<AppListItemProps> = ({
-    app,
+export const UserListItem: FC<UserListItemProps> = ({
+    appSlug,
+    tenSlug,
+    user,
     onEdit,
     onDelete,
 }) => {
-    const unique = typeof app === "string" ? app : app.slug;
-    const urlData = typeof app === "string" ? app : {
-        ...app,
-        created: app.created.toISO(),
-        updated: app.updated.toISO(),
+    const unique = typeof user === "string" ? user : user.name;
+    const urlData = typeof user === "string" ? user : {
+        ...user,
+        created: user.created.toISO(),
+        updated: user.updated.toISO(),
     };
+    const url = useAdminUrl("user", appSlug, tenSlug, unique);
+
     return (
         <ListItem
             secondaryAction={
@@ -70,20 +86,20 @@ export const AppListItem: FC<AppListItemProps> = ({
                 role={undefined}
                 sx={sxButton}
                 component={Link}
-                to={unique}
+                to={url}
                 state={urlData}
             >
                 <ListItemIcon>
-                    <AutoAwesomeIcon />
+                    <Groups2Icon />
                 </ListItemIcon>
-                {typeof app === "string" ? (
+                {typeof user === "string" ? (
                     <ListItemText
-                        primary={app}
+                        primary={user}
                     />
                 ) : (
                     <ListItemText
-                        primary={app.title || app.slug}
-                        secondary={app.description}
+                        primary={user.name}
+                        secondary={user.description}
                     />
                 )}
             </ListItemButton>

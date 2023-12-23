@@ -14,3 +14,9 @@ export {
     useTenantList, useTenantCreate, useTenantDetails,
     useTenantEdit, useTenantDelete
 } from "./tenants";
+
+
+export {
+    useUserList, useUserCreate, useUserDetails,
+    useUserEdit, useUserDelete
+} from "./users";

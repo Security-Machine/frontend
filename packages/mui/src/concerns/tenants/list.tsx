@@ -41,6 +41,7 @@ export const TenantInnerList: FC<TenantListProps> = ({
         <List sx={sxList}>
             {Object.keys(data).map((key) => (
                 <TenantListItem
+                    appSlug={appSlug}
                     key={key}
                     tenant={data[key]}
                     onEdit={canUpdate ? beginEdit : undefined}
@@ -59,7 +60,7 @@ export const TenantList: FC<TenantListProps> = ({
     appSlug
 }) => (
     <TenantListController appSlug={appSlug}>
-        <TenantInnerList appSlug={appSlug}/>
+        <TenantInnerList appSlug={appSlug} />
         <CreateTenantButton />
         <TenantEditDialogInList appSlug={appSlug}>
             <TenantEditDialog appSlug={appSlug} />

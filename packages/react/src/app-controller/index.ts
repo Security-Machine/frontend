@@ -4,5 +4,6 @@ export { SecMaAppController } from "./controller";
 
 export type { SecMaAppContext } from "./context"
 export {
-    SecMaAppContextProvider, secMaAppContext, useSecMaAppContext
+    SecMaAppContextProvider, secMaAppContext,
+    useSecMaAppContext, useAdminUrl,
 } from "./context"

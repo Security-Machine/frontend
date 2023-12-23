@@ -4,6 +4,7 @@ import { NotAuthorized, PageHeader } from "@secma/mui";
 import { PageGuard, useTenantDetails } from "@secma/react";
 import { useLocation, useParams } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";
+import { DateTime } from "luxon";
 
 
 const permissions = [managementTenantReadPermission];
@@ -34,7 +35,11 @@ export const TenantDetailsInner: FC = () => {
         result,
         error: detailsError,
     } = useTenantDetails(appSlug, tenSlug, !hasState);
-    const tenantDetails = hasState ? state : result;
+    const tenantDetails = hasState ? {
+        ...state,
+        created: DateTime.fromISO(state.created),
+        updated: DateTime.fromISO(state.updated),
+    } : result;
     console.log(
         "[TenantDetailsPage] result %O, error %O",
         result, detailsError
