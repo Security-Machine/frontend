@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import { UserData } from "@secma/base";
+import { RoleData } from "@secma/base";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Groups2Icon from '@mui/icons-material/Groups2';
@@ -19,9 +19,9 @@ const sxButton = {
 
 
 /**
- * The properties for the (@link UserListItem).
+ * The properties for the (@link RoleListItem).
  */
-export interface UserListItemProps {
+export interface RoleListItemProps {
 
     /**
      * The slug of the parent application.
@@ -34,9 +34,9 @@ export interface UserListItemProps {
     tenSlug: string;
 
     /**
-     * The user represented by this list item.
+     * The role represented by this list item.
      */
-    user: string | UserData;
+    role: string | RoleData;
 
     /**
      * The callback for when the edit button is clicked.
@@ -55,23 +55,22 @@ export interface UserListItemProps {
 
 
 /**
- * The list of users in an application.
+ * The list of roles in an application.
  */
-export const UserListItem: FC<UserListItemProps> = ({
+export const RoleListItem: FC<RoleListItemProps> = ({
     appSlug,
     tenSlug,
-    user,
+    role,
     onEdit,
     onDelete,
 }) => {
-    console.log("[UserListItem] user %O", user);
-    const unique = typeof user === "string" ? user : user.name;
-    const urlData = typeof user === "string" ? user : {
-        ...user,
-        created: user.created.toISO(),
-        updated: user.updated.toISO(),
+    const unique = typeof role === "string" ? role : role.name;
+    const urlData = typeof role === "string" ? role : {
+        ...role,
+        created: role.created.toISO(),
+        updated: role.updated.toISO(),
     };
-    const url = useAdminUrl("user", appSlug, tenSlug, unique);
+    const url = useAdminUrl("role", appSlug, tenSlug, unique);
 
     return (
         <ListItem
@@ -93,14 +92,14 @@ export const UserListItem: FC<UserListItemProps> = ({
                 <ListItemIcon>
                     <Groups2Icon />
                 </ListItemIcon>
-                {typeof user === "string" ? (
+                {typeof role === "string" ? (
                     <ListItemText
-                        primary={user}
+                        primary={role}
                     />
                 ) : (
                     <ListItemText
-                        primary={user.name}
-                        secondary={user.description}
+                        primary={role.name}
+                        secondary={role.description}
                     />
                 )}
             </ListItemButton>

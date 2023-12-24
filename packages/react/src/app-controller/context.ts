@@ -55,7 +55,7 @@ export const useSecMaAppContext = () => {
 /**
  * The types of URLs that useAdminUrl can compute.
  */
-export type AdminUrlType = "app" | "tenant" | "user" | "role" | "permission";
+export type AdminUrlType = "app" | "tenant" | "user" | "role" | "perm";
 /**
  * The hook for computing the url for admin pages.
  */
@@ -75,7 +75,7 @@ export const useAdminUrl = (
             return `${adminPrefix}/users/${appSlug}/${tenantSlug}/${unique}`;
         case "role":
             return `${adminPrefix}/roles/${appSlug}/${tenantSlug}/${unique}`;
-        case "permission":
+        case "perm":
             return `${adminPrefix}/perms/${appSlug}/${tenantSlug}/${unique}`;
         default:
             throw new Error(`Invalid admin url type ${mode}`);

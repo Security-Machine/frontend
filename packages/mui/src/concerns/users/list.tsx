@@ -39,6 +39,7 @@ export const UserInnerList: FC<UserListProps> = ({
         canUpdate,
         canDelete,
     } = useUserListContext();
+    console.log("[UserInnerList] data %O", data);
     return (
         <List sx={sxList}>
             {Object.keys(data).map((key) => (
@@ -64,10 +65,10 @@ export const UserList: FC<UserListProps> = ({
     tenSlug,
 }) => (
     <UserListController appSlug={appSlug} tenSlug={tenSlug}>
-        <UserInnerList appSlug={appSlug} tenSlug={tenSlug}/>
+        <UserInnerList appSlug={appSlug} tenSlug={tenSlug} />
         <CreateUserButton />
         <UserEditDialogInList appSlug={appSlug} tenSlug={tenSlug}>
-            <UserEditDialog appSlug={appSlug} tenSlug={tenSlug}/>
+            <UserEditDialog appSlug={appSlug} tenSlug={tenSlug} />
         </UserEditDialogInList>
         <UserDelDialogInList appSlug={appSlug} tenSlug={tenSlug}>
             <UserConfirmDeleteDialog />

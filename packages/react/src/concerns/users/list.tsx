@@ -117,6 +117,7 @@ export const UserListController: FC<UserListControllerProps> = ({
         fetchDetail,
         toKey,
     });
+    console.log("[UserListController] list %O", list);
 
     return (
         <UserListContextProvider value={list}>

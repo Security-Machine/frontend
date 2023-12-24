@@ -3,7 +3,6 @@ import { IntlShape } from "react-intl";
 
 import { TokenData } from "../models";
 import { SecMaUser } from "../user";
-import { TenantData, TenantInput } from "../models/tenants";
 import { AccessPoint, AccessPointMethod } from "./base";
 import { UserData, UserInput } from '../models/users';
 

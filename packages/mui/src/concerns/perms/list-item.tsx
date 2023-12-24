@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import { UserData } from "@secma/base";
+import { PermData } from "@secma/base";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Groups2Icon from '@mui/icons-material/Groups2';
@@ -19,9 +19,9 @@ const sxButton = {
 
 
 /**
- * The properties for the (@link UserListItem).
+ * The properties for the (@link PermListItem).
  */
-export interface UserListItemProps {
+export interface PermListItemProps {
 
     /**
      * The slug of the parent application.
@@ -34,9 +34,9 @@ export interface UserListItemProps {
     tenSlug: string;
 
     /**
-     * The user represented by this list item.
+     * The perm represented by this list item.
      */
-    user: string | UserData;
+    perm: string | PermData;
 
     /**
      * The callback for when the edit button is clicked.
@@ -55,23 +55,22 @@ export interface UserListItemProps {
 
 
 /**
- * The list of users in an application.
+ * The list of perms in an application.
  */
-export const UserListItem: FC<UserListItemProps> = ({
+export const PermListItem: FC<PermListItemProps> = ({
     appSlug,
     tenSlug,
-    user,
+    perm,
     onEdit,
     onDelete,
 }) => {
-    console.log("[UserListItem] user %O", user);
-    const unique = typeof user === "string" ? user : user.name;
-    const urlData = typeof user === "string" ? user : {
-        ...user,
-        created: user.created.toISO(),
-        updated: user.updated.toISO(),
+    const unique = typeof perm === "string" ? perm : perm.name;
+    const urlData = typeof perm === "string" ? perm : {
+        ...perm,
+        created: perm.created.toISO(),
+        updated: perm.updated.toISO(),
     };
-    const url = useAdminUrl("user", appSlug, tenSlug, unique);
+    const url = useAdminUrl("perm", appSlug, tenSlug, unique);
 
     return (
         <ListItem
@@ -93,14 +92,14 @@ export const UserListItem: FC<UserListItemProps> = ({
                 <ListItemIcon>
                     <Groups2Icon />
                 </ListItemIcon>
-                {typeof user === "string" ? (
+                {typeof perm === "string" ? (
                     <ListItemText
-                        primary={user}
+                        primary={perm}
                     />
                 ) : (
                     <ListItemText
-                        primary={user.name}
-                        secondary={user.description}
+                        primary={perm.name}
+                        secondary={perm.description}
                     />
                 )}
             </ListItemButton>

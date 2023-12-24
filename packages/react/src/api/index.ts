@@ -20,3 +20,15 @@ export {
     useUserList, useUserCreate, useUserDetails,
     useUserEdit, useUserDelete
 } from "./users";
+
+
+export {
+    useRoleList, useRoleCreate, useRoleDetails,
+    useRoleEdit, useRoleDelete
+} from "./roles";
+
+
+export {
+    usePermList, usePermCreate, usePermDetails,
+    usePermEdit, usePermDelete
+} from "./perms";

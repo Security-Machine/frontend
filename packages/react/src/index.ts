@@ -2,10 +2,19 @@ export type { SecMaApiState, SecMaApiResult, } from "./api";
 export {
     useAppList, useAppCreate, useAppDetails, useAppEdit, useAppDelete,
     useAPI, useStats, useVersion,
+
     useTenantList, useTenantCreate, useTenantDetails,
     useTenantEdit, useTenantDelete,
+
     useUserList, useUserCreate, useUserDetails,
     useUserEdit, useUserDelete,
+
+    usePermList, usePermCreate, usePermDetails,
+    usePermEdit, usePermDelete,
+
+    useRoleList, useRoleCreate, useRoleDetails,
+    useRoleEdit, useRoleDelete,
+
 } from "./api";
 
 
@@ -54,18 +63,35 @@ export type {
     AppEditDialogChildProps,
     AppEditControllerProps,
     AppDelDialogInListProps,
+
     TenantListContextData,
     TenantListControllerProps,
     TenantEditDialogInListProps,
     TenantEditDialogChildProps,
     TenantEditControllerProps,
     TenantDelDialogInListProps,
+
     UserListContextData,
     UserListControllerProps,
     UserEditDialogInListProps,
     UserEditDialogChildProps,
     UserEditControllerProps,
     UserDelDialogInListProps,
+
+    PermListContextData,
+    PermListControllerProps,
+    PermEditDialogInListProps,
+    PermEditDialogChildProps,
+    PermEditControllerProps,
+    PermDelDialogInListProps,
+
+    RoleListContextData,
+    RoleListControllerProps,
+    RoleEditDialogInListProps,
+    RoleEditDialogChildProps,
+    RoleEditControllerProps,
+    RoleDelDialogInListProps,
+
 } from './concerns';
 export {
     appListContext,
@@ -91,4 +117,20 @@ export {
     UserEditDialogInList,
     UserEditController,
     UserDelDialogInList,
+
+    permListContext,
+    usePermListContext,
+    PermListContextProvider,
+    PermListController,
+    PermEditDialogInList,
+    PermEditController,
+    PermDelDialogInList,
+
+    roleListContext,
+    useRoleListContext,
+    RoleListContextProvider,
+    RoleListController,
+    RoleEditDialogInList,
+    RoleEditController,
+    RoleDelDialogInList,
 } from './concerns';

@@ -36,3 +36,23 @@ export {
     managementUserEditPermission,
     managementUserDeletePermission,
 } from "./users";
+
+
+export {
+    RoleCreateAP, RoleDeleteAP, RoleDetailsAP, RoleEditAP, RoleListAP,
+    managementRoleListPermission,
+    managementRoleCreatePermission,
+    managementRoleReadPermission,
+    managementRoleEditPermission,
+    managementRoleDeletePermission,
+} from "./roles";
+
+
+export {
+    PermCreateAP, PermDeleteAP, PermDetailsAP, PermEditAP, PermListAP,
+    managementPermListPermission,
+    managementPermCreatePermission,
+    managementPermReadPermission,
+    managementPermEditPermission,
+    managementPermDeletePermission,
+} from "./perms";
