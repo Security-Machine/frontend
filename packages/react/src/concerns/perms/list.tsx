@@ -94,12 +94,12 @@ export const PermListController: FC<PermListControllerProps> = ({
 
     // Prepared call.
     const fetchDetail = useCallback((
-        tenSlug: any
+        permSlug: any
     ) => PermDetailsAP.i.call(
         permContext, // perm
         intl,
         undefined, // payload
-        { appSlug, tenSlug } as any, // pathArgs
+        { appSlug, tenSlug, permSlug } as any, // pathArgs
         undefined, // headers
         -1, // timeout (-1 without timeout, no controller)
     ), [permContext, intl]);
@@ -107,7 +107,7 @@ export const PermListController: FC<PermListControllerProps> = ({
     // Hook for managing the list of perms.
     const list = use2StageList<
         never, never, string,
-        never, { appSlug: string }, PermData
+        never, { appSlug: string, tenSlug: string }, PermData
     >({
         createPerms,
         readPerms,

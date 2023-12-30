@@ -181,7 +181,7 @@ export class UserCreateAP
 
     get isMutation() { return true; }
     get method() { return "PUT" as AccessPointMethod; }
-    get pathPattern() { return "/users/{appSlug}"; }
+    get pathPattern() { return "/users/{appSlug}/{tenSlug}/"; }
     override isAllowed(user: Readonly<SecMaUser>) {
         return (
             !!user.user_name &&

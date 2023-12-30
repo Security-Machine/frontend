@@ -57,7 +57,7 @@ export interface PermEditControllerProps {
 
 
 /**
- * Controller for editing and creating applications.
+ * Controller for editing and creating permissions.
  */
 export const PermEditController: FC<PermEditControllerProps> = ({
     initialValues,

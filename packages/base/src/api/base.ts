@@ -185,7 +185,7 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
 
         // See if the user is allowed to call this access point.
         if (!this.isAllowed(user)) {
-            console.log("[AccessPoint.call] Not allowed");
+            console.log("[AccessPoint.call] Not allowed for user %O", user);
             return {
                 status: 0,
                 code: 'err-permission',
@@ -223,11 +223,16 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult> {
         if (user && user.token) {
             finalHeaders['Authorization'] = 'Bearer ' + user.token;
         }
+        console.log("[AccessPoint.call] headers", finalHeaders);
+
+        // Compute the url.
+        const url = this.url(pathArgs);
+        console.log("[AccessPoint.call] url", url);
 
         // Make the request.
         let response: Response;
         try {
-            response = await fetch(this.url(pathArgs), {
+            response = await fetch(url, {
                 method: this.method,
                 body,
                 headers: finalHeaders,

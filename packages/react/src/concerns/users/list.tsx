@@ -94,12 +94,12 @@ export const UserListController: FC<UserListControllerProps> = ({
 
     // Prepared call.
     const fetchDetail = useCallback((
-        tenSlug: any
+        userSlug: any
     ) => UserDetailsAP.i.call(
         userContext, // user
         intl,
         undefined, // payload
-        { appSlug, tenSlug } as any, // pathArgs
+        { appSlug, tenSlug, userSlug }, // pathArgs
         undefined, // headers
         -1, // timeout (-1 without timeout, no controller)
     ), [userContext, intl]);

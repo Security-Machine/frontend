@@ -54,7 +54,7 @@ export class PermListAP
 
     get isMutation() { return false; }
     get method() { return "GET" as AccessPointMethod; }
-    get pathPattern() { return "/perms/{appSlug}/{tenSlug}/"; }
+    get pathPattern() { return "/perm/{appSlug}/{tenSlug}/"; }
     override isAllowed(user: Readonly<SecMaUser>) {
         return (
             !!user.user_name &&
@@ -75,7 +75,7 @@ export class PermDetailsAP
 
     get isMutation() { return false; }
     get method() { return "GET" as AccessPointMethod; }
-    get pathPattern() { return "/perms/{appSlug}/{tenSlug}/{permSlug}"; }
+    get pathPattern() { return "/perm/{appSlug}/{tenSlug}/{permSlug}"; }
     override isAllowed(user: Readonly<SecMaUser>) {
         return (
             !!user.user_name &&
@@ -105,7 +105,7 @@ export class PermCreateAP
 
     get isMutation() { return true; }
     get method() { return "PUT" as AccessPointMethod; }
-    get pathPattern() { return "/perms/{appSlug}"; }
+    get pathPattern() { return "/perm/{appSlug}/{tenSlug}/"; }
     override isAllowed(user: Readonly<SecMaUser>) {
         return (
             !!user.user_name &&
@@ -135,7 +135,7 @@ export class PermEditAP
 
     get isMutation() { return true; }
     get method() { return "POST" as AccessPointMethod; }
-    get pathPattern() { return "/perms/{appSlug}/{tenSlug}/{permSlug}"; }
+    get pathPattern() { return "/perm/{appSlug}/{tenSlug}/{permSlug}"; }
     override isAllowed(user: Readonly<SecMaUser>) {
         return (
             !!user.user_name &&
@@ -165,7 +165,7 @@ export class PermDeleteAP
 
     get isMutation() { return true; }
     get method() { return "DELETE" as AccessPointMethod; }
-    get pathPattern() { return "/perms/{appSlug}/{tenSlug}"; }
+    get pathPattern() { return "/perm/{appSlug}/{tenSlug}/{permSlug}"; }
     override isAllowed(user: Readonly<SecMaUser>) {
         return (
             !!user.user_name &&

@@ -105,7 +105,7 @@ export class RoleCreateAP
 
     get isMutation() { return true; }
     get method() { return "PUT" as AccessPointMethod; }
-    get pathPattern() { return "/roles/{appSlug}"; }
+    get pathPattern() { return "/roles/{appSlug}/{tenSlug}/"; }
     override isAllowed(user: Readonly<SecMaUser>) {
         return (
             !!user.user_name &&
@@ -165,7 +165,7 @@ export class RoleDeleteAP
 
     get isMutation() { return true; }
     get method() { return "DELETE" as AccessPointMethod; }
-    get pathPattern() { return "/roles/{appSlug}/{tenSlug}"; }
+    get pathPattern() { return "/roles/{appSlug}/{tenSlug}/{roleSlug}"; }
     override isAllowed(user: Readonly<SecMaUser>) {
         return (
             !!user.user_name &&
