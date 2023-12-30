@@ -47,7 +47,11 @@ export const SecMaContextProvider = secMaContext.Provider;
  * The hook to use for retrieving all information about a map from within.
  */
 export const useSecMaContext = () => {
-    return useContext<SecMaContext>(secMaContext as any) as SecMaContext;
+    const result = useContext(secMaContext);
+    if (!result) {
+        throw new Error("No SecMaContextProvider found.");
+    }
+    return result as SecMaContext;
 };
 
 

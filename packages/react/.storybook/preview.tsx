@@ -90,6 +90,7 @@ const preview: Preview = {
                 <SecMaAppContextProvider value={{
                     loginPath: "loginPath",
                     apiUrl: "http://example.com",
+                    adminPrefix: "admin",
                 }}>
                     <G11nController messages={messages} initialLocale='en'>
                         <SnackbarProvider />
