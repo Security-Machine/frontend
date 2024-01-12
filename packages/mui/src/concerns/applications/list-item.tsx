@@ -53,8 +53,8 @@ export const AppListItem: FC<AppListItemProps> = ({
     const unique = typeof app === "string" ? app : app.slug;
     const urlData = typeof app === "string" ? app : {
         ...app,
-        created: app.created.toISO(),
-        updated: app.updated.toISO(),
+        created: app.created ? app.created.toISO() : undefined,
+        updated: app.updated ? app.updated.toISO() : undefined,
     };
     return (
         <ListItem

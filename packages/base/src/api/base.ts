@@ -5,10 +5,6 @@ import { AccessPointError } from "../models/errors";
 import { SecMaUser } from "../user";
 
 
-/**
- * The methods accepted by the API.
- */
-export type AccessPointMethod = "GET" | "POST" | "PUT" | "DELETE";
 
 
 /**
@@ -396,3 +392,4 @@ function useAllErrorMessages() { // eslint-disable-line
         }),
     ]
 }
+

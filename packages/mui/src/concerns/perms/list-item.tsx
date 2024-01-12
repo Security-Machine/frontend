@@ -67,8 +67,8 @@ export const PermListItem: FC<PermListItemProps> = ({
     const unique = typeof perm === "string" ? perm : perm.name;
     const urlData = typeof perm === "string" ? perm : {
         ...perm,
-        created: perm.created.toISO(),
-        updated: perm.updated.toISO(),
+        created: perm.created ? perm.created.toISO() : undefined,
+        updated: perm.updated ? perm.updated.toISO() : undefined,
     };
     const url = useAdminUrl("perm", appSlug, tenSlug, unique);
 

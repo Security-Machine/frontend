@@ -68,8 +68,8 @@ export const UserListItem: FC<UserListItemProps> = ({
     const unique = typeof user === "string" ? user : user.name;
     const urlData = typeof user === "string" ? user : {
         ...user,
-        created: user.created.toISO(),
-        updated: user.updated.toISO(),
+        created: user.created ? user.created.toISO() : undefined,
+        updated: user.updated ? user.updated.toISO() : undefined,
     };
     const url = useAdminUrl("user", appSlug, tenSlug, unique);
 

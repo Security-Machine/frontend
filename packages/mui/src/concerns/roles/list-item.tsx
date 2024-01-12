@@ -67,8 +67,8 @@ export const RoleListItem: FC<RoleListItemProps> = ({
     const unique = typeof role === "string" ? role : role.name;
     const urlData = typeof role === "string" ? role : {
         ...role,
-        created: role.created.toISO(),
-        updated: role.updated.toISO(),
+        created: role.created ? role.created.toISO() : undefined,
+        updated: role.updated ? role.updated.toISO() : undefined,
     };
     const url = useAdminUrl("role", appSlug, tenSlug, unique);
 

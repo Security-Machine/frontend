@@ -60,8 +60,8 @@ export const TenantListItem: FC<TenantListItemProps> = ({
     const unique = typeof tenant === "string" ? tenant : tenant.slug;
     const urlData = typeof tenant === "string" ? tenant : {
         ...tenant,
-        created: tenant.created.toISO(),
-        updated: tenant.updated.toISO(),
+        created: tenant.created ? tenant.created.toISO() : undefined,
+        updated: tenant.updated ? tenant.updated.toISO() : undefined,
     };
     const url = useAdminUrl("tenant", appSlug, unique);
 

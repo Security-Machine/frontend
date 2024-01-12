@@ -51,6 +51,26 @@
       "defaultMessage": "Sign Out",
       "en": "Sign Out",
       "ro": "Sign Out"
+    },
+    "tenants": {
+      "tabs": {
+        "aria-label": {
+          "__id__": "secma-admin.tenants.tabs.aria-label",
+          "defaultMessage": "Tenant components"
+        },
+        "perms": {
+          "__id__": "secma-admin.tenants.tabs.perms",
+          "defaultMessage": "Permissions"
+        },
+        "roles": {
+          "__id__": "secma-admin.tenants.tabs.roles",
+          "defaultMessage": "Roles"
+        },
+        "users": {
+          "__id__": "secma-admin.tenants.tabs.users",
+          "defaultMessage": "Users"
+        }
+      }
     }
   },
   "secma-mui": {

@@ -101,6 +101,23 @@
       "short": {
         "__id__": "secma-base.title.short"
       }
+    },
+    "userName": {
+      "invalid": {
+        "__id__": "secma-base.userName.invalid"
+      },
+      "long": {
+        "__id__": "secma-base.userName.long",
+        "defaultMessage": "The name is too long (255 characters maximum)"
+      },
+      "required": {
+        "__id__": "secma-base.userName.required",
+        "defaultMessage": "The name is required"
+      },
+      "short": {
+        "__id__": "secma-base.userName.short",
+        "defaultMessage": "The name is too short (3 characters minimum)"
+      }
     }
   }
 }

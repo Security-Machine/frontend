@@ -140,11 +140,107 @@
         "ro": "Last update:"
       }
     },
+    "perms": {
+      "add": {
+        "d": {
+          "__id__": "secma-mui.perms.add.d",
+          "defaultMessage": "Description"
+        },
+        "slug": {
+          "__id__": "secma-mui.perms.add.slug",
+          "defaultMessage": "Slug"
+        },
+        "title": {
+          "__id__": "secma-mui.perms.add.title",
+          "defaultMessage": "Title"
+        }
+      },
+      "create": {
+        "btn": {
+          "__id__": "secma-mui.perms.create.btn",
+          "defaultMessage": "Create a New Perm"
+        }
+      },
+      "del": {
+        "dialog": {
+          "d": {
+            "__id__": "secma-mui.perms.del.dialog.d",
+            "defaultMessage": "Are you sure you want to delete the perm {perm}?"
+          },
+          "t": {
+            "__id__": "secma-mui.perms.del.dialog.t",
+            "defaultMessage": "Delete perm?"
+          }
+        }
+      },
+      "dialog": {
+        "add": {
+          "__id__": "secma-mui.perms.dialog.add",
+          "defaultMessage": "Create a new perm"
+        },
+        "d": {
+          "__id__": "secma-mui.perms.dialog.d",
+          "defaultMessage": "At the very minimum a perm needs a unique slug. You may also provide a title and a description."
+        },
+        "edit": {
+          "__id__": "secma-mui.perms.dialog.edit",
+          "defaultMessage": "Edit the {perm} perm"
+        }
+      }
+    },
     "reset": {
       "__id__": "secma-mui.reset",
       "defaultMessage": "Reset",
       "en": "Reset",
       "ro": "Reset"
+    },
+    "roles": {
+      "add": {
+        "d": {
+          "__id__": "secma-mui.roles.add.d",
+          "defaultMessage": "Description"
+        },
+        "slug": {
+          "__id__": "secma-mui.roles.add.slug",
+          "defaultMessage": "Slug"
+        },
+        "title": {
+          "__id__": "secma-mui.roles.add.title",
+          "defaultMessage": "Title"
+        }
+      },
+      "create": {
+        "btn": {
+          "__id__": "secma-mui.roles.create.btn",
+          "defaultMessage": "Create a New Role"
+        }
+      },
+      "del": {
+        "dialog": {
+          "d": {
+            "__id__": "secma-mui.roles.del.dialog.d",
+            "defaultMessage": "Are you sure you want to delete the role {role}?"
+          },
+          "t": {
+            "__id__": "secma-mui.roles.del.dialog.t",
+            "defaultMessage": "Delete role?"
+          }
+        }
+      },
+      "dialog": {
+        "add": {
+          "__id__": "secma-mui.roles.dialog.add",
+          "defaultMessage": "Create a new role"
+        },
+        "d": {
+          "__id__": "secma-mui.roles.dialog.d",
+          "defaultMessage": "At the very minimum a role needs a unique slug. You may also provide a title and a description."
+        },
+        "edit": {
+          "__id__": "secma-mui.roles.dialog.edit",
+          "defaultMessage": "Edit the {role} role"
+        }
+      }
     },
     "save": {
       "__id__": "secma-mui.save",
@@ -279,6 +375,54 @@
           "defaultMessage": "Edit the {tenant} tenant",
           "en": "Edit the {app} application",
           "ro": "Edit the {app} application"
+        }
+      }
+    },
+    "users": {
+      "add": {
+        "d": {
+          "__id__": "secma-mui.users.add.d",
+          "defaultMessage": "Description"
+        },
+        "slug": {
+          "__id__": "secma-mui.users.add.slug",
+          "defaultMessage": "Slug"
+        },
+        "title": {
+          "__id__": "secma-mui.users.add.title",
+          "defaultMessage": "Title"
+        }
+      },
+      "create": {
+        "btn": {
+          "__id__": "secma-mui.users.create.btn",
+          "defaultMessage": "Create a New User"
+        }
+      },
+      "del": {
+        "dialog": {
+          "d": {
+            "__id__": "secma-mui.users.del.dialog.d",
+            "defaultMessage": "Are you sure you want to delete the user {user}?"
+          },
+          "t": {
+            "__id__": "secma-mui.users.del.dialog.t",
+            "defaultMessage": "Delete user?"
+          }
+        }
+      },
+      "dialog": {
+        "add": {
+          "__id__": "secma-mui.users.dialog.add",
+          "defaultMessage": "Create a new user"
+        },
+        "d": {
+          "__id__": "secma-mui.users.dialog.d",
+          "defaultMessage": "At the very minimum a user needs a unique slug. You may also provide a title and a description."
+        },
+        "edit": {
+          "__id__": "secma-mui.users.dialog.edit",
+          "defaultMessage": "Edit the {user} user"
         }
       }
     }
