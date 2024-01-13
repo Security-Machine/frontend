@@ -1,9 +1,8 @@
-import { jwtDecode,  } from 'jwt-decode';
-import { IntlShape } from "react-intl";
+import { jwtDecode, } from 'jwt-decode';
+import { AccessPointMethod } from "@vebgen/access-api";
 
 import { TokenData } from "../models";
-import { SecMaUser } from "../user";
-import { AccessPoint, AccessPointMethod } from "./base";
+import { AccessPoint, ApiContext } from "./base";
 import { UserData, UserInput } from '../models/users';
 
 
@@ -35,15 +34,14 @@ export class LogInTokenAP extends AccessPoint<Payload, PathArgs, TokenData> {
     protected static _instance: LogInTokenAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return false; }
-    get method() { return "POST" as AccessPointMethod; }
-    get pathPattern() { return "/token/{app}/{tenant}"; }
-    override get additionalHeaders() {
+    override method() { return "POST" as AccessPointMethod; }
+    override pathPattern() { return "/token/{app}/{tenant}"; }
+    override additionalHeaders() {
         return {
             "Content-Type": "application/x-www-form-urlencoded",
         };
     }
-    override isAllowed(user: Readonly<SecMaUser>) { // eslint-disable-line
+    override isAllowed(context: ApiContext) { // eslint-disable-line
         return true;
     }
     override processResult(result: any) {
@@ -51,10 +49,10 @@ export class LogInTokenAP extends AccessPoint<Payload, PathArgs, TokenData> {
         const token = result["access_token"];
         const decoded: TokenReply = jwtDecode<TokenReply>(token);
         // Shape the reply.
-        return {
+        return Promise.resolve({
             token,
             ...decoded,
-        }
+        });
     }
     override createBody(payload?: Payload): string | undefined {
         if (!payload) throw new Error("[LogInTokenAP] Missing payload");
@@ -75,8 +73,7 @@ export class SignUpTokenAP extends LogInTokenAP {
         return this._instance ?? (this._instance = new this());
     }
 
-    override get isMutation() { return true; }
-    override get method() { return "PUT" as AccessPointMethod; }
+    override method() { return "PUT" as AccessPointMethod; }
 }
 
 
@@ -128,13 +125,12 @@ export class UserListAP
     protected static _instance: UserListAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return false; }
-    get method() { return "GET" as AccessPointMethod; }
-    get pathPattern() { return "/users/{appSlug}/{tenSlug}/"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "GET" as AccessPointMethod; }
+    override pathPattern() { return "/users/{appSlug}/{tenSlug}/"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementUserListPermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementUserListPermission)
         );
     }
 }
@@ -149,23 +145,16 @@ export class UserDetailsAP
     protected static _instance: UserDetailsAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return false; }
-    get method() { return "GET" as AccessPointMethod; }
-    get pathPattern() { return "/users/{appSlug}/{tenSlug}/{userSlug}"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "GET" as AccessPointMethod; }
+    override pathPattern() { return "/users/{appSlug}/{tenSlug}/{userSlug}"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementUserReadPermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementUserReadPermission)
         );
     }
-    override processResult(
-        result: any,
-        user: Readonly<SecMaUser>,
-        intl: Readonly<IntlShape>,
-        payload?: never,
-        pathArgs?: Readonly<AppTenantUser>,
-    ): UserData {
-        return this.processDates(result);
+    override processResult(result: any) {
+        return Promise.resolve(this.processDates(result));
     }
 }
 
@@ -179,23 +168,16 @@ export class UserCreateAP
     protected static _instance: UserCreateAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return true; }
-    get method() { return "PUT" as AccessPointMethod; }
-    get pathPattern() { return "/users/{appSlug}/{tenSlug}/"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "PUT" as AccessPointMethod; }
+    override pathPattern() { return "/users/{appSlug}/{tenSlug}/"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementUserCreatePermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementUserCreatePermission)
         );
     }
-    override processResult(
-        result: any,
-        user: Readonly<SecMaUser>,
-        intl: Readonly<IntlShape>,
-        payload?: never,
-        pathArgs?: Readonly<AppAndTenant>,
-    ): UserData {
-        return this.processDates(result);
+    override processResult(result: any) {
+        return Promise.resolve(this.processDates(result));
     }
 }
 
@@ -209,23 +191,16 @@ export class UserEditAP
     protected static _instance: UserEditAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return true; }
-    get method() { return "POST" as AccessPointMethod; }
-    get pathPattern() { return "/users/{appSlug}/{tenSlug}/{userSlug}"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "POST" as AccessPointMethod; }
+    override pathPattern() { return "/users/{appSlug}/{tenSlug}/{userSlug}"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementUserEditPermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementUserEditPermission)
         );
     }
-    override processResult(
-        result: any,
-        user: Readonly<SecMaUser>,
-        intl: Readonly<IntlShape>,
-        payload?: never,
-        pathArgs?: Readonly<AppTenantUser>,
-    ): UserData {
-        return this.processDates(result);
+    override processResult(result: any) {
+        return Promise.resolve(this.processDates(result));
     }
 }
 
@@ -239,22 +214,15 @@ export class UserDeleteAP
     protected static _instance: UserDeleteAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return true; }
-    get method() { return "DELETE" as AccessPointMethod; }
-    get pathPattern() { return "/users/{appSlug}/{tenSlug}"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "DELETE" as AccessPointMethod; }
+    override pathPattern() { return "/users/{appSlug}/{tenSlug}"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementUserDeletePermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementUserDeletePermission)
         );
     }
-    override processResult(
-        result: any,
-        user: Readonly<SecMaUser>,
-        intl: Readonly<IntlShape>,
-        payload?: never,
-        pathArgs?: Readonly<AppTenantUser>,
-    ): UserData {
-        return this.processDates(result);
+    override processResult(result: any) {
+        return Promise.resolve(this.processDates(result));
     }
 }

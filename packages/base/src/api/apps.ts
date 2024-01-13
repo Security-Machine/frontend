@@ -1,6 +1,7 @@
+import { AccessPointMethod } from "@vebgen/access-api";
+
 import { ApplicationData, ApplicationInput } from "../models/apps";
-import { AccessPoint, AccessPointMethod } from "./base";
-import { SecMaUser } from "../user";
+import { AccessPoint, ApiContext } from "./base";
 
 
 /**
@@ -36,13 +37,12 @@ export class AppListAP extends AccessPoint<never, never, string[]> {
     protected static _instance: AppListAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return false; }
-    get method() { return "GET" as AccessPointMethod; }
-    get pathPattern() { return "/mng/apps/"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "GET" as AccessPointMethod; }
+    override pathPattern() { return "/mng/apps/"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementAppListPermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementAppListPermission)
         );
     }
 }
@@ -57,18 +57,17 @@ export class AppDetailsAP
     protected static _instance: AppDetailsAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return false; }
-    get method() { return "GET" as AccessPointMethod; }
-    get pathPattern() { return "/mng/apps/{slug}"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "GET" as AccessPointMethod; }
+    override pathPattern() { return "/mng/apps/{slug}"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementAppReadPermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementAppReadPermission)
         );
     }
-    override processResult(result: any): ApplicationData {
+    override processResult(result: any) {
         console.log("[AppDetailsAP.processResult]", result)
-        return this.processDates(result);
+        return Promise.resolve(this.processDates(result));
     }
 }
 
@@ -82,17 +81,16 @@ export class AppCreateAP
     protected static _instance: AppCreateAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return true; }
-    get method() { return "PUT" as AccessPointMethod; }
-    get pathPattern() { return "/mng/apps/"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "PUT" as AccessPointMethod; }
+    override pathPattern() { return "/mng/apps/"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementAppCreatePermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementAppCreatePermission)
         );
     }
-    override processResult(result: any): ApplicationData {
-        return this.processDates(result);
+    override processResult(result: any) {
+        return Promise.resolve(this.processDates(result));
     }
 }
 
@@ -106,17 +104,16 @@ export class AppEditAP
     protected static _instance: AppEditAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return true; }
-    get method() { return "POST" as AccessPointMethod; }
-    get pathPattern() { return "/mng/apps/{slug}"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "POST" as AccessPointMethod; }
+    override pathPattern() { return "/mng/apps/{slug}"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementAppEditPermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementAppEditPermission)
         );
     }
-    override processResult(result: any): ApplicationData {
-        return this.processDates(result);
+    override processResult(result: any) {
+        return Promise.resolve(this.processDates(result));
     }
 }
 
@@ -130,16 +127,15 @@ export class AppDeleteAP
     protected static _instance: AppDeleteAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return true; }
-    get method() { return "DELETE" as AccessPointMethod; }
-    get pathPattern() { return "/mng/apps/{slug}"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "DELETE" as AccessPointMethod; }
+    override pathPattern() { return "/mng/apps/{slug}"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementAppDeletePermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementAppDeletePermission)
         );
     }
-    override processResult(result: any): ApplicationData {
-        return this.processDates(result);
+    override processResult(result: any) {
+        return Promise.resolve(this.processDates(result));
     }
 }

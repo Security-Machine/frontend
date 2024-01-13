@@ -4,6 +4,7 @@ import jwt_encode from "jwt-encode";
 
 import { SecMaUser } from "../user";
 import { LogInTokenAP } from "./token";
+import { ApiContext } from "./base";
 
 
 // User data for tests.
@@ -12,13 +13,18 @@ const testUser: SecMaUser = {
     user_name: undefined
 } as any as SecMaUser;
 
-
-enableFetchMocks();
-
 // Instead of using the real translator.
 const translator = {
     formatMessage: jest.fn(() => "a message" as any as string),
 } as unknown as IntlShape;
+
+const defCtx: ApiContext = {
+    user: testUser,
+    intl: translator,
+}
+
+enableFetchMocks();
+
 
 class LocalTokenAP extends LogInTokenAP {
     public constructor() { super(); }
@@ -36,7 +42,7 @@ beforeEach(() => {
 
 it("should call the API and return the result", async () => {
     expect(async () => {
-        await toTest.call(testUser, translator);
+        await toTest.call(defCtx);
     }).rejects.toThrow("Missing payload");
 });
 
@@ -54,7 +60,7 @@ it("should call the API and return the result", async () => {
             "token_type": "bearer"
         })
     );
-    const result = await toTest.call(testUser, translator, {
+    const result = await toTest.call(defCtx, {
         username: "test",
         password: "test",
     }, {

@@ -11,6 +11,7 @@ import {
     AppEditAP,
     AppDeleteAP
 } from "./apps";
+import { ApiContext } from "./base";
 
 
 enableFetchMocks();
@@ -26,6 +27,11 @@ const testUser: SecMaUser = {
 const translator = {
     formatMessage: jest.fn(() => "a message" as any as string),
 } as unknown as IntlShape;
+
+const defCtx: ApiContext = {
+    user: testUser,
+    intl: translator,
+}
 
 // The response payload for functions that return an application.
 const appDataPayload = JSON.stringify({
@@ -45,7 +51,12 @@ beforeEach(() => {
 
 export async function checkNoUser(toTest: any, permissions: string[]) {
     testUser.permissions = permissions;
-    const result = await toTest.call(testUser, translator);
+    let result;
+    try {
+        result = await toTest.call(defCtx);
+    } catch (e) {
+        result = e;
+    }
     expect(result).toEqual({
         "code": "err-permission",
         "message": "a message",
@@ -53,9 +64,6 @@ export async function checkNoUser(toTest: any, permissions: string[]) {
     });
     expect(fetchMock.mock.calls.length).toEqual(0);
     expect(translator.formatMessage).toHaveBeenCalledWith({
-        "defaultMessage":
-            "You don't have the required permissions to access " +
-            "this resource",
         "id": "secma-base.err-permission",
     });
 }
@@ -64,7 +72,12 @@ export async function checkNoUser(toTest: any, permissions: string[]) {
 export async function checkNoPermission(toTest: any) {
     testUser.permissions = ["apps:xxx", "apps:yyy"];
     testUser.user_name = "test";
-    const result = await toTest.call(testUser, translator);
+    let result;
+    try {
+        result = await toTest.call(defCtx);
+    } catch (e) {
+        result = e;
+    }
     expect(result).toEqual({
         "code": "err-permission",
         "message": "a message",
@@ -72,9 +85,6 @@ export async function checkNoPermission(toTest: any) {
     });
     expect(fetchMock.mock.calls.length).toEqual(0);
     expect(translator.formatMessage).toHaveBeenCalledWith({
-        "defaultMessage":
-            "You don't have the required permissions to access " +
-            "this resource",
         "id": "secma-base.err-permission",
     });
 }
@@ -119,7 +129,7 @@ describe("list", () => {
         fetchMock.mockResponseOnce(
             JSON.stringify(["lorem", "ipsum"])
         );
-        const result = await toTest.call(testUser, translator);
+        const result = await toTest.call(defCtx);
         expect(result).toEqual(["lorem", "ipsum"]);
         expect(fetchMock.mock.calls.length).toEqual(1);
         expect(translator.formatMessage).not.toHaveBeenCalled();
@@ -147,7 +157,7 @@ describe("create", () => {
         testUser.permissions = permissions;
         testUser.user_name = "test";
         fetchMock.mockResponseOnce(appDataPayload);
-        const result = await toTest.call(testUser, translator, {
+        const result = await toTest.call(defCtx, {
             slug: "lorem",
             title: "ipsum",
             description: "dolor"
@@ -180,7 +190,7 @@ describe("read", () => {
         testUser.user_name = "test";
         fetchMock.mockResponseOnce(appDataPayload);
         const result = await toTest.call(
-            testUser, translator, undefined, { slug: "lorem" }
+            defCtx, undefined, { slug: "lorem" }
         ) as ApplicationData;
 
         expect(fetchMock.mock.calls[0][0]).toEqual("auth123/mng/apps/lorem");
@@ -210,11 +220,11 @@ describe("update", () => {
         testUser.user_name = "test";
         fetchMock.mockResponseOnce(appDataPayload);
         const result = await toTest.call(
-            testUser, translator, {
-                slug: "lorem",
-                title: "ipsum",
-                description: "dolor"
-            }, { slug: "lorem" }
+            defCtx, {
+            slug: "lorem",
+            title: "ipsum",
+            description: "dolor"
+        }, { slug: "lorem" }
         ) as ApplicationData;
 
         expect(fetchMock.mock.calls[0][0]).toEqual("auth123/mng/apps/lorem");
@@ -244,7 +254,7 @@ describe("delete", () => {
         testUser.user_name = "test";
         fetchMock.mockResponseOnce(appDataPayload);
         const result = await toTest.call(
-            testUser, translator, undefined, { slug: "lorem" }
+            defCtx, undefined, { slug: "lorem" }
         ) as ApplicationData;
 
         expect(fetchMock.mock.calls[0][0]).toEqual("auth123/mng/apps/lorem");

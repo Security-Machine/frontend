@@ -50,9 +50,6 @@ export {
     managementPermDeletePermission,
 
 } from "./api";
-export type {
-    AccessPointMethod
-} from "./api";
 
 
 export type { SecMaUser } from "./user";

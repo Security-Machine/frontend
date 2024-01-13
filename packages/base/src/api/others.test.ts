@@ -4,6 +4,7 @@ import { IntlShape } from "react-intl";
 import { SecMaUser } from "../user";
 import { StatsAP, VersionAP } from "./others";
 import { checkNoUser, checkNoPermission } from "./apps.test";
+import { ApiContext } from "./base";
 
 
 enableFetchMocks();
@@ -20,6 +21,10 @@ const translator = {
     formatMessage: jest.fn(() => "a message" as any as string),
 } as unknown as IntlShape;
 
+const defCtx: ApiContext = {
+    user: testUser,
+    intl: translator,
+}
 
 beforeEach(() => {
     fetchMock.resetMocks();
@@ -51,7 +56,7 @@ describe("statistics", () => {
         fetchMock.mockResponseOnce(
             JSON.stringify(["lorem", "ipsum"])
         );
-        const result = await toTest.call(testUser, translator);
+        const result = await toTest.call(defCtx);
         expect(result).toEqual(["lorem", "ipsum"]);
         expect(fetchMock.mock.calls.length).toEqual(1);
         expect(translator.formatMessage).not.toHaveBeenCalled();
@@ -81,7 +86,7 @@ describe("versions", () => {
         fetchMock.mockResponseOnce(
             JSON.stringify(["lorem", "ipsum"])
         );
-        const result = await toTest.call(testUser, translator);
+        const result = await toTest.call(defCtx);
         expect(result).toEqual(["lorem", "ipsum"]);
         expect(fetchMock.mock.calls.length).toEqual(1);
         expect(translator.formatMessage).not.toHaveBeenCalled();

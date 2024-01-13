@@ -1,8 +1,7 @@
-import { IntlShape } from "react-intl";
+import { AccessPointMethod } from "@vebgen/access-api";
 
 import { TenantData, TenantInput } from "../models/tenants";
-import { AccessPoint, AccessPointMethod } from "./base";
-import { SecMaUser } from "../user";
+import { AccessPoint, ApiContext } from "./base";
 
 
 interface AppAndTenant {
@@ -50,13 +49,12 @@ export class TenantListAP
     protected static _instance: TenantListAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return false; }
-    get method() { return "GET" as AccessPointMethod; }
-    get pathPattern() { return "/tenants/{appSlug}/"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "GET" as AccessPointMethod; }
+    override pathPattern() { return "/tenants/{appSlug}/"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementTenantListPermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementTenantListPermission)
         );
     }
 }
@@ -71,26 +69,25 @@ export class TenantDetailsAP
     protected static _instance: TenantDetailsAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return false; }
-    get method() { return "GET" as AccessPointMethod; }
-    get pathPattern() { return "/tenants/{appSlug}/{tenSlug}"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "GET" as AccessPointMethod; }
+    override pathPattern() { return "/tenants/{appSlug}/{tenSlug}"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementTenantReadPermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementTenantReadPermission)
         );
     }
+
     override processResult(
         result: any,
-        user: Readonly<SecMaUser>,
-        intl: Readonly<IntlShape>,
+        context: ApiContext,
         payload?: never,
         pathArgs?: Readonly<AppOnly>,
-    ): TenantData {
-        return {
+    ) {
+        return Promise.resolve({
             ...this.processDates(result),
             appSlug: pathArgs?.appSlug ?? "",
-        };
+        });
     }
 }
 
@@ -104,26 +101,24 @@ export class TenantCreateAP
     protected static _instance: TenantCreateAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return true; }
-    get method() { return "PUT" as AccessPointMethod; }
-    get pathPattern() { return "/tenants/{appSlug}/"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "PUT" as AccessPointMethod; }
+    override pathPattern() { return "/tenants/{appSlug}/"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementTenantCreatePermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementTenantCreatePermission)
         );
     }
     override processResult(
         result: any,
-        user: Readonly<SecMaUser>,
-        intl: Readonly<IntlShape>,
+        context: ApiContext,
         payload?: never,
         pathArgs?: Readonly<AppOnly>,
-    ): TenantData {
-        return {
+    ) {
+        return Promise.resolve({
             ...this.processDates(result),
             appSlug: pathArgs?.appSlug ?? "",
-        };
+        });
     }
 }
 
@@ -137,26 +132,24 @@ export class TenantEditAP
     protected static _instance: TenantEditAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return true; }
-    get method() { return "POST" as AccessPointMethod; }
-    get pathPattern() { return "/tenants/{appSlug}/{tenSlug}"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "POST" as AccessPointMethod; }
+    override pathPattern() { return "/tenants/{appSlug}/{tenSlug}"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementTenantEditPermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementTenantEditPermission)
         );
     }
     override processResult(
         result: any,
-        user: Readonly<SecMaUser>,
-        intl: Readonly<IntlShape>,
+        context: ApiContext,
         payload?: never,
         pathArgs?: Readonly<AppOnly>,
-    ): TenantData {
-        return {
+    ) {
+        return Promise.resolve({
             ...this.processDates(result),
             appSlug: pathArgs?.appSlug ?? "",
-        };
+        });
     }
 }
 
@@ -170,25 +163,23 @@ export class TenantDeleteAP
     protected static _instance: TenantDeleteAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return true; }
-    get method() { return "DELETE" as AccessPointMethod; }
-    get pathPattern() { return "/tenants/{appSlug}/{tenSlug}"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "DELETE" as AccessPointMethod; }
+    override pathPattern() { return "/tenants/{appSlug}/{tenSlug}"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementTenantDeletePermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementTenantDeletePermission)
         );
     }
     override processResult(
         result: any,
-        user: Readonly<SecMaUser>,
-        intl: Readonly<IntlShape>,
+        context: ApiContext,
         payload?: never,
         pathArgs?: Readonly<AppOnly>,
-    ): TenantData {
-        return {
+    ) {
+        return Promise.resolve({
             ...this.processDates(result),
             appSlug: pathArgs?.appSlug ?? "",
-        };
+        });
     }
 }

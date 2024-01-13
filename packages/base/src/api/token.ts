@@ -1,8 +1,8 @@
-import { jwtDecode,  } from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
+import { AccessPointMethod } from "@vebgen/access-api";
 
 import { TokenData } from "../models";
-import { SecMaUser } from "../user";
-import { AccessPoint, AccessPointMethod } from "./base";
+import { AccessPoint, ApiContext } from "./base";
 
 
 /**
@@ -32,15 +32,14 @@ export class LogInTokenAP extends AccessPoint<Payload, PathArgs, TokenData> {
     protected static _instance: LogInTokenAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return false; }
-    get method() { return "POST" as AccessPointMethod; }
-    get pathPattern() { return "/token/{app}/{tenant}"; }
-    override get additionalHeaders() {
+    override method() { return "POST" as AccessPointMethod; }
+    override pathPattern() { return "/token/{app}/{tenant}"; }
+    override additionalHeaders() {
         return {
             "Content-Type": "application/x-www-form-urlencoded",
         };
     }
-    override isAllowed(user: Readonly<SecMaUser>) { // eslint-disable-line
+    override isAllowed(context: ApiContext) { // eslint-disable-line
         return true;
     }
     override processResult(result: any) {
@@ -48,12 +47,12 @@ export class LogInTokenAP extends AccessPoint<Payload, PathArgs, TokenData> {
         const token = result["access_token"];
         const decoded: TokenReply = jwtDecode<TokenReply>(token);
         // Shape the reply.
-        return {
+        return Promise.resolve({
             token,
             ...decoded,
-        }
+        });
     }
-    override createBody(payload?: Payload): string | undefined {
+    override createBody(context: ApiContext, payload?: Payload) {
         if (!payload) throw new Error("[LogInTokenAP] Missing payload");
         const data = new URLSearchParams();
         data.append("username", payload.username);
@@ -72,6 +71,5 @@ export class SignUpTokenAP extends LogInTokenAP {
         return this._instance ?? (this._instance = new this());
     }
 
-    override get isMutation() { return true; }
-    override get method() { return "PUT" as AccessPointMethod; }
+    override method() { return "PUT" as AccessPointMethod; }
 }

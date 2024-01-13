@@ -27,4 +27,7 @@ export default {
     moduleFileExtensions: ['ts', 'js', 'html'],
     testEnvironment: 'node',
     coverageDirectory: '../../coverage/packages/base',
+    transformIgnorePatterns: [
+        '<rootDir>/node_modules/.pnpm/(?!(@vebgen))'
+    ],
 };

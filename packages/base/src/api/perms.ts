@@ -1,8 +1,7 @@
-import { IntlShape } from "react-intl";
+import { AccessPointMethod } from "@vebgen/access-api";
 
-import { AccessPoint, AccessPointMethod } from "./base";
+import { AccessPoint, ApiContext } from "./base";
 import { PermData, PermInput } from '../models/perms';
-import { SecMaUser } from "../user";
 
 
 interface AppAndTenant {
@@ -52,13 +51,12 @@ export class PermListAP
     protected static _instance: PermListAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return false; }
-    get method() { return "GET" as AccessPointMethod; }
-    get pathPattern() { return "/perm/{appSlug}/{tenSlug}/"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "GET" as AccessPointMethod; }
+    override pathPattern() { return "/perm/{appSlug}/{tenSlug}/"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementPermListPermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementPermListPermission)
         );
     }
 }
@@ -73,23 +71,16 @@ export class PermDetailsAP
     protected static _instance: PermDetailsAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return false; }
-    get method() { return "GET" as AccessPointMethod; }
-    get pathPattern() { return "/perm/{appSlug}/{tenSlug}/{permSlug}"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "GET" as AccessPointMethod; }
+    override pathPattern() { return "/perm/{appSlug}/{tenSlug}/{permSlug}"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementPermReadPermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementPermReadPermission)
         );
     }
-    override processResult(
-        result: any,
-        perm: Readonly<SecMaUser>,
-        intl: Readonly<IntlShape>,
-        payload?: never,
-        pathArgs?: Readonly<AppTenantPerm>,
-    ): PermData {
-        return this.processDates(result);
+    override processResult(result: any) {
+        return Promise.resolve(this.processDates(result));
     }
 }
 
@@ -103,23 +94,16 @@ export class PermCreateAP
     protected static _instance: PermCreateAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return true; }
-    get method() { return "PUT" as AccessPointMethod; }
-    get pathPattern() { return "/perm/{appSlug}/{tenSlug}/"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "PUT" as AccessPointMethod; }
+    override pathPattern() { return "/perm/{appSlug}/{tenSlug}/"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementPermCreatePermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementPermCreatePermission)
         );
     }
-    override processResult(
-        result: any,
-        perm: Readonly<SecMaUser>,
-        intl: Readonly<IntlShape>,
-        payload?: never,
-        pathArgs?: Readonly<AppAndTenant>,
-    ): PermData {
-        return this.processDates(result);
+    override processResult(result: any) {
+        return Promise.resolve(this.processDates(result));
     }
 }
 
@@ -133,23 +117,16 @@ export class PermEditAP
     protected static _instance: PermEditAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return true; }
-    get method() { return "POST" as AccessPointMethod; }
-    get pathPattern() { return "/perm/{appSlug}/{tenSlug}/{permSlug}"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "POST" as AccessPointMethod; }
+    override pathPattern() { return "/perm/{appSlug}/{tenSlug}/{permSlug}"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementPermEditPermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementPermEditPermission)
         );
     }
-    override processResult(
-        result: any,
-        perm: Readonly<SecMaUser>,
-        intl: Readonly<IntlShape>,
-        payload?: never,
-        pathArgs?: Readonly<AppTenantPerm>,
-    ): PermData {
-        return this.processDates(result);
+    override processResult(result: any) {
+        return Promise.resolve(this.processDates(result));
     }
 }
 
@@ -163,22 +140,15 @@ export class PermDeleteAP
     protected static _instance: PermDeleteAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return true; }
-    get method() { return "DELETE" as AccessPointMethod; }
-    get pathPattern() { return "/perm/{appSlug}/{tenSlug}/{permSlug}"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "DELETE" as AccessPointMethod; }
+    override pathPattern() { return "/perm/{appSlug}/{tenSlug}/{permSlug}"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementPermDeletePermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementPermDeletePermission)
         );
     }
-    override processResult(
-        result: any,
-        perm: Readonly<SecMaUser>,
-        intl: Readonly<IntlShape>,
-        payload?: never,
-        pathArgs?: Readonly<AppTenantPerm>,
-    ): PermData {
-        return this.processDates(result);
+    override processResult(result: any) {
+        return Promise.resolve(this.processDates(result));
     }
 }

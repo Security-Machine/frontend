@@ -1,6 +1,6 @@
+import { AccessPointMethod } from "@vebgen/access-api";
 import { StatsData, VersionData } from "../models/others";
-import { SecMaUser } from "../user";
-import { AccessPoint, AccessPointMethod } from "./base";
+import { AccessPoint, ApiContext } from "./base";
 
 
 /**
@@ -22,13 +22,12 @@ export class StatsAP extends AccessPoint<never, never, StatsData> {
     static get i() { return this._instance ?? (this._instance = new this()); }
 
     protected constructor() { super(); }
-    get isMutation() { return false; }
-    get method() { return "GET" as AccessPointMethod; }
-    get pathPattern() { return "/mng/stats"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "GET" as AccessPointMethod; }
+    override pathPattern() { return "/mng/stats"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementStatsPermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementStatsPermission)
         );
     }
 }
@@ -43,13 +42,12 @@ export class VersionAP extends AccessPoint<never, never, VersionData> {
     static get i() { return this._instance ?? (this._instance = new this()); }
 
     protected constructor() { super(); }
-    get isMutation() { return false; }
-    get method() { return "GET" as AccessPointMethod; }
-    get pathPattern() { return "/mng/version"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "GET" as AccessPointMethod; }
+    override pathPattern() { return "/mng/version"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementVersionPermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementVersionPermission)
         );
     }
 }

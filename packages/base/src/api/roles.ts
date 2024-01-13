@@ -1,8 +1,7 @@
-import { IntlShape } from "react-intl";
+import { AccessPointMethod } from "@vebgen/access-api";
 
-import { AccessPoint, AccessPointMethod } from "./base";
+import { AccessPoint, ApiContext } from "./base";
 import { RoleData, RoleInput } from '../models/roles';
-import { SecMaUser } from "../user";
 
 
 interface AppAndTenant {
@@ -52,13 +51,12 @@ export class RoleListAP
     protected static _instance: RoleListAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return false; }
-    get method() { return "GET" as AccessPointMethod; }
-    get pathPattern() { return "/roles/{appSlug}/{tenSlug}/"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "GET" as AccessPointMethod; }
+    override pathPattern() { return "/roles/{appSlug}/{tenSlug}/"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementRoleListPermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementRoleListPermission)
         );
     }
 }
@@ -73,23 +71,16 @@ export class RoleDetailsAP
     protected static _instance: RoleDetailsAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return false; }
-    get method() { return "GET" as AccessPointMethod; }
-    get pathPattern() { return "/roles/{appSlug}/{tenSlug}/{roleSlug}"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "GET" as AccessPointMethod; }
+    override pathPattern() { return "/roles/{appSlug}/{tenSlug}/{roleSlug}"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementRoleReadPermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementRoleReadPermission)
         );
     }
-    override processResult(
-        result: any,
-        role: Readonly<SecMaUser>,
-        intl: Readonly<IntlShape>,
-        payload?: never,
-        pathArgs?: Readonly<AppTenantRole>,
-    ): RoleData {
-        return this.processDates(result);
+    override processResult(result: any) {
+        return Promise.resolve(this.processDates(result));
     }
 }
 
@@ -103,23 +94,16 @@ export class RoleCreateAP
     protected static _instance: RoleCreateAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return true; }
-    get method() { return "PUT" as AccessPointMethod; }
-    get pathPattern() { return "/roles/{appSlug}/{tenSlug}/"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "PUT" as AccessPointMethod; }
+    override pathPattern() { return "/roles/{appSlug}/{tenSlug}/"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementRoleCreatePermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementRoleCreatePermission)
         );
     }
-    override processResult(
-        result: any,
-        role: Readonly<SecMaUser>,
-        intl: Readonly<IntlShape>,
-        payload?: never,
-        pathArgs?: Readonly<AppAndTenant>,
-    ): RoleData {
-        return this.processDates(result);
+    override processResult(result: any) {
+        return Promise.resolve(this.processDates(result));
     }
 }
 
@@ -133,23 +117,16 @@ export class RoleEditAP
     protected static _instance: RoleEditAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return true; }
-    get method() { return "POST" as AccessPointMethod; }
-    get pathPattern() { return "/roles/{appSlug}/{tenSlug}/{roleSlug}"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "POST" as AccessPointMethod; }
+    override pathPattern() { return "/roles/{appSlug}/{tenSlug}/{roleSlug}"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementRoleEditPermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementRoleEditPermission)
         );
     }
-    override processResult(
-        result: any,
-        role: Readonly<SecMaUser>,
-        intl: Readonly<IntlShape>,
-        payload?: never,
-        pathArgs?: Readonly<AppTenantRole>,
-    ): RoleData {
-        return this.processDates(result);
+    override processResult(result: any) {
+        return Promise.resolve(this.processDates(result));
     }
 }
 
@@ -163,22 +140,15 @@ export class RoleDeleteAP
     protected static _instance: RoleDeleteAP;
     static get i() { return this._instance ?? (this._instance = new this()); }
 
-    get isMutation() { return true; }
-    get method() { return "DELETE" as AccessPointMethod; }
-    get pathPattern() { return "/roles/{appSlug}/{tenSlug}/{roleSlug}"; }
-    override isAllowed(user: Readonly<SecMaUser>) {
+    override method() { return "DELETE" as AccessPointMethod; }
+    override pathPattern() { return "/roles/{appSlug}/{tenSlug}/{roleSlug}"; }
+    override isAllowed(context: ApiContext) {
         return (
-            !!user.user_name &&
-            user.permissions.includes(managementRoleDeletePermission)
+            !!context.user.user_name &&
+            context.user.permissions.includes(managementRoleDeletePermission)
         );
     }
-    override processResult(
-        result: any,
-        role: Readonly<SecMaUser>,
-        intl: Readonly<IntlShape>,
-        payload?: never,
-        pathArgs?: Readonly<AppTenantRole>,
-    ): RoleData {
-        return this.processDates(result);
+    override processResult(result: any) {
+        return Promise.resolve(this.processDates(result));
     }
 }

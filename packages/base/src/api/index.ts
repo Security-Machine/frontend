@@ -11,7 +11,6 @@ export {
 } from "./apps";
 
 
-export type { AccessPointMethod } from "./base";
 export { AccessPoint } from "./base";
 
 
