@@ -1,12 +1,13 @@
 import { FC, ReactNode, useCallback } from "react";
 import { useIntl } from "react-intl";
-import type { RoleData, RoleInput } from "@secma/base";
+import type { ApiContext, RoleData, RoleInput } from "@secma/base";
 import {
     validateDescription, validateName,
 } from "@secma/base";
 
 import { EditController } from "../../lcrud/edit-controller";
-import { SecMaApiResult, useRoleCreate, useRoleEdit } from "../../api";
+import { useRoleCreate, useRoleEdit } from "../../api";
+import { UseApiResult } from "@vebgen/use-api";
 
 
 /**
@@ -73,10 +74,12 @@ export const RoleEditController: FC<RoleEditControllerProps> = ({
     // Note that the hooks should not be called inside conditional.
     // It is fine here since we impose a restriction on the initialValues
     // prop to have same value throughout the lifetime of the component.
-    let hookValue: SecMaApiResult<any, any, RoleData>;
+    let hookValue: UseApiResult<any, any, RoleData, ApiContext>;
     if (initialValues === undefined) {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         hookValue = useRoleCreate(appSlug, tenSlug);
     } else {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         hookValue = useRoleEdit(appSlug, tenSlug, initialValues.name);
     }
 

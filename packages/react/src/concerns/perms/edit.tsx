@@ -1,12 +1,13 @@
 import { FC, ReactNode, useCallback } from "react";
 import { useIntl } from "react-intl";
-import type { PermData, PermInput } from "@secma/base";
+import type { ApiContext, PermData, PermInput } from "@secma/base";
 import {
     validateDescription, validateName
 } from "@secma/base";
 
 import { EditController } from "../../lcrud/edit-controller";
-import { SecMaApiResult, usePermCreate, usePermEdit } from "../../api";
+import { usePermCreate, usePermEdit } from "../../api";
+import { UseApiResult } from "@vebgen/use-api";
 
 
 /**
@@ -73,10 +74,12 @@ export const PermEditController: FC<PermEditControllerProps> = ({
     // Note that the hooks should not be called inside conditional.
     // It is fine here since we impose a restriction on the initialValues
     // prop to have same value throughout the lifetime of the component.
-    let hookValue: SecMaApiResult<any, any, PermData>;
+    let hookValue: UseApiResult<any, any, PermData, ApiContext>;
     if (initialValues === undefined) {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         hookValue = usePermCreate(appSlug, tenSlug);
     } else {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         hookValue = usePermEdit(appSlug, tenSlug, initialValues.name);
     }
 

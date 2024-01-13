@@ -1,4 +1,3 @@
-export type { SecMaApiState, SecMaApiResult, } from "./api";
 export {
     useAppList, useAppCreate, useAppDetails, useAppEdit, useAppDelete,
     useAPI, useStats, useVersion,

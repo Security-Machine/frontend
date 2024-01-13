@@ -17,8 +17,7 @@ interface TDetail {
 
 // The properties passed to each story.
 type StoryProps = Use2StageListProps<
-    never, never, TFast,
-    never, { unique: TFast; }, TDetail
+    never, { unique: TFast; }, TFast, TDetail
 > & {
     user_name?: string;
 };
@@ -125,8 +124,7 @@ const Inner = (args: any) => {
         current,
         mode,
     } = use2StageList<
-        never, never, TFast,
-        never, { unique: TFast; }, TDetail
+        never, { unique: TFast; }, TFast, TDetail
     >(args);
     return (
         <table>

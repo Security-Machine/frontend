@@ -113,6 +113,11 @@ describe("AccessPoint", () => {
             } catch (e) {
                 result = e;
             }
+            expect(result).toEqual({
+                "code": "err-other",
+                "message": "a message",
+                "status": 0,
+            });
             expect(fetchMock.mock.calls.length).toEqual(1);
             expect(translator.formatMessage).toHaveBeenCalledWith({
                 "id": "secma-base.err-comm",
@@ -131,6 +136,11 @@ describe("AccessPoint", () => {
             } catch (e) {
                 result = e;
             }
+            expect(result).toEqual({
+                "code": "err-aborted",
+                "message": "a message",
+                "status": 0,
+            });
             expect(fetchMock.mock.calls.length).toEqual(1);
             expect(translator.formatMessage).toHaveBeenCalledWith({
                 "id": "secma-base.err-comm",

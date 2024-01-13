@@ -1,8 +1,8 @@
 import { ReactNode, useCallback } from "react";
 import { Form } from "react-final-form";
 import { FORM_ERROR } from "final-form";
-
-import { SecMaApiResult } from "../api";
+import { ApiContext } from "@secma/base";
+import { UseApiResult } from "@vebgen/use-api";
 
 
 /**
@@ -29,7 +29,7 @@ export interface EditControllerProps<T extends object> {
     /**
      * The API hook to create or update an application.
      */
-    hookValue: SecMaApiResult<any, any, T>;
+    hookValue: UseApiResult<any, any, T, ApiContext>;
 
     /**
      * The callback triggered when the API call succeeds.

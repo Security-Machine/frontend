@@ -1,12 +1,13 @@
 import { FC, ReactNode, useCallback } from "react";
 import { useIntl } from "react-intl";
-import type { TenantData, TenantInput } from "@secma/base";
+import type { ApiContext, TenantData, TenantInput } from "@secma/base";
 import {
     validateDescription, validateSlug, validateTitle
 } from "@secma/base";
 
 import { EditController } from "../../lcrud/edit-controller";
-import { SecMaApiResult, useTenantCreate, useTenantEdit } from "../../api";
+import { useTenantCreate, useTenantEdit } from "../../api";
+import { UseApiResult } from "@vebgen/use-api";
 
 
 /**
@@ -67,10 +68,12 @@ export const TenantEditController: FC<TenantEditControllerProps> = ({
     // Note that the hooks should not be called inside conditional.
     // It is fine here since we impose a restriction on the initialValues
     // prop to have same value throughout the lifetime of the component.
-    let hookValue: SecMaApiResult<any, any, TenantData>;
+    let hookValue: UseApiResult<any, any, TenantData, ApiContext>;
     if (initialValues === undefined) {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         hookValue = useTenantCreate(appSlug);
     } else {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         hookValue = useTenantEdit(appSlug, initialValues.slug);
     }
 

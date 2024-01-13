@@ -56,19 +56,27 @@
       "tabs": {
         "aria-label": {
           "__id__": "secma-admin.tenants.tabs.aria-label",
-          "defaultMessage": "Tenant components"
+          "defaultMessage": "Tenant components",
+          "en": "Tenant components",
+          "ro": "Tenant components"
         },
         "perms": {
           "__id__": "secma-admin.tenants.tabs.perms",
-          "defaultMessage": "Permissions"
+          "defaultMessage": "Permissions",
+          "en": "Permissions",
+          "ro": "Permissions"
         },
         "roles": {
           "__id__": "secma-admin.tenants.tabs.roles",
-          "defaultMessage": "Roles"
+          "defaultMessage": "Roles",
+          "en": "Roles",
+          "ro": "Roles"
         },
         "users": {
           "__id__": "secma-admin.tenants.tabs.users",
-          "defaultMessage": "Users"
+          "defaultMessage": "Users",
+          "en": "Users",
+          "ro": "Users"
         }
       }
     }

@@ -15,6 +15,8 @@ export interface SecMaAppContext {
 
     /**
      * The base url for API calls.
+     *
+     * @deprecated Use a custom class if you need to change the API url.
      */
     apiUrl: string;
 

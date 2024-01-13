@@ -21,7 +21,7 @@ export const AppDetailsInner: FC = () => {
 
 
     // The link source may already have the application details.
-    let { state } = useLocation();
+    const { state } = useLocation();
     const hasState = state && typeof state === "object";
     console.log("[AppDetailsPage] location state %O", state);
 

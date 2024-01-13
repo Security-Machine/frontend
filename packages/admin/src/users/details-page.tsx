@@ -27,7 +27,7 @@ export const UserDetailsInner: FC = () => {
 
 
     // The link source may already have the user details.
-    let { state } = useLocation();
+    const { state } = useLocation();
     const hasState = state && typeof state === "object";
     console.log("[UserDetailsPage] location state %O", state);
 

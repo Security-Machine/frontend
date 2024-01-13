@@ -3,7 +3,6 @@ export {
 } from "./apps";
 
 
-export type { SecMaApiState, SecMaApiResult, } from "./base";
 export { useAPI } from "./base";
 
 

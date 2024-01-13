@@ -96,18 +96,19 @@ export const UserListController: FC<UserListControllerProps> = ({
     const fetchDetail = useCallback((
         userSlug: any
     ) => UserDetailsAP.i.call(
-        userContext, // user
-        intl,
+        {
+            intl,
+            user: userContext,
+        },
         undefined, // payload
         { appSlug, tenSlug, userSlug }, // pathArgs
         undefined, // headers
         -1, // timeout (-1 without timeout, no controller)
-    ), [userContext, intl]);
+    ), [appSlug, tenSlug, userContext, intl]);
 
     // Hook for managing the list of users.
     const list = use2StageList<
-        never, never, string,
-        never, { appSlug: string }, UserData
+        never, { appSlug: string, tenSlug: string }, string, UserData
     >({
         createPerms,
         readPerms,

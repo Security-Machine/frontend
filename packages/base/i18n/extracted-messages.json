@@ -108,15 +108,21 @@
       },
       "long": {
         "__id__": "secma-base.userName.long",
-        "defaultMessage": "The name is too long (255 characters maximum)"
+        "defaultMessage": "The name is too long (255 characters maximum)",
+        "en": "The name is too long (255 characters maximum)",
+        "ro": "The name is too long (255 characters maximum)"
       },
       "required": {
         "__id__": "secma-base.userName.required",
-        "defaultMessage": "The name is required"
+        "defaultMessage": "The name is required",
+        "en": "The name is required",
+        "ro": "The name is required"
       },
       "short": {
         "__id__": "secma-base.userName.short",
-        "defaultMessage": "The name is too short (3 characters minimum)"
+        "defaultMessage": "The name is too short (3 characters minimum)",
+        "en": "The name is too short (3 characters minimum)",
+        "ro": "The name is too short (3 characters minimum)"
       }
     }
   }

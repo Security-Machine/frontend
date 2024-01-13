@@ -53,7 +53,13 @@
             },
             "dependsOn": [
                 "translate",
-                "lint"
+                "lint",
+                {
+                    "target": "build",
+                    "projects": [
+                        "mui"
+                    ]
+                }
             ]
         },
         "test": {

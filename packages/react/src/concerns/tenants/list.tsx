@@ -91,18 +91,19 @@ export const TenantListController: FC<TenantListControllerProps> = ({
     const fetchDetail = useCallback((
         tenSlug: any
     ) => TenantDetailsAP.i.call(
-        userContext, // user
-        intl,
+        {
+            intl,
+            user: userContext,
+        },
         undefined, // payload
         { appSlug, tenSlug }, // pathArgs
         undefined, // headers
         -1, // timeout (-1 without timeout, no controller)
-    ), [userContext, intl]);
+    ), [appSlug, userContext, intl]);
 
     // Hook for managing the list of tenants.
     const list = use2StageList<
-        never, never, string,
-        never, { appSlug: string }, TenantData
+        never, { appSlug: string }, string, TenantData
     >({
         createPerms,
         readPerms,

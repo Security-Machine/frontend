@@ -64,7 +64,7 @@ export const RoleDelDialogInList: FC<RoleDelDialogInListProps> = ({
         );
 
         // Trigger the deletion.
-        trigger(undefined, {
+        trigger(undefined, undefined, {
             appSlug, tenSlug, roleSlug: current as string
         }).then((result) => {
             console.log("[RoleDelDialogInList] trigger returns %O", result);
@@ -77,7 +77,7 @@ export const RoleDelDialogInList: FC<RoleDelDialogInListProps> = ({
 
         console.log("[RoleDelDialogInList] onSuccess %O", current);
         clearCurrent();
-    }, [mode, current, clearCurrent, removeItem, trigger]);
+    }, [appSlug, tenSlug, mode, current, clearCurrent, removeItem, trigger]);
 
     // Make sure there's something to edit.
     if (!mode || !data || !current) {

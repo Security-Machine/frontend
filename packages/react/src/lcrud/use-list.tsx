@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useReducer } from "react";
-import { AccessPointError } from "@secma/base";
+import { AccessPointError, ApiContext } from "@secma/base";
 
 import { useSecMaContext } from "../user-controller";
-import { SecMaApiResult } from "../api";
+import { UseApiResult } from "@vebgen/use-api";
 
 
 /**
@@ -373,8 +373,7 @@ export interface Use2StageListResult<TFast, TDetail>
  * The shape of the properties passed to the `use2StageList` hook.
  */
 export interface Use2StageListProps<
-    TPayloadList, TPathArgsList, TFast,
-    TPayloadDetail, TPathArgsDetail, TDetail
+    TPayloadList, TPathArgsList, TFast, TDetail
 > {
     /**
      * The permissions required to create items.
@@ -399,7 +398,9 @@ export interface Use2StageListProps<
     /**
      * The hook to use for fetching the initial list of items.
      */
-    useFetchList: () => SecMaApiResult<TPayloadList, TPathArgsList, TFast[]>;
+    useFetchList: () => UseApiResult<
+        TPayloadList, TPathArgsList, TFast[], ApiContext
+    >;
 
     /**
      * The hook to use for fetching the details of an item.
@@ -417,8 +418,7 @@ export interface Use2StageListProps<
  * Generic hook for managing a list of items.
  */
 export function use2StageList<
-    TPayloadList, TPathArgsList, TFast,
-    TPayloadDetail, TPathArgsDetail, TDetail
+    TPayloadList, TPathArgsList, TFast, TDetail
 >({
     createPerms,
     readPerms,
@@ -427,10 +427,9 @@ export function use2StageList<
     useFetchList,
     fetchDetail,
     toKey,
-}: Use2StageListProps<
-    TPayloadList, TPathArgsList, TFast,
-    TPayloadDetail, TPathArgsDetail, TDetail
->): Use2StageListResult<TFast, TDetail> {
+}: Use2StageListProps<TPayloadList, TPathArgsList, TFast, TDetail>):
+    Use2StageListResult<TFast, TDetail> {
+        
     console.log("[use2StageList] createPerms: %O", createPerms);
     console.log("[use2StageList] readPerms: %O", readPerms);
     console.log("[use2StageList] updatePerms: %O", updatePerms);
@@ -496,7 +495,7 @@ export function use2StageList<
 
         // Create initial dataset.
         const dataset: Record<ListKey, TFast> = listResult.reduce(
-            (acc, fast) => {
+            (acc: Record<ListKey, TFast>, fast: TFast) => {
                 acc[toKey(fast)] = fast;
                 return acc;
             }, {} as Record<ListKey, TFast>

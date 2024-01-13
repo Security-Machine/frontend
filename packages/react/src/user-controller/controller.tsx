@@ -2,14 +2,13 @@ import { FC, ReactNode, useCallback, useEffect, useReducer, useRef } from "react
 import {
     OnSignIn, OnSignOut, OnTokenError, LogInTokenAP, SignUpTokenAP,
     TokenData,
-    AccessPoint,
+    AccessPointError,
 } from "@secma/base";
 import { useIntl } from "react-intl";
 import { DateTime } from "luxon";
 
 import { SecMaContext, SecMaContextProvider } from "./context";
 import { SecMaState, initialUserState, secMaReducer } from "./state";
-import { useSecMaAppContext } from "../app-controller";
 import { jwtDecode } from "jwt-decode";
 
 
@@ -201,10 +200,6 @@ export const SecMaController: FC<SecMaControllerProps> = ({
     // The timer ID for the token expiration.
     const timeoutId = useRef<number | undefined>(undefined);
 
-    // Set the base for the API call.
-    const { apiUrl } = useSecMaAppContext();
-    AccessPoint.apiUrl = apiUrl;
-
     // Translation provider.
     const intl = useIntl();
 
@@ -219,8 +214,10 @@ export const SecMaController: FC<SecMaControllerProps> = ({
         // Call the API, retrieve the token.
         const Cls = isExisting ? LogInTokenAP : SignUpTokenAP;
         const result = await Cls.i.call(
-            undefined as any, // user (not used in this case)
-            intl,
+            {
+                intl,
+                user: undefined as any,
+            },
             {
                 username: email,
                 password,
@@ -236,7 +233,7 @@ export const SecMaController: FC<SecMaControllerProps> = ({
 
         if ("code" in result) {
             // This is an error.
-            onError?.(result);
+            onError?.(result as unknown as AccessPointError);
         } else {
             // The token was retrieved.
             dispatch({

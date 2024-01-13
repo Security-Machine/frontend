@@ -81,8 +81,10 @@ export const AppListController: FC<AppListControllerProps> = ({
 
     // Prepared call.
     const fetchDetail = useCallback((appSlug: any) => AppDetailsAP.i.call(
-        userContext, // user
-        intl,
+        {
+            user: userContext,
+            intl,
+        },
         undefined, // payload
         { slug: appSlug }, // pathArgs
         undefined, // headers
@@ -91,8 +93,7 @@ export const AppListController: FC<AppListControllerProps> = ({
 
     // Hook for managing the list of applications.
     const list = use2StageList<
-        never, never, string,
-        never, { appSlug: string }, ApplicationData
+        never, never, string, ApplicationData
     >({
         createPerms,
         readPerms,

@@ -79,7 +79,7 @@ export const TenantDetailsInner: FC = () => {
 
 
     // The link source may already have the tenant details.
-    let { state } = useLocation();
+    const { state } = useLocation();
     const hasState = state && typeof state === "object";
     console.log("[TenantDetailsPage] location state %O", state);
 

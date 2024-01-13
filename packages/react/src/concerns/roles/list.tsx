@@ -96,18 +96,19 @@ export const RoleListController: FC<RoleListControllerProps> = ({
     const fetchDetail = useCallback((
         roleSlug: any
     ) => RoleDetailsAP.i.call(
-        roleContext, // role
-        intl,
+        {
+            intl,
+            user: roleContext,
+        },
         undefined, // payload
         { appSlug, tenSlug, roleSlug }, // pathArgs
         undefined, // headers
         -1, // timeout (-1 without timeout, no controller)
-    ), [roleContext, intl]);
+    ), [appSlug, tenSlug, roleContext, intl]);
 
     // Hook for managing the list of roles.
     const list = use2StageList<
-        never, never, string,
-        never, { appSlug: string, tenSlug: string }, RoleData
+        never, { appSlug: string, tenSlug: string }, string, RoleData
     >({
         createPerms,
         readPerms,

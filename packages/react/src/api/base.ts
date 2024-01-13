@@ -40,7 +40,7 @@ export function useAPI<
     timeout?: Readonly<number>,
 ) {
     return useApiBase<TPayload, TPathArgs, TResult, ApiContext>(
-        accessPoint,
+        accessPoint as any,
         {
             user: useSecMaContext(),
             intl: useIntl(),

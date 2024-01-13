@@ -44,7 +44,7 @@ export const AppDelDialogInList: FC<AppDelDialogInListProps> = ({
         console.log("[AppDelDialogInList] triggering deletion of %O", current);
 
         // Trigger the deletion.
-        trigger(undefined, { slug: current as string }).then((result) => {
+        trigger(undefined, undefined, { slug: current as string }).then((result) => {
             console.log("[AppDelDialogInList] trigger returns %O", result);
             if ("code" in result && "status" in result) {
                 enqueueSnackbar(result.message, { variant: "error" });

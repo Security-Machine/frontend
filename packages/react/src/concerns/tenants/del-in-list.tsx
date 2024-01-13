@@ -58,7 +58,7 @@ export const TenantDelDialogInList: FC<TenantDelDialogInListProps> = ({
         );
 
         // Trigger the deletion.
-        trigger(undefined, {
+        trigger(undefined, undefined, {
             appSlug, tenSlug: current as string
         }).then((result) => {
             console.log("[TenantDelDialogInList] trigger returns %O", result);
@@ -71,7 +71,7 @@ export const TenantDelDialogInList: FC<TenantDelDialogInListProps> = ({
 
         console.log("[TenantDelDialogInList] onSuccess %O", current);
         clearCurrent();
-    }, [mode, current, clearCurrent, removeItem, trigger]);
+    }, [appSlug, mode, current, clearCurrent, removeItem, trigger]);
 
     // Make sure there's something to edit.
     if (!mode || !data || !current) {

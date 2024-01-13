@@ -1,12 +1,13 @@
 import { FC, ReactNode, useCallback } from "react";
 import { useIntl } from "react-intl";
-import type { UserData, UserInput } from "@secma/base";
+import type { ApiContext, UserData, UserInput } from "@secma/base";
 import {
-    validateDescription, validateUserName, validateTitle
+    validateDescription, validateUserName
 } from "@secma/base";
 
 import { EditController } from "../../lcrud/edit-controller";
-import { SecMaApiResult, useUserCreate, useUserEdit } from "../../api";
+import { useUserCreate, useUserEdit } from "../../api";
+import { UseApiResult } from "@vebgen/use-api";
 
 
 /**
@@ -73,10 +74,12 @@ export const UserEditController: FC<UserEditControllerProps> = ({
     // Note that the hooks should not be called inside conditional.
     // It is fine here since we impose a restriction on the initialValues
     // prop to have same value throughout the lifetime of the component.
-    let hookValue: SecMaApiResult<any, any, UserData>;
+    let hookValue: UseApiResult<any, any, UserData, ApiContext>;
     if (initialValues === undefined) {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         hookValue = useUserCreate(appSlug, tenSlug);
     } else {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         hookValue = useUserEdit(appSlug, tenSlug, initialValues.name);
     }
 

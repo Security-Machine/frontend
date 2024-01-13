@@ -64,7 +64,7 @@ export const UserDelDialogInList: FC<UserDelDialogInListProps> = ({
         );
 
         // Trigger the deletion.
-        trigger(undefined, {
+        trigger(undefined, undefined, {
             appSlug, tenSlug, userSlug: current as string
         }).then((result) => {
             console.log("[UserDelDialogInList] trigger returns %O", result);
@@ -77,7 +77,7 @@ export const UserDelDialogInList: FC<UserDelDialogInListProps> = ({
 
         console.log("[UserDelDialogInList] onSuccess %O", current);
         clearCurrent();
-    }, [mode, current, clearCurrent, removeItem, trigger]);
+    }, [appSlug, tenSlug, mode, current, clearCurrent, removeItem, trigger]);
 
     // Make sure there's something to edit.
     if (!mode || !data || !current) {

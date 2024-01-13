@@ -54,7 +54,10 @@ export class LogInTokenAP extends AccessPoint<Payload, PathArgs, TokenData> {
             ...decoded,
         });
     }
-    override createBody(payload?: Payload): string | undefined {
+    override createBody(
+        context: ApiContext,
+        payload?: Payload
+    ): string | undefined {
         if (!payload) throw new Error("[LogInTokenAP] Missing payload");
         const data = new URLSearchParams();
         data.append("username", payload.username);

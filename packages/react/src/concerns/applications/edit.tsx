@@ -1,12 +1,13 @@
 import { FC, ReactNode, useCallback } from "react";
 import { useIntl } from "react-intl";
-import type { ApplicationData, ApplicationInput } from "@secma/base";
+import type { ApiContext, ApplicationData, ApplicationInput } from "@secma/base";
 import {
     validateDescription, validateSlug, validateTitle
 } from "@secma/base";
 
 import { EditController } from "../../lcrud/edit-controller";
-import { SecMaApiResult, useAppCreate, useAppEdit } from "../../api";
+import { useAppCreate, useAppEdit } from "../../api";
+import { UseApiResult } from "@vebgen/use-api";
 
 
 /**
@@ -61,10 +62,12 @@ export const AppEditController: FC<AppEditControllerProps> = ({
     // Note that the hooks should not be called inside conditional.
     // It is fine here since we impose a restriction on the initialValues
     // prop to have same value throughout the lifetime of the component.
-    let hookValue: SecMaApiResult<any, any, ApplicationData>;
+    let hookValue: UseApiResult<any, any, ApplicationData, ApiContext>;
     if (initialValues === undefined) {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         hookValue = useAppCreate();
     } else {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         hookValue = useAppEdit(initialValues.slug);
     }
 
