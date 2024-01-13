@@ -1,8 +1,9 @@
 import { FC } from "react";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
-import { useButtonMenu, useSecMaContext } from "@secma/react";
+import { useSecMaContext } from "@secma/react";
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import { useButtonMenu } from "@vebgen/react-buttons";
 
 import { UserMenu } from "./user-menu";
 import { PublicMenu } from "./public-menu";

@@ -1,4 +1,26 @@
 {
     "name": "@secma/mui",
-    "version": "0.0.1"
+    "description": "MUI components for security machine",
+    "version": "0.0.1",
+    "private": false,
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Security-Machine/frontend.git",
+        "directory": "packages/mui"
+    },
+    "bugs": {
+        "url": "https://github.com/Security-Machine/frontend/issues"
+    },
+    "homepage": "https://github.com/Security-Machine/frontend",
+    "license": "MIT",
+    "keywords": [
+        "react", "mui", "secma", "security", "user-management"
+    ],
+    "publishConfig": {
+        "access": "public",
+        "directory": "../../dist/packages/mui"
+    },
+    "peerDependencies": {
+        "core-js": "^3.34.0"
+    }
 }

@@ -65,6 +65,9 @@ importers:
       '@vebgen/mui-rff-time':
         specifier: ^0.0.5
         version: 0.0.5(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@mui/system@5.15.4)(@types/react@18.2.43)(core-js@3.35.0)(final-form@4.20.10)(luxon@3.4.4)(react-dom@18.2.0)(react@18.2.0)
+      '@vebgen/react-buttons':
+        specifier: ^0.0.5
+        version: 0.0.5(core-js@3.35.0)(react@18.2.0)
       '@vebgen/use-api':
         specifier: ^0.0.4
         version: 0.0.4(@vebgen/access-api@0.0.4)(core-js@3.35.0)(react@18.2.0)
@@ -7735,6 +7738,16 @@ packages:
       - moment
       - moment-hijri
       - moment-jalaali
+    dev: false
+
+  /@vebgen/react-buttons@0.0.5(core-js@3.35.0)(react@18.2.0):
+    resolution: {integrity: sha512-FNPzJFiPGx96dSa54tKbD9YeF6c/m20md5e2mdx+Q5OAVXN0dXAMg07vx+dyqf2Q30tRZx1A52V0mnbvj+50Ww==}
+    peerDependencies:
+      core-js: ^3.34.0
+      react: 18.2.0
+    dependencies:
+      core-js: 3.35.0
+      react: 18.2.0
     dev: false
 
   /@vebgen/use-api@0.0.4(@vebgen/access-api@0.0.4)(core-js@3.35.0)(react@18.2.0):

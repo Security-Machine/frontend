@@ -25,6 +25,7 @@
         "@vebgen/mui-rff-switch": "^0.0.5",
         "@vebgen/mui-rff-text": "^0.0.5",
         "@vebgen/mui-rff-time": "^0.0.5",
+        "@vebgen/react-buttons": "^0.0.5",
         "@vebgen/use-api": "^0.0.4",
         "core-js": "^3.35.0",
         "final-form": "^4.20.10",

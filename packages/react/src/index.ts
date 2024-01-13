@@ -38,11 +38,9 @@ export {
 
 export type {
     PageGuardProps, NavigationData,
-    UseButtonMenuResult,
 } from "./utility";
 export {
     PageGuard, navigationDataToUrl,
-    useButtonMenu
 } from "./utility";
 
 

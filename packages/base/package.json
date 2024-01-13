@@ -1,15 +1,29 @@
 {
     "name": "@secma/base",
+    "description": "definitions and API endpoints for security machine",
     "version": "0.0.1",
-    "dependencies": {
-        "luxon": "^3.4.4",
-        "react-intl": "^6.5.5",
-        "jwt-decode": "^4.0.0"
+    "private": false,
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Security-Machine/frontend.git",
+        "directory": "packages/base"
+    },
+    "bugs": {
+        "url": "https://github.com/Security-Machine/frontend/issues"
+    },
+    "homepage": "https://github.com/Security-Machine/frontend",
+    "license": "MIT",
+    "keywords": [
+        "api", "secma", "security", "user-management"
+    ],
+    "publishConfig": {
+        "access": "public",
+        "directory": "../../dist/packages/base"
     },
     "peerDependencies": {
+        "luxon": "^3.4.4",
+        "react-intl": "^6.5.5",
+        "jwt-decode": "^4.0.0",
         "@vebgen/access-api": "^0.0.4"
-    },
-    "type": "commonjs",
-    "main": "./index.cjs",
-    "module": "./index.js"
+    }
 }

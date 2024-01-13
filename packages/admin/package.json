@@ -1,4 +1,27 @@
 {
     "name": "@secma/admin",
-    "version": "0.0.1"
+    "description": "admin components for security machine",
+    "version": "0.0.1",
+    "private": false,
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Security-Machine/frontend.git",
+        "directory": "packages/admin"
+    },
+    "bugs": {
+        "url": "https://github.com/Security-Machine/frontend/issues"
+    },
+    "homepage": "https://github.com/Security-Machine/frontend",
+    "license": "MIT",
+    "keywords": [
+        "react", "mui", "secma", "security", "user-management"
+    ],
+    "publishConfig": {
+        "access": "public",
+        "directory": "../../dist/packages/admin"
+    },
+    "peerDependencies": {
+        "core-js": "^3.34.0",
+        "@vebgen/react-buttons": "0.0.5"
+    }
 }

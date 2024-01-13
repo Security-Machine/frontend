@@ -44,7 +44,17 @@
                 ],
                 "styles": [],
                 "scripts": [],
-                "webpackConfig": "apps/admin-app/webpack.config.js"
+                "webpackConfig": "apps/admin-app/webpack.config.js",
+                "dependsOn": [
+                    "translate",
+                    "lint",
+                    {
+                        "target": "build",
+                        "projects": [
+                            "admin"
+                        ]
+                    }
+                ]
             },
             "configurations": {
                 "development": {
