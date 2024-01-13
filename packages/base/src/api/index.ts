@@ -12,6 +12,7 @@ export {
 
 
 export { AccessPoint } from "./base";
+export type { ApiContext } from "./base";
 
 
 export { LogInTokenAP, SignUpTokenAP } from "./token";

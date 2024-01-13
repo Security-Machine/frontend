@@ -50,6 +50,7 @@ export {
     managementPermDeletePermission,
 
 } from "./api";
+export type { ApiContext } from "./api";
 
 
 export type { SecMaUser } from "./user";
