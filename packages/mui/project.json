@@ -9,7 +9,7 @@
             "executor": "nx:run-commands",
             "options": {
                 "commands": [
-                    "g11n-cli update {projectRoot}/src {projectRoot}/i18n packages/base/i18n/extracted-messages.json packages/react/i18n/extracted-messages.json"
+                    "g11n-cli update {projectRoot}/src {projectRoot}/i18n packages/base/i18n/extracted-messages.json packages/react/i18n/extracted-messages.json node_modules/@vebgen/mui-rff-buttons/extracted-messages.json"
                 ],
                 "parallel": false
             },

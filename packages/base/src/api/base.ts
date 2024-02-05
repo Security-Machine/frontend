@@ -1,9 +1,9 @@
 import { IntlShape, useIntl } from "react-intl";
 import { DateTime } from "luxon";
+import { AccessPoint as AccessPointBase } from "@vebgen/access-api";
 
 import { AccessPointError } from "../models/errors";
 import { SecMaUser } from "../user";
-import { AccessPoint as AccessPointBase } from "@vebgen/access-api";
 
 
 /**

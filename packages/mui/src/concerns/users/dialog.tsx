@@ -7,9 +7,9 @@ import Typography from "@mui/material/Typography";
 import {
     UserEditController, UserEditDialogChildProps
 } from "@secma/react";
+import { StandardFormActions } from "@vebgen/mui-rff-buttons";
 
 import { UserEditor } from "./editor";
-import { StandardFormActions } from "../../components/form-actions";
 
 
 /**

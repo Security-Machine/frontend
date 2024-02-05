@@ -21,7 +21,7 @@
         "directory": "../../dist/packages/admin"
     },
     "peerDependencies": {
-        "core-js": "^3.34.0",
+        "core-js": "^3.35.0",
         "@vebgen/react-buttons": "0.0.5"
     }
 }

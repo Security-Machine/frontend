@@ -7,9 +7,9 @@ import Typography from "@mui/material/Typography";
 import {
     TenantEditController, TenantEditDialogChildProps
 } from "@secma/react";
+import { StandardFormActions } from "@vebgen/mui-rff-buttons";
 
 import { TenantEditor } from "./editor";
-import { StandardFormActions } from "../../components/form-actions";
 
 
 /**

@@ -72,12 +72,6 @@
       "en": "Cancel",
       "ro": "Cancel"
     },
-    "create": {
-      "__id__": "secma-mui.create",
-      "defaultMessage": "Create",
-      "en": "Create",
-      "ro": "Create"
-    },
     "delete": {
       "__id__": "secma-mui.delete",
       "defaultMessage": "Delete",
@@ -206,12 +200,6 @@
         }
       }
     },
-    "reset": {
-      "__id__": "secma-mui.reset",
-      "defaultMessage": "Reset",
-      "en": "Reset",
-      "ro": "Reset"
-    },
     "roles": {
       "add": {
         "d": {
@@ -277,12 +265,6 @@
           "ro": "Edit the {role} role"
         }
       }
-    },
-    "save": {
-      "__id__": "secma-mui.save",
-      "defaultMessage": "Save",
-      "en": "Save",
-      "ro": "Save"
     },
     "signIn": {
       "button": {

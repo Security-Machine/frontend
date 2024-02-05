@@ -21,6 +21,6 @@
         "directory": "../../dist/packages/mui"
     },
     "peerDependencies": {
-        "core-js": "^3.34.0"
+        "core-js": "^3.35.0"
     }
 }

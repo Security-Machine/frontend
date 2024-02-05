@@ -7,9 +7,9 @@ import Typography from "@mui/material/Typography";
 import {
     PermEditController, PermEditDialogChildProps
 } from "@secma/react";
+import { StandardFormActions } from "@vebgen/mui-rff-buttons";
 
 import { PermEditor } from "./editor";
-import { StandardFormActions } from "../../components/form-actions";
 
 
 /**

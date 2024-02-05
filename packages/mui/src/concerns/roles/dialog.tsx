@@ -7,9 +7,9 @@ import Typography from "@mui/material/Typography";
 import {
     RoleEditController, RoleEditDialogChildProps
 } from "@secma/react";
+import { StandardFormActions } from "@vebgen/mui-rff-buttons";
 
 import { RoleEditor } from "./editor";
-import { StandardFormActions } from "../../components/form-actions";
 
 
 /**

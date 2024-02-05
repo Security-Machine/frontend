@@ -5,9 +5,9 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Typography from "@mui/material/Typography";
 import { AppEditController, AppEditDialogChildProps } from "@secma/react";
+import { StandardFormActions } from "@vebgen/mui-rff-buttons";
 
 import { AppEditor } from "./editor";
-import { StandardFormActions } from "../../components/form-actions";
 
 
 /**

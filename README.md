@@ -35,6 +35,7 @@ pnpm exec nx generate @nx/react:library \
     --bundler=rollup  \
     --component=false \
     --importPath=@secma/some-name \
+    --projectNameAndRootFormat=derived  \
     --publishable=true  \
     --style=none \
     --tags="a b c" \
@@ -48,6 +49,7 @@ pnpm exec nx generate @nx/js:library \
     --directory=apps \
     --publishable=true \
     --importPath=@secma/something \
+    --projectNameAndRootFormat=derived  \
     --includeBabelRc=true \
     --testEnvironment=node \
     --no-interactive --dry-run
