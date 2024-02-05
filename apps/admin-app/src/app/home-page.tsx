@@ -107,7 +107,7 @@ export const EmailPassCard = () => {
 export const ThirdPartyCard = () => {
     return (
         <LinkCard
-            to="/admin/email-password/sign-in"
+            to="/admin/third-party/sign-in"
             label="3'rd party"
             image="assets/email-pwd.png"
             description="Log-in using a third-party provider."
@@ -116,7 +116,7 @@ export const ThirdPartyCard = () => {
                 size="small"
                 color="primary"
                 component={Link}
-                to={"/admin/email-password/sign-in"}
+                to={"/admin/third-party/sign-in"}
             >
                 Sign-in
             </Button>
@@ -128,7 +128,7 @@ export const ThirdPartyCard = () => {
 export const PasswordLessCard = () => {
     return (
         <LinkCard
-            to="/admin/email-password/sign-in"
+            to="/admin/passwordless/sign-in"
             label="PasswordLess"
             image="assets/email-pwd.png"
             description="Log-in using your phone or e-mail."
@@ -137,7 +137,7 @@ export const PasswordLessCard = () => {
                 size="small"
                 color="primary"
                 component={Link}
-                to={"/admin/email-password/sign-in"}
+                to={"/admin/passwordless/sign-in"}
             >
                 Sign-in
             </Button>

@@ -77,6 +77,7 @@ export const UsernameField = () => (
         name="username"
         required
         autoFocus
+        autoComplete="username"
     >
         <FormattedMessage
             id="secma-mui.signIn.username"
