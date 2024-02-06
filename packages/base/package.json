@@ -24,6 +24,6 @@
         "luxon": "^3.4.4",
         "react-intl": "^6.6.1",
         "jwt-decode": "^4.0.0",
-        "@vebgen/access-api": "^0.0.4"
+        "@vebgen/access-api": "^0.0.7"
     }
 }

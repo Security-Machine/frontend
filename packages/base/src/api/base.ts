@@ -24,6 +24,9 @@ export interface ApiContext {
 
 /**
  * Base class for all API calls.
+ *
+ * It expects the `NX_AUTH_URL` environment variable to be set and uses it
+ * as the base URL for the API calls.
  */
 export abstract class AccessPoint<TPayload, TPathArgs, TResult>
     extends AccessPointBase<TPayload, TPathArgs, TResult, ApiContext> {
@@ -60,6 +63,8 @@ export abstract class AccessPoint<TPayload, TPathArgs, TResult>
         context: ApiContext,
         error: AccessPointError
     ): AccessPointError {
+        // We override this to translate the message to the current language.
+        console.log("[AccessPoint.adjustBuildInError] error", error);
         return {
             ...error,
             message: context.intl.formatMessage({

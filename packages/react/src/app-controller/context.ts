@@ -58,6 +58,8 @@ export const useSecMaAppContext = () => {
  * The types of URLs that useAdminUrl can compute.
  */
 export type AdminUrlType = "app" | "tenant" | "user" | "role" | "perm";
+
+
 /**
  * The hook for computing the url for admin pages.
  */

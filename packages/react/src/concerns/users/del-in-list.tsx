@@ -99,4 +99,3 @@ export const UserDelDialogInList: FC<UserDelDialogInListProps> = ({
     const onlyChild = Children.only(children);
     return cloneElement(onlyChild, properties);
 }
-

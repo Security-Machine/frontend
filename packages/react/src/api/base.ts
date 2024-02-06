@@ -6,7 +6,7 @@ import { useSecMaContext } from "../user-controller/context";
 
 
 /**
- * A hook that can be used to the SecMa API.
+ * A hook that can be used to access SecMa API.
  *
  * The `TPayload` type is the type of the payload that is sent to the API.
  * The `TPathArgs` type is the type of the arguments that are passed in the

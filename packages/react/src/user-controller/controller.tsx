@@ -213,35 +213,36 @@ export const SecMaController: FC<SecMaControllerProps> = ({
     ) => {
         // Call the API, retrieve the token.
         const Cls = isExisting ? LogInTokenAP : SignUpTokenAP;
-        const result = await Cls.i.call(
-            {
-                intl,
-                user: undefined as any,
-            },
-            {
-                username: email,
-                password,
-            }, // payload
-            {
-                app: appSlug,
-                tenant: tenantSlug,
-            }, // pathArgs
-            undefined, // headers
-            timeout,
-        );
-        console.log("[SecMaController] api result %O", result);
-
-        if ("code" in result) {
-            // This is an error.
-            onError?.(result as unknown as AccessPointError);
-        } else {
-            // The token was retrieved.
-            dispatch({
-                type: "sign-in",
-                payload: result as TokenData,
-            });
-            onSignIn?.(result as TokenData);
+        let result;
+        try {
+            result = await Cls.i.call(
+                {
+                    intl,
+                    user: undefined as any,
+                },
+                {
+                    username: email,
+                    password,
+                }, // payload
+                {
+                    app: appSlug,
+                    tenant: tenantSlug,
+                }, // pathArgs
+                undefined, // headers
+                timeout,
+            );
+            console.log("[SecMaController] api result %O", result);
+        } catch (e) {
+            onError?.(e as unknown as AccessPointError);
+            return e as AccessPointError;
         }
+
+        // The token was retrieved.
+        dispatch({
+            type: "sign-in",
+            payload: result as TokenData,
+        });
+        onSignIn?.(result as TokenData);
 
         return result;
     }, [timeout, onError, onSignIn, appSlug, tenantSlug, intl]);

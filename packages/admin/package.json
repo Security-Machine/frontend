@@ -22,6 +22,6 @@
     },
     "peerDependencies": {
         "core-js": "^3.35.0",
-        "@vebgen/react-buttons": "0.0.5"
+        "@vebgen/react-buttons": "0.0.7"
     }
 }

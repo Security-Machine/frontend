@@ -5,16 +5,19 @@ import Grid from "@mui/material/Grid";
 import { FormattedMessage } from "react-intl";
 
 import {
+    ErrorMessage,
     LostPasswordLink, MainButton, PageTitle, PasswordField,
     RememberField, SignInMuiFormProps, TheLink, UsernameField
 } from "./common";
+import { useFormState } from "react-final-form";
+import { Box, Typography } from "@mui/material";
 
 
-/**
- * The form for signing in.
- */
-export const SignInMuiForm: FC<SignInMuiFormProps> = (props) => (
-    <SignInForm isExisting={true} {...props}>
+export const SignInInner: FC = () => {
+    const {
+        submitting, submitError
+    } = useFormState();
+    return (
         <Container maxWidth="xs">
             <PageTitle>
                 <FormattedMessage
@@ -25,18 +28,19 @@ export const SignInMuiForm: FC<SignInMuiFormProps> = (props) => (
             <UsernameField />
             <PasswordField />
             <RememberField />
-            <MainButton>
+            <ErrorMessage submitError={submitError} />
+            <MainButton loading={submitting}>
                 <FormattedMessage
                     id="secma-mui.signIn.button"
                     defaultMessage="Sign in"
                 />
             </MainButton>
-            <Grid container>
-                <Grid item xs>
+            <Box display="flex">
+                <Box padding={1}>
                     <LostPasswordLink />
-                </Grid>
-                <Grid item>
-                    <TheLink to="../sign-up">
+                </Box>
+                <Box padding={1}>
+                <TheLink to="../sign-up">
                         <FormattedMessage
                             id="secma-mui.signIn.signUp"
                             defaultMessage={
@@ -44,8 +48,18 @@ export const SignInMuiForm: FC<SignInMuiFormProps> = (props) => (
                             }
                         />
                     </TheLink>
-                </Grid>
-            </Grid>
+                </Box>
+            </Box>
         </Container>
+    );
+}
+
+
+/**
+ * The form for signing in.
+ */
+export const SignInMuiForm: FC<SignInMuiFormProps> = (props) => (
+    <SignInForm isExisting={true} {...props}>
+        <SignInInner />
     </SignInForm >
 )

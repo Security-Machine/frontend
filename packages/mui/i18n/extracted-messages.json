@@ -313,7 +313,7 @@
     "signUp": {
       "button": {
         "__id__": "secma-mui.signUp.button",
-        "defaultMessage": "Sign in",
+        "defaultMessage": "Sign Up",
         "en": "Sign Up",
         "ro": "Sign Up"
       },
@@ -325,7 +325,7 @@
       },
       "title": {
         "__id__": "secma-mui.signUp.title",
-        "defaultMessage": "Sign in",
+        "defaultMessage": "Sign Up",
         "en": "Sign in",
         "ro": "Sign in"
       }

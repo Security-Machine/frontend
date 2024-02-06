@@ -5,6 +5,7 @@ import Grid from "@mui/material/Grid";
 import { LostPasswordForm } from "@secma/react";
 
 import { MainButton, PageTitle, TheLink, UsernameField } from "./common";
+import { Box } from "@mui/material";
 
 
 /**
@@ -26,24 +27,29 @@ export const LostPasswordMuiForm: FC = () => (
                     defaultMessage="Send email"
                 />
             </MainButton>
-            <Grid container>
-                <Grid item xs>
+            <Box
+                display="flex"
+                alignContent="center"
+                justifyContent="space-evenly"
+                alignItems="center"
+            >
+                <Box padding={1}>
                     <TheLink to="../sign-up">
                         <FormattedMessage
                             id="secma-mui.lost.signUp"
                             defaultMessage="Sign Up"
                         />
                     </TheLink>
-                </Grid>
-                <Grid item xs>
+                </Box>
+                <Box padding={1}>
                     <TheLink to="../sign-in">
                         <FormattedMessage
                             id="secma-mui.lost.signIn"
                             defaultMessage="Sign In"
                         />
                     </TheLink>
-                </Grid>
-            </Grid>
+                </Box>
+            </Box>
         </Container>
     </LostPasswordForm>
 )

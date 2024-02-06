@@ -1,14 +1,16 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import MuiLink from "@mui/material/Link";
 import { Text, TextProps } from "@vebgen/mui-rff-text"
 import { Checkboxes } from "@vebgen/mui-rff-checkboxes";
 import { SignInFormProps } from "@secma/react";
-
+import LoadingButton from '@mui/lab/LoadingButton';
+import BackupIcon from '@mui/icons-material/Backup';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 
 // The style to apply to the title.
 const sxTitle = { mb: 2, mt: 3 };
@@ -125,18 +127,23 @@ export const RememberField = () => (
  * The action button.
  */
 export const MainButton = ({
+    loading = false,
     children
 }: {
+    loading?: boolean,
     children: ReactNode
 }) => (
-    <Button
+    <LoadingButton
         type="submit"
+        loadingPosition="start"
+        startIcon={<DoneOutlineIcon />}
         fullWidth
         variant="contained"
         sx={sxSignInButton}
+        loading={loading}
     >
         {children}
-    </Button>
+    </LoadingButton>
 );
 
 
@@ -172,3 +179,43 @@ export const LostPasswordLink = () => (
         />
     </TheLink>
 );
+
+const sxError = {
+    display: 'flex',
+    alignItems: 'center',
+    alignContent: "center",
+    justifyContent: "center",
+    gap: "0.5rem",
+    paddingTop: "1rem",
+    paddingBottom: "1rem",
+ };
+
+/**
+ * Prints the error message.
+ */
+export const ErrorMessage = ({
+    submitError
+}: {
+    submitError: string | undefined
+}) => {
+    const [shown, setShown] = useState(false);
+
+    useEffect(() => {
+        if (submitError) {
+            setShown(true);
+        }
+    }, [submitError]);
+
+    if (!submitError || !shown) {
+        return null;
+    }
+
+    return (
+        <div style={sxError} onClick={() => {setShown(false)}}>
+            <WarningAmberIcon color="error" />
+            <Typography color="error" variant="body2">
+                {submitError}
+            </Typography>
+        </div>
+    );
+}

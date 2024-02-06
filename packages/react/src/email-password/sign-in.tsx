@@ -3,7 +3,10 @@ import { Form } from 'react-final-form';
 import { useIntl } from 'react-intl';
 import { useSecMaContext } from '../user-controller';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { FORM_ERROR } from "final-form";
+
 import { NavigationData, navigationDataToUrl } from '../utility';
+import { AccessPointError } from '@secma/base';
 
 
 /**
@@ -159,9 +162,18 @@ export const SignInForm: FC<SignInFormProps> = ({
     // The callback used to submit the form.
     const submit = useCallback((values: SignInFormState) => {
         console.log('[%s] Sign in %O', strMode, values);
-        signIn(values.username, values.password, isExisting);
+        return signIn(
+            values.username, values.password, isExisting
+        ).then(result => {
+            console.log('[%s] Sign in result %O', strMode, result);
 
-        // TODO: Handle remember me by using a refresh token.
+            if ('code' in result && 'status' in result) {
+                return {
+                    [FORM_ERROR]: (result as AccessPointError).message,
+                }
+            }
+            // TODO: Handle remember me by using a refresh token.
+        });
     }, [signIn, isExisting, strMode]);
 
 

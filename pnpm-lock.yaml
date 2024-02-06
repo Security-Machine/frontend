@@ -33,8 +33,8 @@ importers:
         specifier: ~0.5.3
         version: 0.5.3
       '@vebgen/access-api':
-        specifier: ^0.0.4
-        version: 0.0.4(core-js@3.35.0)
+        specifier: ^0.0.7
+        version: 0.0.7(core-js@3.35.0)
       '@vebgen/g11n':
         specifier: ^0.1.2
         version: 0.1.2(core-js@3.35.0)(react@18.2.0)(typescript@5.3.3)
@@ -69,11 +69,14 @@ importers:
         specifier: ^0.0.7
         version: 0.0.7(@mui/material@5.15.5)(@mui/x-date-pickers@6.19.0)(@vebgen/mui-rff-core@0.0.7)(core-js@3.35.0)(react-dom@18.2.0)(react-final-form@6.5.9)(react@18.2.0)
       '@vebgen/react-buttons':
-        specifier: ^0.0.5
-        version: 0.0.5(core-js@3.35.0)(react@18.2.0)
+        specifier: ^0.0.7
+        version: 0.0.7(core-js@3.35.0)(react-dom@18.2.0)(react@18.2.0)
+      '@vebgen/simple-crud':
+        specifier: ^0.0.7
+        version: 0.0.7(@vebgen/access-api@0.0.7)(@vebgen/use-api@0.0.4)(core-js@3.35.0)(final-form@4.20.10)(react-final-form@6.5.9)(react@18.2.0)
       '@vebgen/use-api':
         specifier: ^0.0.4
-        version: 0.0.4(@vebgen/access-api@0.0.4)(core-js@3.35.0)(react@18.2.0)
+        version: 0.0.4(@vebgen/access-api@0.0.7)(core-js@3.35.0)(react@18.2.0)
       core-js:
         specifier: ^3.35.0
         version: 3.35.0
@@ -385,8 +388,8 @@ importers:
   packages/admin:
     dependencies:
       '@vebgen/react-buttons':
-        specifier: 0.0.5
-        version: 0.0.5(core-js@3.35.0)(react@18.2.0)
+        specifier: 0.0.7
+        version: 0.0.7(core-js@3.35.0)(react-dom@18.2.0)(react@18.2.0)
       core-js:
         specifier: ^3.35.0
         version: 3.35.0
@@ -395,8 +398,8 @@ importers:
   packages/base:
     dependencies:
       '@vebgen/access-api':
-        specifier: ^0.0.4
-        version: 0.0.4(core-js@3.35.0)
+        specifier: ^0.0.7
+        version: 0.0.7(core-js@3.35.0)
       jwt-decode:
         specifier: ^4.0.0
         version: 4.0.0
@@ -7479,8 +7482,8 @@ packages:
       - supports-color
     dev: true
 
-  /@vebgen/access-api@0.0.4(core-js@3.35.0):
-    resolution: {integrity: sha512-62FOXTTobdgJZPFMYD2Upn0Y+x93TCm/M9EjGFjMeofNot8Rtt1w3ItgXri0aCpsnyg+QeEW8iSd83rCemIstA==}
+  /@vebgen/access-api@0.0.7(core-js@3.35.0):
+    resolution: {integrity: sha512-SJ2NF8VXd6BuUTNTR98B1u1LKC+zS7QrIZmEq8Rat/jUs100r7XZ4HHTuKZeprzVQbPP6dhcjrq5t74bpw/dbQ==}
     peerDependencies:
       core-js: ^3.34.0
     dependencies:
@@ -7737,24 +7740,44 @@ packages:
       react-final-form: 6.5.9(final-form@4.20.10)(react@18.2.0)
     dev: false
 
-  /@vebgen/react-buttons@0.0.5(core-js@3.35.0)(react@18.2.0):
-    resolution: {integrity: sha512-FNPzJFiPGx96dSa54tKbD9YeF6c/m20md5e2mdx+Q5OAVXN0dXAMg07vx+dyqf2Q30tRZx1A52V0mnbvj+50Ww==}
+  /@vebgen/react-buttons@0.0.7(core-js@3.35.0)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-6sKifXRBzirhthGfI4725sYnn01pe1+lh44XqHAvPAoYyLgvDq/M5dxUNrYzPphSsBM8bhK/BizG7oz2CfzDew==}
     peerDependencies:
       core-js: ^3.34.0
       react: 18.2.0
+      react-dom: 18.2.0
     dependencies:
       core-js: 3.35.0
       react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@vebgen/use-api@0.0.4(@vebgen/access-api@0.0.4)(core-js@3.35.0)(react@18.2.0):
+  /@vebgen/simple-crud@0.0.7(@vebgen/access-api@0.0.7)(@vebgen/use-api@0.0.4)(core-js@3.35.0)(final-form@4.20.10)(react-final-form@6.5.9)(react@18.2.0):
+    resolution: {integrity: sha512-08RR26ICu2WgDKQYKtDJVnL5xjiDWxah1Zqq/6+SjUybgiuNUor6vQOr58c7kVG6peg65oebJzRKKMGZBfFhpw==}
+    peerDependencies:
+      '@vebgen/access-api': 0.0.7
+      '@vebgen/use-api': 0.0.7
+      core-js: ^3.34.0
+      final-form: ^4.20.10
+      react: 18.2.0
+      react-final-form: ^6.5.9
+    dependencies:
+      '@vebgen/access-api': 0.0.7(core-js@3.35.0)
+      '@vebgen/use-api': 0.0.4(@vebgen/access-api@0.0.7)(core-js@3.35.0)(react@18.2.0)
+      core-js: 3.35.0
+      final-form: 4.20.10
+      react: 18.2.0
+      react-final-form: 6.5.9(final-form@4.20.10)(react@18.2.0)
+    dev: false
+
+  /@vebgen/use-api@0.0.4(@vebgen/access-api@0.0.7)(core-js@3.35.0)(react@18.2.0):
     resolution: {integrity: sha512-St8v8hWuDuXryF85LlDqtxwqatdW5FPmCcM8tQ6jC0ianMkrFo8s8o+i3H+4c5oonzbbP8HytjtJ1yXMtRVzgg==}
     peerDependencies:
       '@vebgen/access-api': ^0.0.4
       core-js: ^3.34.0
       react: 18.2.0
     dependencies:
-      '@vebgen/access-api': 0.0.4(core-js@3.35.0)
+      '@vebgen/access-api': 0.0.7(core-js@3.35.0)
       core-js: 3.35.0
       react: 18.2.0
     dev: false
